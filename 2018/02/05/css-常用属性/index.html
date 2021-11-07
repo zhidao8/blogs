@@ -2,9 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
@@ -13,20 +15,18 @@
 <link rel="stylesheet" href="/blogs/css/main.css">
 
 
-<link rel="stylesheet" href="/blogs/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/blogs/lib/pace/pace-theme-minimal.min.css">
-  <script src="/blogs/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"zhidao8.github.io","root":"/blogs/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":360,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-  <meta name="description" content="背景   属性 描述    background 简写属性，作用是将背景属性设置在一个声明中   background-attachment 背景图像是否固定或者随着页面的其余部分滚动   background-color 设置元素的背景颜色   background-image 把图像设置为背景   background-position 设置背景图像的起始位置   background-rep">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","width":360,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<meta name="description" content="背景   属性 描述    background 简写属性，作用是将背景属性设置在一个声明中   background-attachment 背景图像是否固定或者随着页面的其余部分滚动   background-color 设置元素的背景颜色   background-image 把图像设置为背景   background-position 设置背景图像的起始位置   background-rep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS 常用属性">
-<meta property="og:url" content="http://zhidao8.github.io/blogs/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:url" content="http://zhidao8.github.io/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/index.html">
 <meta property="og:site_name" content="zhidao8&#39;s Blogs">
 <meta property="og:description" content="背景   属性 描述    background 简写属性，作用是将背景属性设置在一个声明中   background-attachment 背景图像是否固定或者随着页面的其余部分滚动   background-color 设置元素的背景颜色   background-image 把图像设置为背景   background-position 设置背景图像的起始位置   background-rep">
 <meta property="og:locale" content="zh_CN">
@@ -36,72 +36,45 @@
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhidao8.github.io/blogs/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/">
+
+<link rel="canonical" href="http://zhidao8.github.io/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>CSS 常用属性 | zhidao8's Blogs</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhidao8.github.io/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/","path":"2018/02/05/css-常用属性/","title":"CSS 常用属性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS 常用属性 | zhidao8's Blogs</title>
   
 
 
 
 
-
-
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/blogs/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">zhidao8's Blogs</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">只争朝夕，不负韶华</p>
   </div>
@@ -115,29 +88,12 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -148,23 +104,22 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -172,24 +127,93 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-position"><span class="nav-number">2.</span> <span class="nav-text">background-position</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%AD%97%E4%BD%93%E7%B3%BB%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">通用字体系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serif"><span class="nav-number">5.1.</span> <span class="nav-text">Serif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sans-serif"><span class="nav-number">5.2.</span> <span class="nav-text">Sans-serif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cursive"><span class="nav-number">5.3.</span> <span class="nav-text">Cursive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fantasy"><span class="nav-number">5.4.</span> <span class="nav-text">Fantasy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-size"><span class="nav-number">6.</span> <span class="nav-text">font-size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-weight"><span class="nav-number">7.</span> <span class="nav-text">font-weight</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhidao8</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blogs/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/blogs/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2018/02/05/css-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -205,33 +229,35 @@
           CSS 常用属性
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-02-05 18:19:00" itemprop="dateCreated datePublished" datetime="2018-02-05T18:19:00+08:00">2018-02-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-02-05 18:19:00" itemprop="dateCreated datePublished" datetime="2018-02-05T18:19:00+08:00">2018-02-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -240,8 +266,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><table>
 <thead>
 <tr>
@@ -274,8 +298,9 @@
 <td>设置背景图像是否及如何重复</td>
 </tr>
 </tbody></table>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">background</span>: <span class="selector-id">#ff0000</span> <span class="selector-tag">url</span>(<span class="selector-tag">image</span><span class="selector-class">.png</span>) <span class="selector-tag">no-repeat</span> <span class="selector-tag">fixed</span> <span class="selector-tag">center</span>;</span><br><span class="line">background-attachment: scroll|fixed;</span><br><span class="line">background-color: transparent|color_name|hex_number|rgb_number;</span><br><span class="line">background-color: transparent|red|#ff0000|rgb(255,0,0);</span><br><span class="line">background-image: none|url(&#x27;URL&#x27;);</span><br><span class="line">background-image: none|url(image.png);</span><br><span class="line">background-position: top left|x% y%|xpos ypos</span><br><span class="line">background-repeat: repeat|repeat-x|repeat-y|no-repeat;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: <span class="number">#ff0000</span> <span class="built_in">url</span>(<span class="string">image.png</span>) no-repeat fixed center;</span><br><span class="line"><span class="attribute">background-attachment</span>: scroll|fixed;</span><br><span class="line"><span class="attribute">background-color</span>: transparent|color_name|hex_number|rgb_number;</span><br><span class="line"><span class="attribute">background-color</span>: transparent|red|<span class="number">#ff0000</span>|<span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"><span class="attribute">background-image</span>: none|<span class="built_in">url</span>(<span class="string">&#x27;URL&#x27;</span>);</span><br><span class="line"><span class="attribute">background-image</span>: none|<span class="built_in">url</span>(<span class="string">image.png</span>);</span><br><span class="line"><span class="attribute">background-position</span>: top left|x% y%|xpos ypos</span><br><span class="line">background-repeat: repeat|repeat-x|repeat-y|no-repeat;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
 
 <h2 id="background-position"><a href="#background-position" class="headerlink" title="background-position"></a>background-position</h2><table>
 <thead>
@@ -285,16 +310,16 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>top left<br/>top center<br/>top right<br/>center left<br/>center center<br/>center right<br/>bottom left<br/>bottom center<br/>bottom right</td>
-<td>如果您仅规定了一个关键词，那么第二个值将是”center”。<br/>默认值：0% 0%</td>
+<td>top left<br>top center<br>top right<br>center left<br>center center<br>center right<br>bottom left<br>bottom center<br>bottom right</td>
+<td>如果您仅规定了一个关键词，那么第二个值将是”center”。<br>默认值：0% 0%</td>
 </tr>
 <tr>
 <td>x% y%</td>
-<td>第一个值是水平位置，第二个值是垂直位置。<br/>左上角是 0% 0%。右下角是 100% 100%。<br/>如果您仅规定了一个值，另一个值将是 50%</td>
+<td>第一个值是水平位置，第二个值是垂直位置。<br>左上角是 0% 0%。右下角是 100% 100%。<br>如果您仅规定了一个值，另一个值将是 50%</td>
 </tr>
 <tr>
 <td>xpos ypos</td>
-<td>第一个值是水平位置，第二个值是垂直位置。<br/>左上角是 0 0。单位是像素 (0px 0px) 或任何其他的 CSS 单位。<br/>如果您仅规定了一个值，另一个值将是50%。<br/>您可以混合使用 % 和 position 值</td>
+<td>第一个值是水平位置，第二个值是垂直位置。<br>左上角是 0 0。单位是像素 (0px 0px) 或任何其他的 CSS 单位。<br>如果您仅规定了一个值，另一个值将是50%。<br>您可以混合使用 % 和 position 值</td>
 </tr>
 </tbody></table>
 <h2 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h2><table>
@@ -345,7 +370,8 @@
 <td>设置字间距</td>
 </tr>
 </tbody></table>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">color: color_name|hex_number|rgb_number;</span><br><span class="line">color: red|#ff0000|rgb(255,0,0);</span><br><span class="line">direction: ltr|rtl;</span><br><span class="line">line-height: normal|number|length|%;</span><br><span class="line">line-height: normal|2|20px|200%;</span><br><span class="line">letter-spacing: normal|length;</span><br><span class="line">letter-spacing: normal|-0.5em;</span><br><span class="line">text-align: left|right|center|justify;</span><br><span class="line">text-decoration: none|underline|overline|line-through|blink;</span><br><span class="line">text-indent: length|%;</span><br><span class="line">text-indent: 20px|20%;</span><br><span class="line">text-transform: none|capitalize|uppercase|lowercase;</span><br><span class="line">white-space: normal|pre|nowrap|pre-wrap|pre-line;</span><br><span class="line">word-spacing: normal|length;</span><br><span class="line">word-spacing: normal|20px;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">color</span>: color_name|hex_number|rgb_number;</span><br><span class="line"><span class="attribute">color</span>: red|<span class="number">#ff0000</span>|<span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line"><span class="attribute">direction</span>: ltr|rtl;</span><br><span class="line"><span class="attribute">line-height</span>: normal|number|length|%;</span><br><span class="line"><span class="attribute">line-height</span>: normal|<span class="number">2</span>|<span class="number">20px</span>|<span class="number">200%</span>;</span><br><span class="line"><span class="attribute">letter-spacing</span>: normal|length;</span><br><span class="line"><span class="attribute">letter-spacing</span>: normal|-<span class="number">0.5em</span>;</span><br><span class="line"><span class="attribute">text-align</span>: left|right|center|justify;</span><br><span class="line"><span class="attribute">text-decoration</span>: none|underline|overline|line-through|blink;</span><br><span class="line"><span class="attribute">text-indent</span>: length|%;</span><br><span class="line"><span class="attribute">text-indent</span>: <span class="number">20px</span>|<span class="number">20%</span>;</span><br><span class="line"><span class="attribute">text-transform</span>: none|capitalize|uppercase|lowercase;</span><br><span class="line"><span class="attribute">white-space</span>: normal|pre|nowrap|pre-wrap|pre-line;</span><br><span class="line"><span class="attribute">word-spacing</span>: normal|length;</span><br><span class="line"><span class="attribute">word-spacing</span>: normal|<span class="number">20px</span>;</span><br></pre></td></tr></table></figure>
+
 <h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><table>
 <thead>
 <tr>
@@ -378,7 +404,8 @@
 <td>设置字体的粗细</td>
 </tr>
 </tbody></table>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">font</span>: <span class="selector-tag">italic</span> <span class="selector-tag">bold</span> 12<span class="selector-tag">px</span> <span class="selector-tag">arial</span>,<span class="selector-tag">sans-serif</span>;</span><br><span class="line"><span class="selector-tag">font-family</span>: <span class="selector-tag">family-name</span>/<span class="selector-tag">generic-family</span>;</span><br><span class="line"><span class="selector-tag">font-family</span>: <span class="selector-tag">monospace</span>;</span><br><span class="line"><span class="selector-tag">font-family</span>: <span class="selector-tag">courier</span>;</span><br><span class="line">font-size: medium|smaller|larger|length|%;</span><br><span class="line">font-size: medium|smaller|larger|20px|200%;</span><br><span class="line">font-style: normal|italic|oblique;</span><br><span class="line">font-variantnt: normal|small-caps;</span><br><span class="line">font-weight: normal|bold|bolder|lighter|100;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">font</span>: italic bold <span class="number">12px</span> arial,sans-serif;</span><br><span class="line"><span class="attribute">font-family</span>: family-name/generic-family;</span><br><span class="line"><span class="attribute">font-family</span>: monospace;</span><br><span class="line"><span class="attribute">font-family</span>: courier;</span><br><span class="line"><span class="attribute">font-size</span>: medium|smaller|larger|length|%;</span><br><span class="line"><span class="attribute">font-size</span>: medium|smaller|larger|<span class="number">20px</span>|<span class="number">200%</span>;</span><br><span class="line"><span class="attribute">font-style</span>: normal|italic|oblique;</span><br><span class="line"><span class="attribute">font</span>-variantnt: normal|small-caps;</span><br><span class="line"><span class="attribute">font-weight</span>: normal|bold|bolder|lighter|<span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+
 <h2 id="通用字体系列"><a href="#通用字体系列" class="headerlink" title="通用字体系列"></a>通用字体系列</h2><p>除了各种特定字体系列外（如 Times、Verdana、Helvetica 或 Arial），CSS 还定义了 5 种通用字体系列：</p>
 <h3 id="Serif"><a href="#Serif" class="headerlink" title="Serif"></a>Serif</h3><p>这些字体成比例，而且有上下短线。如果字体中的所有字符根据其不同大小有不同的宽度，则成该字符是成比例的。例如，小写 i 和小写 m 的宽度就不同。上下短线是每个字符笔划末端的装饰，比如小写 l 顶部和底部的短线，或大写 A 两条腿底部的短线。Serif 字体的例子包括 Times、Georgia 和 New Century Schoolbook。</p>
 <h3 id="Sans-serif"><a href="#Sans-serif" class="headerlink" title="Sans-serif"></a>Sans-serif</h3><p>这些字体是成比例的，而且没有上下短线。Sans-serif 字体的例子包括 Helvetica、Geneva、Verdana、Arial 或 Univers。<br>Monospace 字体<br>Monospace 字体并不是成比例的。它们通常用于模拟打字机打出的文本、老式点阵打印机的输出，甚至更老式的视频显示终端。采用这些字体，每个字符的宽度都必须完全相同，所以小写的 i 和小写的 m 有相同的宽度。这些字体可能有上下短线，也可能没有。如果一个字体的字符宽度完全相同，则归类为 Monospace 字体，而不论是否有上下短线。Monospace 字体的例子包括 Courier、Courier New 和 Andale Mono。</p>
@@ -393,8 +420,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>xx-small<br/>x-small<br/>small<br/>medium<br/>large<br/>x-large<br/>xx-large</td>
-<td>把字体的尺寸设置为不同的尺寸，从 xx-small 到 xx-large。<br/>默认值：medium</td>
+<td>xx-small<br>x-small<br>small<br>medium<br>large<br>x-large<br>xx-large</td>
+<td>把字体的尺寸设置为不同的尺寸，从 xx-small 到 xx-large。<br>默认值：medium</td>
 </tr>
 <tr>
 <td>smaller</td>
@@ -437,7 +464,7 @@
 <td>定义更细的字符</td>
 </tr>
 <tr>
-<td>100<br/>200<br/>300<br/>400<br/>500<br/>600<br/>700<br/>800<br/>900</td>
+<td>100<br>200<br>300<br>400<br>500<br>600<br>700<br>800<br>900</td>
 <td>定义由粗到细的字符。400 等同于 normal，而 700 等同于 bold</td>
 </tr>
 </tbody></table>
@@ -448,203 +475,74 @@
     
     
 
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/blogs/tags/CSS/" rel="tag"># CSS</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/blogs/2018/02/01/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="prev" title="Java 多线程">
-      <i class="fa fa-chevron-left"></i> Java 多线程
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/blogs/2018/02/08/android-%E6%97%A0%E9%9A%9C%E7%A2%8D%E5%8A%9F%E8%83%BD/" rel="next" title="Android 无障碍功能">
-      Android 无障碍功能 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/2018/02/01/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="prev" title="Java 多线程">
+                  <i class="fa fa-chevron-left"></i> Java 多线程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/2018/02/08/android-%E6%97%A0%E9%9A%9C%E7%A2%8D%E5%8A%9F%E8%83%BD/" rel="next" title="Android 无障碍功能">
+                  Android 无障碍功能 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background-position"><span class="nav-number">2.</span> <span class="nav-text">background-position</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%AD%97%E4%BD%93%E7%B3%BB%E5%88%97"><span class="nav-number">5.</span> <span class="nav-text">通用字体系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Serif"><span class="nav-number">5.1.</span> <span class="nav-text">Serif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sans-serif"><span class="nav-number">5.2.</span> <span class="nav-text">Sans-serif</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cursive"><span class="nav-number">5.3.</span> <span class="nav-text">Cursive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fantasy"><span class="nav-number">5.4.</span> <span class="nav-text">Fantasy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-size"><span class="nav-number">6.</span> <span class="nav-text">font-size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-weight"><span class="nav-number">7.</span> <span class="nav-text">font-weight</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">zhidao8</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/blogs/archives/">
-        
-          <span class="site-state-item-count">37</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/blogs/categories/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/blogs/tags/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
+    </footer>
+  </article>
 </div>
 
 
 
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+</div>
+  </main>
 
-        
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">zhidao8</span>
 </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/blogs/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/blogs/lib/velocity/velocity.min.js"></script>
-  <script src="/blogs/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script>
 
-<script src="/blogs/js/utils.js"></script>
-
-<script src="/blogs/js/motion.js"></script>
-
-
-<script src="/blogs/js/schemes/pisces.js"></script>
-
-
-<script src="/blogs/js/next-boot.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blogs/js/third-party/search/local-search.js"></script>
 
 
 
+  <script src="/blogs/js/third-party/fancybox.js"></script>
+
+  <script src="/blogs/js/third-party/pace.js"></script>
 
   
 
 
 
 
-  
-<script src="/blogs/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
 </html>

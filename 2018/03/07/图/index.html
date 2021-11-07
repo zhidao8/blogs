@@ -2,9 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
@@ -13,20 +15,18 @@
 <link rel="stylesheet" href="/blogs/css/main.css">
 
 
-<link rel="stylesheet" href="/blogs/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/blogs/lib/pace/pace-theme-minimal.min.css">
-  <script src="/blogs/lib/pace/pace.min.js"></script>
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"zhidao8.github.io","root":"/blogs/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":360,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-  <meta name="description" content="图图（graph）是一种数学结构，它表示真实世界中实体之间的关系。 一个图包含了非空的顶点、结点或者点，以及一个连接顶点的边的集合。为方便起见，我们这样定义一个图 G&#x3D;(V,E)，其中 V 代表顶点的集合，E 代表边的集合。 图可以是有向的，也可以是无向的。在有向图中，每条边都有一个方向，表明可以沿着这条边将个顶点移动到另一个顶点，可以使用有向图来对父子之间的关系进行建模，其中从顶点 A 到 B">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","width":360,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<meta name="description" content="图图（graph）是一种数学结构，它表示真实世界中实体之间的关系。 一个图包含了非空的顶点、结点或者点，以及一个连接顶点的边的集合。为方便起见，我们这样定义一个图 G&#x3D;(V,E)，其中 V 代表顶点的集合，E 代表边的集合。 图可以是有向的，也可以是无向的。在有向图中，每条边都有一个方向，表明可以沿着这条边将个顶点移动到另一个顶点，可以使用有向图来对父子之间的关系进行建模，其中从顶点 A 到 B">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图">
-<meta property="og:url" content="http://zhidao8.github.io/blogs/2018/03/07/%E5%9B%BE/index.html">
+<meta property="og:url" content="http://zhidao8.github.io/2018/03/07/%E5%9B%BE/index.html">
 <meta property="og:site_name" content="zhidao8&#39;s Blogs">
 <meta property="og:description" content="图图（graph）是一种数学结构，它表示真实世界中实体之间的关系。 一个图包含了非空的顶点、结点或者点，以及一个连接顶点的边的集合。为方便起见，我们这样定义一个图 G&#x3D;(V,E)，其中 V 代表顶点的集合，E 代表边的集合。 图可以是有向的，也可以是无向的。在有向图中，每条边都有一个方向，表明可以沿着这条边将个顶点移动到另一个顶点，可以使用有向图来对父子之间的关系进行建模，其中从顶点 A 到 B">
 <meta property="og:locale" content="zh_CN">
@@ -36,72 +36,45 @@
 <meta property="article:tag" content="图">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhidao8.github.io/blogs/2018/03/07/%E5%9B%BE/">
+
+<link rel="canonical" href="http://zhidao8.github.io/2018/03/07/%E5%9B%BE/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
 
-  <title>图 | zhidao8's Blogs</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhidao8.github.io/2018/03/07/%E5%9B%BE/","path":"2018/03/07/图/","title":"图"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>图 | zhidao8's Blogs</title>
   
 
 
 
 
-
-
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/blogs/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">zhidao8's Blogs</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">只争朝夕，不负韶华</p>
   </div>
@@ -115,29 +88,12 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -148,23 +104,22 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -172,24 +127,93 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhidao8</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blogs/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/blogs/2018/03/07/%E5%9B%BE/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2018/03/07/%E5%9B%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -205,33 +229,35 @@
           图
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-03-07 16:12:00" itemprop="dateCreated datePublished" datetime="2018-03-07T16:12:00+08:00">2018-03-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-03-07 16:12:00" itemprop="dateCreated datePublished" datetime="2018-03-07T16:12:00+08:00">2018-03-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -240,8 +266,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p><strong>图（graph）</strong>是一种数学结构，它表示真实世界中实体之间的关系。</p>
 <p>一个图包含了非空的顶点、结点或者点，以及一个连接顶点的边的集合。为方便起见，我们这样定义一个图 <code>G=(V,E)</code>，其中 <code>V</code> 代表顶点的集合，<code>E</code> 代表边的集合。</p>
 <p>图可以是有向的，也可以是无向的。在有向图中，每条边都有一个方向，表明可以沿着这条边将个顶点移动到另一个顶点，可以使用有向图来对父子之间的关系进行建模，其中从顶点 A 到 B 的边表示 A 是 B 的父亲。</p>
@@ -250,215 +274,90 @@
 <p>如果两个顶点是相邻的，那么它们互为<strong>邻居（neighbor）</strong>。类似地，两条相邻的边也互为邻居。</p>
 <p>一个<strong>环（1oop）</strong>是一条将顶点连接到它自身的边。如果两个顶点可通过两条或者多条边相连，这些边就称为<strong>平行边（parallel edge）</strong>。</p>
 <p><strong>简单图（simple graph）</strong>是指没有环和平行边的图，<strong>完整图（complete graph）</strong>是指每一对顶点都相连的图。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Graph</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回图中顶点个数</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 顶点个数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回图中顶点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 图中顶点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">List&lt;V&gt; <span class="title">getVertices</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回指定顶点下标的顶点对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 顶点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 顶点对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">V <span class="title">getVertex</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回指定顶点对象的下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> v 顶点对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 顶点下标</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(V v)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回指定顶点下标的顶点邻居</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 顶点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 顶点邻居</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">List&lt;Integer&gt; <span class="title">getNeighbors</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回指定顶点下标的度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 顶点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 顶点的度</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getDegree</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回邻接矩阵</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 邻接矩阵</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span>[][] getAdjacencyMatrix();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取一个深度优先搜索树</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 作为搜索树根结点的结点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 深度优先搜索树</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    AbstractGraph&lt;V&gt;.<span class="function">Tree <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取一个广度优先搜索树</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> index 作为搜索树根结点的结点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 广度优先搜索树</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    AbstractGraph&lt;V&gt;.<span class="function">Tree <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractGraph</span>&lt;<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Graph</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;V&gt; vertices;</span><br><span class="line">    <span class="keyword">private</span> List&lt;List&lt;Integer&gt;&gt; neighbors;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">AbstractGraph</span><span class="params">(<span class="keyword">int</span>[][] edges, V[] vertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.vertices = <span class="keyword">new</span> ArrayList&lt;&gt;(vertices.length);</span><br><span class="line">        <span class="keyword">this</span>.vertices.addAll(Arrays.asList(vertices));</span><br><span class="line">        createAdjacencyLists(edges, vertices.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">AbstractGraph</span><span class="params">(List&lt;Edge&gt; edges, List&lt;V&gt; vertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.vertices = vertices;</span><br><span class="line">        createAdjacencyLists(edges, vertices.size());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createAdjacencyLists</span><span class="params">(<span class="keyword">int</span>[][] edges, <span class="keyword">int</span> numberOfVertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.neighbors = <span class="keyword">new</span> ArrayList&lt;&gt;(numberOfVertices);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numberOfVertices; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.neighbors.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] edge : edges) &#123;</span><br><span class="line">            neighbors.get(edge[<span class="number">0</span>]).add(edge[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createAdjacencyLists</span><span class="params">(List&lt;Edge&gt; edges, <span class="keyword">int</span> numberOfVertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.neighbors = <span class="keyword">new</span> ArrayList&lt;&gt;(numberOfVertices);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numberOfVertices; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.neighbors.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Edge edge : edges) &#123;</span><br><span class="line">            neighbors.get(edge.u).add(edge.v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.vertices.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;V&gt; <span class="title">getVertices</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.vertices;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">getVertex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.vertices.get(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">(V v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.vertices.indexOf(v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">getNeighbors</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.neighbors.get(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDegree</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.neighbors.get(index).size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] getAdjacencyMatrix() &#123;</span><br><span class="line">        <span class="keyword">int</span>[][] adjacencyMatrix = <span class="keyword">new</span> <span class="keyword">int</span>[getSize()][getSize()];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.neighbors.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">this</span>.neighbors.get(i).size(); j++) &#123;</span><br><span class="line">                <span class="keyword">int</span> v = <span class="keyword">this</span>.neighbors.get(i).get(j);</span><br><span class="line">                adjacencyMatrix[i][v] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> adjacencyMatrix;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AbstractGraph&lt;V&gt;.<span class="function">Tree <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; searchOrders = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] parent = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="keyword">this</span>.vertices.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; parent.length; i++)</span><br><span class="line">            parent[i] = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span>[] isVisited = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="keyword">this</span>.vertices.size()];</span><br><span class="line"></span><br><span class="line">        dfs(v, parent, searchOrders, isVisited);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tree(v, parent, searchOrders);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span>[] parent, List&lt;Integer&gt; searchOrders, <span class="keyword">boolean</span>[] isVisited)</span> </span>&#123;</span><br><span class="line">        searchOrders.add(v);</span><br><span class="line">        isVisited[v] = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : <span class="keyword">this</span>.neighbors.get(v)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isVisited[i]) &#123;</span><br><span class="line">                parent[i] = v;</span><br><span class="line">                dfs(i, parent, searchOrders, isVisited);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AbstractGraph&lt;V&gt;.<span class="function">Tree <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; searchOrders = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[] parent = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="keyword">this</span>.vertices.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; parent.length; i++)</span><br><span class="line">            parent[i] = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span>[] isVisited = <span class="keyword">new</span> <span class="keyword">boolean</span>[<span class="keyword">this</span>.vertices.size()];</span><br><span class="line">        queue.offer(v);</span><br><span class="line">        isVisited[v] = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> u = queue.poll();</span><br><span class="line">            searchOrders.add(u);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> w : <span class="keyword">this</span>.neighbors.get(u)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!isVisited[w]) &#123;</span><br><span class="line">                    queue.offer(w);</span><br><span class="line">                    parent[w] = u;</span><br><span class="line">                    isVisited[w] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tree(v, parent, searchOrders);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Edge</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> u;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Edge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.u = u;</span><br><span class="line">            <span class="keyword">this</span>.v = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tree</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 树的根结点</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> root;</span><br><span class="line">        <span class="comment">// 顶点的父结点</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span>[] parent;</span><br><span class="line">        <span class="comment">// 遍历顶点的顺序</span></span><br><span class="line">        <span class="keyword">private</span> List&lt;Integer&gt; searchOrders;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Tree</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span>[] parent, List&lt;Integer&gt; searchOrders)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.root = root;</span><br><span class="line">            <span class="keyword">this</span>.parent = parent;</span><br><span class="line">            <span class="keyword">this</span>.searchOrders = searchOrders;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Tree</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span>[] parent)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.root = root;</span><br><span class="line">            <span class="keyword">this</span>.parent = parent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 返回树的根结点</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRoot</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.root;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 返回指定顶点下标的父结点</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getParent</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.parent[v];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 返回被搜索顶点的顺序</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">getSearchOrders</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.searchOrders;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 返回被搜索顶点的个数</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumberOfVerticesFound</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.searchOrders.size();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 返回从指定顶点下标到根结点的顶点列表</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> List&lt;V&gt; <span class="title">getPath</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">            ArrayList&lt;V&gt; path = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                path.add(AbstractGraph.<span class="keyword">this</span>.vertices.get(index));</span><br><span class="line">                index = <span class="keyword">this</span>.parent[index];</span><br><span class="line">            &#125; <span class="keyword">while</span> (index != <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> path;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnweightedGraph</span>&lt;<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractGraph</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnweightedGraph</span><span class="params">(<span class="keyword">int</span>[][] edges, V[] vertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(edges, vertices);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnweightedGraph</span><span class="params">(List&lt;Edge&gt; edges, List&lt;V&gt; vertices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(edges, vertices);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graph.AbstractGraph;</span><br><span class="line"><span class="keyword">import</span> graph.Graph;</span><br><span class="line"><span class="keyword">import</span> graph.UnweightedGraph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] vertices = &#123;</span><br><span class="line">                <span class="string">&quot;Seattle&quot;</span>,</span><br><span class="line">                <span class="string">&quot;San Francisco&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Los Angeles&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Denver&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Kansas City&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Chicago&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Boston&quot;</span>,</span><br><span class="line">                <span class="string">&quot;New York&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Atlanta&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Miami&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Dallas&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Houston&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">int</span>[][] edges = &#123;</span><br><span class="line">                &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">3</span>&#125;, &#123;<span class="number">0</span>, <span class="number">5</span>&#125;,</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">1</span>, <span class="number">3</span>&#125;,</span><br><span class="line">                &#123;<span class="number">2</span>, <span class="number">1</span>&#125;, &#123;<span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">2</span>, <span class="number">4</span>&#125;, &#123;<span class="number">2</span>, <span class="number">10</span>&#125;,</span><br><span class="line">                &#123;<span class="number">3</span>, <span class="number">0</span>&#125;, &#123;<span class="number">3</span>, <span class="number">1</span>&#125;, &#123;<span class="number">3</span>, <span class="number">2</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125;, &#123;<span class="number">3</span>, <span class="number">5</span>&#125;,</span><br><span class="line">                &#123;<span class="number">4</span>, <span class="number">2</span>&#125;, &#123;<span class="number">4</span>, <span class="number">3</span>&#125;, &#123;<span class="number">4</span>, <span class="number">5</span>&#125;, &#123;<span class="number">4</span>, <span class="number">7</span>&#125;, &#123;<span class="number">4</span>, <span class="number">8</span>&#125;, &#123;<span class="number">4</span>, <span class="number">10</span>&#125;,</span><br><span class="line">                &#123;<span class="number">5</span>, <span class="number">0</span>&#125;, &#123;<span class="number">5</span>, <span class="number">3</span>&#125;, &#123;<span class="number">5</span>, <span class="number">4</span>&#125;, &#123;<span class="number">5</span>, <span class="number">6</span>&#125;, &#123;<span class="number">5</span>, <span class="number">7</span>&#125;,</span><br><span class="line">                &#123;<span class="number">6</span>, <span class="number">5</span>&#125;, &#123;<span class="number">6</span>, <span class="number">7</span>&#125;,</span><br><span class="line">                &#123;<span class="number">7</span>, <span class="number">4</span>&#125;, &#123;<span class="number">7</span>, <span class="number">5</span>&#125;, &#123;<span class="number">7</span>, <span class="number">6</span>&#125;, &#123;<span class="number">7</span>, <span class="number">8</span>&#125;,</span><br><span class="line">                &#123;<span class="number">8</span>, <span class="number">4</span>&#125;, &#123;<span class="number">8</span>, <span class="number">7</span>&#125;, &#123;<span class="number">8</span>, <span class="number">9</span>&#125;, &#123;<span class="number">8</span>, <span class="number">10</span>&#125;, &#123;<span class="number">8</span>, <span class="number">11</span>&#125;,</span><br><span class="line">                &#123;<span class="number">9</span>, <span class="number">8</span>&#125;, &#123;<span class="number">9</span>, <span class="number">11</span>&#125;,</span><br><span class="line">                &#123;<span class="number">10</span>, <span class="number">2</span>&#125;, &#123;<span class="number">10</span>, <span class="number">4</span>&#125;, &#123;<span class="number">10</span>, <span class="number">8</span>&#125;, &#123;<span class="number">10</span>, <span class="number">11</span>&#125;,</span><br><span class="line">                &#123;<span class="number">11</span>, <span class="number">8</span>&#125;, &#123;<span class="number">11</span>, <span class="number">9</span>&#125;, &#123;<span class="number">11</span>, <span class="number">10</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        Graph&lt;String&gt; graph1 = <span class="keyword">new</span> UnweightedGraph&lt;&gt;(edges, vertices);</span><br><span class="line">        System.out.println(<span class="string">&quot;The number of vertices in graph1: &quot;</span> + graph1.getSize());</span><br><span class="line">        System.out.println(<span class="string">&quot;The vertex with index 1 is &quot;</span> + graph1.getVertex(<span class="number">1</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;The index for Miami is &quot;</span> + graph1.getIndex(<span class="string">&quot;Miami&quot;</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;The edges for graph1:&quot;</span>);</span><br><span class="line">        printEdges(graph1);</span><br><span class="line">        System.out.println(<span class="string">&quot;Adjacency matrix for graph1:&quot;</span>);</span><br><span class="line">        printAdjacencyMatrix(graph1);</span><br><span class="line"></span><br><span class="line">        AbstractGraph&lt;String&gt;.Tree dfs = graph1.dfs(<span class="number">5</span>);</span><br><span class="line">        List&lt;Integer&gt; searchOrders = dfs.getSearchOrders();</span><br><span class="line">        System.out.println(String.format(<span class="string">&quot;%d vertices are searched in this DFS order:&quot;</span>, dfs.getNumberOfVerticesFound()));</span><br><span class="line">        <span class="keyword">for</span> (Integer i : searchOrders)</span><br><span class="line">            System.out.print(graph1.getVertex(i) + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; searchOrders.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dfs.getParent(i) != -<span class="number">1</span>)</span><br><span class="line">                System.out.println(String.format(<span class="string">&quot;parent of %s is %s&quot;</span>, graph1.getVertex(i),</span><br><span class="line">                        graph1.getVertex(dfs.getParent(i))));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String[] names = &#123;</span><br><span class="line">                <span class="string">&quot;Pater&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Jane&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Mark&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Cindy&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Wendy&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line">        ArrayList&lt;AbstractGraph.Edge&gt; edgeList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        edgeList.add(<span class="keyword">new</span> AbstractGraph.Edge(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line">        edgeList.add(<span class="keyword">new</span> AbstractGraph.Edge(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">        edgeList.add(<span class="keyword">new</span> AbstractGraph.Edge(<span class="number">2</span>, <span class="number">4</span>));</span><br><span class="line">        edgeList.add(<span class="keyword">new</span> AbstractGraph.Edge(<span class="number">3</span>, <span class="number">4</span>));</span><br><span class="line">        Graph&lt;String&gt; graph2 = <span class="keyword">new</span> UnweightedGraph&lt;&gt;(edgeList, Arrays.asList(names));</span><br><span class="line">        System.out.println(<span class="string">&quot;The edges for graph2:&quot;</span>);</span><br><span class="line">        printEdges(graph2);</span><br><span class="line">        System.out.println(<span class="string">&quot;Adjacency matrix for graph2:&quot;</span>);</span><br><span class="line">        printAdjacencyMatrix(graph2);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph2.getSize(); i++) &#123;</span><br><span class="line">            System.out.println(String.format(<span class="string">&quot;vertex %d: %s&quot;</span>, i, graph2.getVertex(i)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        BinaryTree&lt;Integer&gt; tree = <span class="keyword">new</span> BinaryTree&lt;&gt;();</span><br><span class="line">        tree.insert(<span class="number">20</span>);</span><br><span class="line">        tree.insert(<span class="number">10</span>);</span><br><span class="line">        tree.insert(<span class="number">16</span>);</span><br><span class="line">        tree.insert(<span class="number">14</span>);</span><br><span class="line">        tree.insert(<span class="number">40</span>);</span><br><span class="line">        tree.insert(<span class="number">30</span>);</span><br><span class="line">        tree.insert(<span class="number">27</span>);</span><br><span class="line">        tree.insert(<span class="number">80</span>);</span><br><span class="line">        tree.insert(<span class="number">50</span>);</span><br><span class="line">        Iterator&lt;Integer&gt; breadthIterator = tree.breadthIterator();</span><br><span class="line">        System.out.println(<span class="string">&quot;Breadth-First Search:&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (breadthIterator.hasNext())</span><br><span class="line">            System.out.print(breadthIterator.next() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Inorder Traversal:&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Integer e : tree)</span><br><span class="line">            System.out.print(e + <span class="string">&quot; &quot;</span>);</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printEdges</span><span class="params">(Graph&lt;?&gt; graph)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph.getSize(); i++) &#123;</span><br><span class="line">            System.out.print(String.format(<span class="string">&quot;Vertex %-2d: &quot;</span>, i));</span><br><span class="line">            <span class="keyword">for</span> (Integer neighbor : graph.getNeighbors(i)) &#123;</span><br><span class="line">                System.out.print(String.format(<span class="string">&quot;(%d, %d) &quot;</span>, i, neighbor));</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printAdjacencyMatrix</span><span class="params">(Graph&lt;?&gt; graph)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] u : graph.getAdjacencyMatrix()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> v : u) &#123;</span><br><span class="line">                System.out.print(v + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
     
     
 
-      <footer class="post-footer">
+    <footer class="post-footer">
           <div class="post-tags">
               <a href="/blogs/tags/%E5%9B%BE/" rel="tag"># 图</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/blogs/2018/03/06/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="二叉树">
-      <i class="fa fa-chevron-left"></i> 二叉树
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/blogs/2018/03/12/%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="next" title="怎么学习前端开发">
-      怎么学习前端开发 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/2018/03/06/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="二叉树">
+                  <i class="fa fa-chevron-left"></i> 二叉树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/2018/03/12/%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="next" title="怎么学习前端开发">
+                  怎么学习前端开发 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">zhidao8</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/blogs/archives/">
-        
-          <span class="site-state-item-count">37</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/blogs/categories/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/blogs/tags/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
+    </footer>
+  </article>
 </div>
 
 
 
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+</div>
+  </main>
 
-        
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="user"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">zhidao8</span>
 </div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/blogs/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/blogs/lib/velocity/velocity.min.js"></script>
-  <script src="/blogs/lib/velocity/velocity.ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script>
 
-<script src="/blogs/js/utils.js"></script>
-
-<script src="/blogs/js/motion.js"></script>
-
-
-<script src="/blogs/js/schemes/pisces.js"></script>
-
-
-<script src="/blogs/js/next-boot.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blogs/js/third-party/search/local-search.js"></script>
 
 
 
+  <script src="/blogs/js/third-party/fancybox.js"></script>
+
+  <script src="/blogs/js/third-party/pace.js"></script>
 
   
 
 
 
 
-  
-<script src="/blogs/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
 </html>
