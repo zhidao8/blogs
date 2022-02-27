@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 6.0.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
@@ -157,7 +157,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blogs/archives/">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -206,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2021/10/16/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864e-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -219,7 +219,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2021/10/16/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Docker 常用命令</a>
+          <a href="/blogs/posts/6b55864e-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">Java 并行程序设计</a>
         </h2>
 
         <div class="post-meta-container">
@@ -229,9 +229,94 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-10-16 21:44:25 / 修改时间：23:31:08" itemprop="dateCreated datePublished" datetime="2021-10-16T21:44:25+08:00">2021-10-16</time>
+      <time title="创建时间：2021-12-10 21:47:33" itemprop="dateCreated datePublished" datetime="2021-12-10T21:47:33+08:00">2021-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blogs/categories/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h2><h3 id="join-方法"><a href="#join-方法" class="headerlink" title="join 方法"></a>join 方法</h3><p>等待线程结束之后再继续执行当前线程。</p>
+<p><code>Thread</code> 的实例 <code>join</code> 方法的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="yield-方法"><a href="#yield-方法" class="headerlink" title="yield 方法"></a>yield 方法</h3><p>是当前线程让出 CPU 的使用权。</p>
+<p><code>Thread</code> 的静态 <code>yield</code> 方法的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">yield</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blogs/posts/6b55864e-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864d-978e-11ec-8ee3-5d314a3065a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="zhidao8">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhidao8's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/blogs/posts/6b55864d-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">Docker 常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-16 21:44:25" itemprop="dateCreated datePublished" datetime="2021-10-16T21:44:25+08:00">2021-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -243,7 +328,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+          <a href="/blogs/categories/docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
         </span>
     </span>
 
@@ -284,7 +369,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2021/09/05/redis-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b558650-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -297,7 +382,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2021/09/05/redis-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Redis 常用命令</a>
+          <a href="/blogs/posts/6b558650-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">Redis 常用命令</a>
         </h2>
 
         <div class="post-meta-container">
@@ -307,9 +392,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-09-05 17:59:34 / 修改时间：19:28:37" itemprop="dateCreated datePublished" datetime="2021-09-05T17:59:34+08:00">2021-09-05</time>
+      <time title="创建时间：2021-09-05 17:59:34" itemprop="dateCreated datePublished" datetime="2021-09-05T17:59:34+08:00">2021-09-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -321,7 +405,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+          <a href="/blogs/categories/redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
         </span>
     </span>
 
@@ -337,18 +421,24 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="redis-cli"><a href="#redis-cli" class="headerlink" title="redis-cli"></a>redis-cli</h2><h3 id="连接本地的-Redis-服务"><a href="#连接本地的-Redis-服务" class="headerlink" title="连接本地的 Redis 服务"></a>连接本地的 Redis 服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
 
-<p>实例</p>
+<p>示例</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
 
 <p>该命令会连接本地的 Redis 服务。</p>
 <h3 id="连接远程的-Redis-服务"><a href="#连接远程的-Redis-服务" class="headerlink" title="连接远程的 Redis 服务"></a>连接远程的 Redis 服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h host -p port -a password</span><br></pre></td></tr></table></figure>
 
-<p>实例</p>
+<p>示例</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> redis-cli -h 127.0.0.1 -p 6379 -a <span class="string">&#x27;password&#x27;</span></span></span><br><span class="line">Warning: Using a password with &#x27;-a&#x27; or &#x27;-u&#x27; option on the command line interface may not be safe.</span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
 
 <p>该命令使用 <code>redis-cli</code> 命令连接到主机为 <code>127.0.0.1</code>，端口为 <code>6379</code> ，密码为 <code>password</code> 的 Redis 服务上。</p>
-<h2 id="Redis-keys-命令"><a href="#Redis-keys-命令" class="headerlink" title="Redis keys 命令"></a>Redis keys 命令</h2><p>[1] <a target="_blank" rel="noopener" href="https://redis.io/commands/copy">COPY – Redis</a><br>[2] <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-keys.html">Redis 键(key) | 菜鸟教程</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blogs/posts/6b558650-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -374,7 +464,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2021/08/16/git-hooks-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91-jenkins-%E6%9E%84%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864f-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -387,7 +477,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2021/08/16/git-hooks-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91-jenkins-%E6%9E%84%E5%BB%BA/" class="post-title-link" itemprop="url">Git Hooks 实现自动触发 Jenkins 构建</a>
+          <a href="/blogs/posts/6b55864f-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">Git Hooks 实现自动触发 Jenkins 构建</a>
         </h2>
 
         <div class="post-meta-container">
@@ -400,13 +490,6 @@
 
       <time title="创建时间：2021-08-16 22:08:52" itemprop="dateCreated datePublished" datetime="2021-08-16T22:08:52+08:00">2021-08-16</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-05 19:29:30" itemprop="dateModified" datetime="2021-09-05T19:29:30+08:00">2021-09-05</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -417,7 +500,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+          <a href="/blogs/categories/git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
         </span>
     </span>
 
@@ -438,7 +521,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2021/08/16/git-hooks-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91-jenkins-%E6%9E%84%E5%BB%BA/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b55864f-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -469,7 +552,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2021/04/11/windows-subsystem-for-linux-wsl/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b558651-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -482,7 +565,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2021/04/11/windows-subsystem-for-linux-wsl/" class="post-title-link" itemprop="url">Windows Subsystem for Linux (WSL)</a>
+          <a href="/blogs/posts/6b558651-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">Windows Subsystem for Linux (WSL)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -495,13 +578,6 @@
 
       <time title="创建时间：2021-04-11 12:51:12" itemprop="dateCreated datePublished" datetime="2021-04-11T12:51:12+08:00">2021-04-11</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 12:56:26" itemprop="dateModified" datetime="2021-08-15T12:56:26+08:00">2021-08-15</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -522,10 +598,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="什么是-WSL"><a href="#什么是-WSL" class="headerlink" title="什么是 WSL"></a>什么是 WSL</h2><p>适用于 Linux 的 Windows 子系统可让开发人员按原样运行 GNU/Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销。<a href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">[1]</a></p>
+          <h2 id="什么是-WSL"><a href="#什么是-WSL" class="headerlink" title="什么是 WSL"></a>什么是 WSL</h2><p>适用于 Linux 的 Windows 子系统可让开发人员按原样运行 GNU&#x2F;Linux 环境 - 包括大多数命令行工具、实用工具和应用程序 - 且不会产生传统虚拟机或双启动设置开销。<a href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">[1]</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2021/04/11/windows-subsystem-for-linux-wsl/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b558651-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -556,7 +632,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/03/23/%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -569,7 +645,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/03/23/%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">序列化</a>
+          <a href="/blogs/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">序列化</a>
         </h2>
 
         <div class="post-meta-container">
@@ -582,20 +658,13 @@
 
       <time title="创建时间：2019-03-23 12:31:19" itemprop="dateCreated datePublished" datetime="2019-03-23T12:31:19+08:00">2019-03-23</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-17 23:45:42" itemprop="dateModified" datetime="2021-08-17T23:45:42+08:00">2021-08-17</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/blogs/categories/java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
         </span>
     </span>
 
@@ -614,7 +683,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">&quot;name&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        Person person = (Person) o;</span><br><span class="line">        <span class="keyword">return</span> age == person.age &amp;&amp;</span><br><span class="line">               name.equals(person.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(name, age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2019/03/23/%E5%BA%8F%E5%88%97%E5%8C%96/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -645,7 +714,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/03/11/html-%E5%9D%97%E7%8A%B6%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -658,7 +727,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/03/11/html-%E5%9D%97%E7%8A%B6%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">HTML 块状元素和行内元素</a>
+          <a href="/blogs/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">HTML 块状元素和行内元素</a>
         </h2>
 
         <div class="post-meta-container">
@@ -671,20 +740,13 @@
 
       <time title="创建时间：2019-03-11 12:31:19" itemprop="dateCreated datePublished" datetime="2019-03-11T12:31:19+08:00">2019-03-11</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
         </span>
     </span>
 
@@ -701,7 +763,7 @@
           <p>HTML 中有块状元素也有行内元素，即使如此，也能通过 CSS 的 <code>display</code> 改变元素的默认效果。如使用 <code>display: block</code> 使得元素显示为块状元素效果，使用 <code>display: inline</code> 则可以使得元素显示为行内元素效果。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2019/03/11/html-%E5%9D%97%E7%8A%B6%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -732,7 +794,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/02/22/%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -745,7 +807,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/02/22/%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86/" class="post-title-link" itemprop="url">时间标准</a>
+          <a href="/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">时间标准</a>
         </h2>
 
         <div class="post-meta-container">
@@ -758,20 +820,13 @@
 
       <time title="创建时间：2019-02-22 12:51:12" itemprop="dateCreated datePublished" datetime="2019-02-22T12:51:12+08:00">2019-02-22</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 12:56:26" itemprop="dateModified" datetime="2021-08-15T12:56:26+08:00">2021-08-15</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
         </span>
     </span>
 
@@ -796,12 +851,12 @@
 </ul>
 <p>它们之间的关系可以表示为：</p>
 <ul>
-<li>UT1 = UT0 + Δλ</li>
-<li>UT2 = UT1 + ΔT</li>
+<li>UT1 &#x3D; UT0 + Δλ</li>
+<li>UT2 &#x3D; UT1 + ΔT</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2019/02/22/%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -832,7 +887,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/02/21/%E5%AE%9E%E7%8E%B0-javascript-%E7%9A%84-bind%EF%BC%8Capply%EF%BC%8Ccall-%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b55864a-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -845,7 +900,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/02/21/%E5%AE%9E%E7%8E%B0-javascript-%E7%9A%84-bind%EF%BC%8Capply%EF%BC%8Ccall-%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">实现 JavaScript 的 bind，apply，call 方法</a>
+          <a href="/blogs/posts/6b55864a-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">实现 JavaScript 的 bind，apply，call 方法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -858,20 +913,13 @@
 
       <time title="创建时间：2019-02-21 12:51:12" itemprop="dateCreated datePublished" datetime="2019-02-21T12:51:12+08:00">2019-02-21</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 12:57:55" itemprop="dateModified" datetime="2021-08-15T12:57:55+08:00">2021-08-15</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
         </span>
     </span>
 
@@ -888,7 +936,7 @@
           <h2 id="实现-Function-prototype-bind-方法"><a href="#实现-Function-prototype-bind-方法" class="headerlink" title="实现 Function.prototype.bind 方法"></a>实现 Function.prototype.bind 方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span> (<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">      args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// apply 方法的实现在下文</span></span><br><span class="line">    <span class="keyword">return</span> apply(fn, obj, args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2019/02/21/%E5%AE%9E%E7%8E%B0-javascript-%E7%9A%84-bind%EF%BC%8Capply%EF%BC%8Ccall-%E6%96%B9%E6%B3%95/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b55864a-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -919,7 +967,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/02/21/npm-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b558649-978e-11ec-8ee3-5d314a3065a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
@@ -932,7 +980,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/02/21/npm-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">npm 常用命令</a>
+          <a href="/blogs/posts/6b558649-978e-11ec-8ee3-5d314a3065a5/" class="post-title-link" itemprop="url">npm 常用命令</a>
         </h2>
 
         <div class="post-meta-container">
@@ -945,20 +993,13 @@
 
       <time title="创建时间：2019-02-21 12:31:19" itemprop="dateCreated datePublished" datetime="2019-02-21T12:31:19+08:00">2019-02-21</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
         </span>
     </span>
 
@@ -983,102 +1024,12 @@
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blogs/2019/02/21/npm-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more" rel="contents">
+              <a class="btn" href="/blogs/posts/6b558649-978e-11ec-8ee3-5d314a3065a5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/2019/01/20/javascript-%E5%AE%9E%E7%94%A8%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blogs/images/avatar.gif">
-      <meta itemprop="name" content="zhidao8">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhidao8's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/blogs/2019/01/20/javascript-%E5%AE%9E%E7%94%A8%E5%BA%93/" class="post-title-link" itemprop="url">JavaScript 实用库</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-20 12:31:19" itemprop="dateCreated datePublished" datetime="2019-01-20T12:31:19+08:00">2019-01-20</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-15 13:18:15" itemprop="dateModified" datetime="2021-08-15T13:18:15+08:00">2021-08-15</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blogs/categories/HTML-CSS-JavaScript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/getify/LABjs">LABjs</a></p>
-<p>  Loading And Blocking JavaScript: On-demand parallel loader for JavaScript with execution order dependencies.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://code.google.com/archive/p/css3-mediaqueries-js/">css3-mediaqueries-js</a></p>
-<p>  Make CSS3 Media Queries work in all browsers (JavaScript library)</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/scottjehl/Respond">Respond.js</a></p>
-<p>  A fast &amp; lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)</p>
-</li>
-</ul>
-
       
     </div>
 
@@ -1108,8 +1059,8 @@
 
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

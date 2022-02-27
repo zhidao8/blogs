@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blogs/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blogs/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","width":360,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<meta name="description" content="HTML 中有块状元素也有行内元素，即使如此，也能通过 CSS 的 display 改变元素的默认效果。如使用 display: block 使得元素显示为块状元素效果，使用 display: inline 则可以使得元素显示为行内元素效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML 块状元素和行内元素">
+<meta property="og:url" content="http://zhidao8.github.io/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/index.html">
+<meta property="og:site_name" content="zhidao8&#39;s Blogs">
+<meta property="og:description" content="HTML 中有块状元素也有行内元素，即使如此，也能通过 CSS 的 display 改变元素的默认效果。如使用 display: block 使得元素显示为块状元素效果，使用 display: inline 则可以使得元素显示为行内元素效果。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-11T04:31:19.000Z">
+<meta property="article:modified_time" content="2019-03-11T04:31:19.000Z">
+<meta property="article:author" content="zhidao8">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhidao8.github.io/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhidao8.github.io/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/","path":"posts/6b558647-978e-11ec-8ee3-5d314a3065a5/","title":"HTML 块状元素和行内元素"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTML 块状元素和行内元素 | zhidao8's Blogs</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blogs/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zhidao8's Blogs</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">只争朝夕，不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%97%E7%8A%B6%E5%85%83%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">块状元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E5%85%83%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">根元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E5%88%86%E5%8C%BA"><span class="nav-number">1.2.</span> <span class="nav-text">内容分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">文本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9D%97%E7%8A%B6%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.</span> <span class="nav-text">其他块状元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">行内元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%94%E6%96%87%E6%9C%AC%E8%AF%AD%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">内联文本语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E5%92%8C%E5%A4%9A%E5%AA%92%E4%BD%93"><span class="nav-number">2.2.</span> <span class="nav-text">图片和多媒体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%B5%8C%E5%86%85%E5%AE%B9"><span class="nav-number">2.3.</span> <span class="nav-text">内嵌内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%A0%87%E8%AF%86"><span class="nav-number">2.5.</span> <span class="nav-text">编辑标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%86%85%E8%81%94%E5%85%83%E7%B4%A0"><span class="nav-number">2.6.</span> <span class="nav-text">其他内联元素</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhidao8</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blogs/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b558647-978e-11ec-8ee3-5d314a3065a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="zhidao8">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhidao8's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML 块状元素和行内元素
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-11 12:31:19" itemprop="dateCreated datePublished" datetime="2019-03-11T12:31:19+08:00">2019-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>HTML 中有块状元素也有行内元素，即使如此，也能通过 CSS 的 <code>display</code> 改变元素的默认效果。如使用 <code>display: block</code> 使得元素显示为块状元素效果，使用 <code>display: inline</code> 则可以使得元素显示为行内元素效果。</p>
+<span id="more"></span>
+
+<p>使用以下代码可得到默认的块状元素和行内元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tags = [</span><br><span class="line">  <span class="string">&#x27;&lt;html&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;base&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;head&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;link&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;meta&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;style&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;title&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;body&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;address&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;article&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;aside&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;footer&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;header&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h1&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h2&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h3&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h4&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h5&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;h6&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;main&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;nav&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;section&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;blockquote&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;dd&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;div&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;dl&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;dt&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;figcaption&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;figure&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;hr&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;li&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;ol&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;p&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;pre&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;ul&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;a&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;abbr&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;b&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;bdi&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;bdo&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;br&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;cite&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;code&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;data&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;dfn&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;em&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;i&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;kbd&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;mark&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;q&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;rb&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;rp&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;rt&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;rtc&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;ruby&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;s&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;samp&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;small&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;span&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;strong&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;sub&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;sup&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;time&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;u&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;var&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;wbr&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;area&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;audio&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;img&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;map&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;track&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;video&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;embed&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;iframe&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;noembed&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;object&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;param&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;picture&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;source&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;canvas&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;noscript&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;script&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;del&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;ins&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;caption&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;col&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;colgroup&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;table&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;tbody&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;td&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;tfoot&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;th&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;thead&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;tr&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;button&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;datalist&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;fieldset&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;form&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;input&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;label&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;legend&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;meter&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;optgroup&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;option&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;output&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;progress&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;select&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;textarea&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;details&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;dialog&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;menu&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;menuitem&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;summary&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;content&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;element&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;shadow&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;slot&gt;&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;&lt;template&gt;&#x27;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> blocks = [];</span><br><span class="line"><span class="keyword">const</span> inlines = [];</span><br><span class="line"><span class="keyword">const</span> others = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> tag <span class="keyword">of</span> tags) &#123;</span><br><span class="line">  <span class="keyword">let</span> elem = <span class="built_in">document</span>.createElement(tag.substring(<span class="number">1</span>, tag.length - <span class="number">1</span>));</span><br><span class="line">  <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;body&#x27;</span>)[<span class="number">0</span>].appendChild(elem);</span><br><span class="line">  <span class="keyword">let</span> computedStyle = <span class="built_in">window</span>.getComputedStyle(elem);</span><br><span class="line">  <span class="keyword">if</span> (computedStyle.display === <span class="string">&#x27;block&#x27;</span>) &#123;</span><br><span class="line">    blocks.push(tag);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (computedStyle.display === <span class="string">&#x27;inline&#x27;</span>) &#123;</span><br><span class="line">    inlines.push(tag);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    others[tag] = computedStyle.display;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;块状元素&#x27;</span>, blocks);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;行内元素&#x27;</span>, inlines);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> keys = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">in</span> others) &#123;</span><br><span class="line">  <span class="keyword">if</span> (others.hasOwnProperty(k))</span><br><span class="line">    keys.push(k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;其他元素&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> keys) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v, others[v])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="块状元素"><a href="#块状元素" class="headerlink" title="块状元素"></a>块状元素</h2><h3 id="根元素"><a href="#根元素" class="headerlink" title="根元素"></a>根元素</h3><p><code>&lt;html&gt;</code><br><code>&lt;body&gt;</code></p>
+<h3 id="内容分区"><a href="#内容分区" class="headerlink" title="内容分区"></a>内容分区</h3><p><code>&lt;address&gt;</code><br><code>&lt;article&gt;</code><br><code>&lt;aside&gt;</code><br><code>&lt;footer&gt;</code><br><code>&lt;header&gt;</code><br><code>&lt;h1&gt;</code><br><code>&lt;h2&gt;</code><br><code>&lt;h3&gt;</code><br><code>&lt;h4&gt;</code><br><code>&lt;h5&gt;</code><br><code>&lt;h6&gt;</code><br><code>&lt;main&gt;</code><br><code>&lt;nav&gt;</code><br><code>&lt;section&gt;</code></p>
+<h3 id="文本内容"><a href="#文本内容" class="headerlink" title="文本内容"></a>文本内容</h3><p><code>&lt;blockquote&gt;</code><br><code>&lt;dd&gt;</code><br><code>&lt;div&gt;</code><br><code>&lt;dl&gt;</code><br><code>&lt;dt&gt;</code><br><code>&lt;figcaption&gt;</code><br><code>&lt;figure&gt;</code><br><code>&lt;hr&gt;</code><br><code>&lt;ol&gt;</code><br><code>&lt;p&gt;</code><br><code>&lt;pre&gt;</code><br><code>&lt;ul&gt;</code></p>
+<h3 id="其他块状元素"><a href="#其他块状元素" class="headerlink" title="其他块状元素"></a>其他块状元素</h3><p><code>&lt;details&gt;</code><br><code>&lt;fieldset&gt;</code><br><code>&lt;form&gt;</code><br><code>&lt;legend&gt;</code><br><code>&lt;menu&gt;</code><br><code>&lt;optgroup&gt;</code><br><code>&lt;option&gt;</code><br><code>&lt;summary&gt;</code></p>
+<h2 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h2><h3 id="内联文本语义"><a href="#内联文本语义" class="headerlink" title="内联文本语义"></a>内联文本语义</h3><p><code>&lt;a&gt;</code><br><code>&lt;abbr&gt;</code><br><code>&lt;b&gt;</code><br><code>&lt;bdi&gt;</code><br><code>&lt;bdo&gt;</code><br><code>&lt;br&gt;</code><br><code>&lt;cite&gt;</code><br><code>&lt;code&gt;</code><br><code>&lt;data&gt;</code><br><code>&lt;dfn&gt;</code><br><code>&lt;em&gt;</code><br><code>&lt;i&gt;</code><br><code>&lt;kbd&gt;</code><br><code>&lt;mark&gt;</code><br><code>&lt;q&gt;</code><br><code>&lt;rb&gt;</code><br><code>&lt;rt&gt;</code><br><code>&lt;rtc&gt;</code><br><code>&lt;ruby&gt;</code><br><code>&lt;s&gt;</code><br><code>&lt;samp&gt;</code><br><code>&lt;small&gt;</code><br><code>&lt;span&gt;</code><br><code>&lt;strong&gt;</code><br><code>&lt;sub&gt;</code><br><code>&lt;sup&gt;</code><br><code>&lt;time&gt;</code><br><code>&lt;u&gt;</code><br><code>&lt;var&gt;</code><br><code>&lt;wbr&gt;</code></p>
+<h3 id="图片和多媒体"><a href="#图片和多媒体" class="headerlink" title="图片和多媒体"></a>图片和多媒体</h3><p><code>&lt;area&gt;</code><br><code>&lt;img&gt;</code><br><code>&lt;map&gt;</code><br><code>&lt;track&gt;</code><br><code>&lt;video&gt;</code></p>
+<h3 id="内嵌内容"><a href="#内嵌内容" class="headerlink" title="内嵌内容"></a>内嵌内容</h3><p><code>&lt;embed&gt;</code><br><code>&lt;iframe&gt;</code><br><code>&lt;noembed&gt;</code><br><code>&lt;object&gt;</code><br><code>&lt;picture&gt;</code><br><code>&lt;source&gt;</code></p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p><code>&lt;canvas&gt;</code><br><code>&lt;noscript&gt;</code></p>
+<h3 id="编辑标识"><a href="#编辑标识" class="headerlink" title="编辑标识"></a>编辑标识</h3><p><code>&lt;del&gt;</code><br><code>&lt;ins&gt;</code></p>
+<h3 id="其他内联元素"><a href="#其他内联元素" class="headerlink" title="其他内联元素"></a>其他内联元素</h3><p><code>&lt;base&gt;</code><br><code>&lt;content&gt;</code><br><code>&lt;element&gt;</code><br><code>&lt;label&gt;</code><br><code>&lt;menuitem&gt;</code><br><code>&lt;output&gt;</code><br><code>&lt;shadow&gt;</code></p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">其他元素 (30)</span><br><span class="line">&lt;head&gt; none</span><br><span class="line">&lt;link&gt; none</span><br><span class="line">&lt;meta&gt; none</span><br><span class="line">&lt;style&gt; none</span><br><span class="line">&lt;title&gt; none</span><br><span class="line">&lt;li&gt; list-item</span><br><span class="line">&lt;rp&gt; none</span><br><span class="line">&lt;audio&gt; none</span><br><span class="line">&lt;param&gt; none</span><br><span class="line">&lt;script&gt; none</span><br><span class="line">&lt;caption&gt; table-caption</span><br><span class="line">&lt;col&gt; table-column</span><br><span class="line">&lt;colgroup&gt; table-column-group</span><br><span class="line">&lt;table&gt; table</span><br><span class="line">&lt;tbody&gt; table-row-group</span><br><span class="line">&lt;td&gt; table-cell</span><br><span class="line">&lt;tfoot&gt; table-footer-group</span><br><span class="line">&lt;th&gt; table-cell</span><br><span class="line">&lt;thead&gt; table-header-group</span><br><span class="line">&lt;tr&gt; table-row</span><br><span class="line">&lt;button&gt; inline-block</span><br><span class="line">&lt;datalist&gt; none</span><br><span class="line">&lt;input&gt; inline-block</span><br><span class="line">&lt;meter&gt; inline-block</span><br><span class="line">&lt;progress&gt; inline-block</span><br><span class="line">&lt;select&gt; inline-block</span><br><span class="line">&lt;textarea&gt; inline-block</span><br><span class="line">&lt;dialog&gt; none</span><br><span class="line">&lt;slot&gt; contents</span><br><span class="line">&lt;template&gt; none</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blogs/tags/html/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/" rel="prev" title="时间标准">
+                  <i class="fa fa-chevron-left"></i> 时间标准
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/" rel="next" title="序列化">
+                  序列化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhidao8</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blogs/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blogs/js/third-party/fancybox.js"></script>
+
+  <script src="/blogs/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>
