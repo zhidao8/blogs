@@ -60,11 +60,7 @@ NexT.motion.middleWares = {
     (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') && pushToSequence('.custom-logo-image');
 
     document.querySelectorAll('.menu-item').forEach(targets => {
-      sequence.push({
-        targets,
-        complete: () => targets.classList.add('animated', 'fadeInDown'),
-        deltaT  : '-=200'
-      });
+      targets.classList.add('animated', 'fadeInDown');
     });
 
     return sequence;
@@ -87,7 +83,11 @@ NexT.motion.middleWares = {
     function animate(animation, selector) {
       if (!animation) return;
       document.querySelectorAll(selector).forEach(targets => {
-        targets.classList.add('animated', animation);
+        sequence.push({
+          targets,
+          complete: () => targets.classList.add('animated', animation),
+          deltaT  : '-=160'
+        });
       });
     }
 
