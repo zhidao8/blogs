@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blogs/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blogs/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blogs/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blogs/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<meta name="description" content="假设 HTML 代码如下： 123<div class=&quot;parent&quot;>  <div class=&quot;child&quot;>Child</div></div>  基础的 CSS 样式如下： 123456789.parent &amp;#123;  border: 1px solid red;  width: 300px;  h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 居中大全">
+<meta property="og:url" content="http://zhidao8.github.io/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/index.html">
+<meta property="og:site_name" content="zhidao8's Blogs">
+<meta property="og:description" content="假设 HTML 代码如下： 123<div class=&quot;parent&quot;>  <div class=&quot;child&quot;>Child</div></div>  基础的 CSS 样式如下： 123456789.parent &amp;#123;  border: 1px solid red;  width: 300px;  h">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-26T04:51:12.000Z">
+<meta property="article:modified_time" content="2018-11-26T04:51:12.000Z">
+<meta property="article:author" content="zhidao8">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="居中">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://zhidao8.github.io/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://zhidao8.github.io/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/","path":"posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/","title":"CSS 居中大全"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS 居中大全 | zhidao8's Blogs</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blogs/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><style>
+body text-autospace:after {
+    content: ' ';
+    display: inline;
+    font-family: inherit;
+    font-size: 0.45em;
+}
+
+html code text-autospace,
+html pre text-autospace,
+html kbd text-autospace,
+html samp text-autospace,
+html ruby text-autospace,
+html .tag-list-item text-autospace {
+    display: none;
+}
+
+html ol > text-autospace,
+html ul > text-autospace {
+    display: none;
+}
+</style><!-- hexo injector head_end end --></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blogs/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">zhidao8's Blogs</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description"><text-autospace></text-autospace>只争朝夕，不负韶华</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute-%E8%B4%9F-margin"><span class="nav-number">1.</span> <span class="nav-text">absolute + 负 margin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute-margin-auto"><span class="nav-number">2.</span> <span class="nav-text">absolute + margin: auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute-calc"><span class="nav-number">3.</span> <span class="nav-text">absolute + calc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#text-align-center-vertical-align-middle-line-height"><span class="nav-number">4.</span> <span class="nav-text">text-align: center + vertical-align: middle + line-height</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute-transform-translate-50-50"><span class="nav-number">5.</span> <span class="nav-text">absolute + transform: translate(-50%, -50%)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display-table-cell-text-align-center-vertical-align-middle"><span class="nav-number">6.</span> <span class="nav-text">display: table-cell + text-align: center + vertical-align: middle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-justify-content-center-align-items-center"><span class="nav-number">7.</span> <span class="nav-text">flex + justify-content: center + align-items: center</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-margin-auto"><span class="nav-number">8.</span> <span class="nav-text">flex + margin: auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#display-grid-align-self-center-justify-self-center"><span class="nav-number">9.</span> <span class="nav-text">display: grid + align-self: center + justify-self: center</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">zhidao8</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blogs/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name"><text-autospace></text-autospace>日志<text-autospace></text-autospace></span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blogs/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>分类<text-autospace></text-autospace></span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blogs/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blogs/images/avatar.gif">
+      <meta itemprop="name" content="zhidao8">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhidao8's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS 居中大全
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于<text-autospace></text-autospace></span>
+
+      <time title="创建时间：2018-11-26 12:51:12" itemprop="dateCreated datePublished" datetime="2018-11-26T12:51:12+08:00">2018-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>分类于<text-autospace></text-autospace></span>
+        <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+          <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>阅读时长 ≈</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>假设 HTML 代码如下：</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span>Child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><text-autospace></text-autospace>基础的 CSS 样式如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<span id="more"></span>
+
+<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><p><strong><text-autospace></text-autospace>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">/* 将 margin 设置为负的宽高的一半 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin: auto"></a>absolute + margin: auto</h2><p><strong><text-autospace></text-autospace>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><p><strong><text-autospace></text-autospace>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="text-align-center-vertical-align-middle-line-height"><a href="#text-align-center-vertical-align-middle-line-height" class="headerlink" title="text-align: center + vertical-align: middle + line-height"></a>text-align: center + vertical-align: middle + line-height</h2><p><strong><text-autospace></text-autospace>缺点</strong>：需要知道父元素的高。父元素需要设置跟自身高度相等的 line-height。</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="comment">/* 跟父元素高度一样的 line-height */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="comment">/* 水平居中 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/* 垂直居中 */</span></span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="comment">/* vertical-align 和父元素的 text-align 属性都只应用于行内元素 */</span></span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">line-height</span>: initial;</span><br><span class="line">  <span class="comment">/* 修正文字对齐 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="absolute-transform-translate-50-50"><a href="#absolute-transform-translate-50-50" class="headerlink" title="absolute + transform: translate(-50%, -50%)"></a>absolute + transform: translate(-50%, -50%)</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="display-table-cell-text-align-center-vertical-align-middle"><a href="#display-table-cell-text-align-center-vertical-align-middle" class="headerlink" title="display: table-cell + text-align: center + vertical-align: middle"></a>display: table-cell + text-align: center + vertical-align: middle</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="flex-justify-content-center-align-items-center"><a href="#flex-justify-content-center-align-items-center" class="headerlink" title="flex + justify-content: center + align-items: center"></a>flex + justify-content: center + align-items: center</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="flex-margin-auto"><a href="#flex-margin-auto" class="headerlink" title="flex + margin: auto"></a>flex + margin: auto</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="display-grid-align-self-center-justify-self-center"><a href="#display-grid-align-self-center-justify-self-center" class="headerlink" title="display: grid + align-self: center + justify-self: center"></a>display: grid + align-self: center + justify-self: center</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> {</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> {</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">  justify-self: center;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blogs/tags/css/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/blogs/tags/%E5%B1%85%E4%B8%AD/" rel="tag"><i class="fa fa-tag"></i> 居中</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blogs/posts/6b558645-978e-11ec-8ee3-5d314a3065a5/" rel="prev" title="生命周期">
+                  <i class="fa fa-chevron-left"></i> 生命周期
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blogs/posts/6b555f33-978e-11ec-8ee3-5d314a3065a5/" rel="next" title="CSS 滤镜 - filter 属性">
+                  CSS 滤镜 - filter 属性 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  © 2018 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhidao8</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script><script src="/blogs/js/bookmark.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/blogs/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/blogs/js/third-party/fancybox.js"></script>
+
+  <script src="/blogs/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+
+
+</body></html>
