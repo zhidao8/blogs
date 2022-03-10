@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<!DOCTYPE html><html lang="zh-CN"><head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
@@ -22,13 +20,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
-<meta name="description" content="转义字符   字符 转义序列    &amp; &amp;amp;   &lt; &amp;lt;   &gt; &amp;gt;   “ &amp;quot;   ‘ &amp;apos;">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<meta name="description" content="转义字符   字符 转义序列    &amp; &amp;amp;   < &amp;lt;   > &amp;gt;   “ &amp;quot;   ‘ &amp;apos;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XML 中的转义字符">
 <meta property="og:url" content="http://zhidao8.github.io/posts/6b555f3d-978e-11ec-8ee3-5d314a3065a5/index.html">
-<meta property="og:site_name" content="zhidao8&#39;s Blogs">
-<meta property="og:description" content="转义字符   字符 转义序列    &amp; &amp;amp;   &lt; &amp;lt;   &gt; &amp;gt;   “ &amp;quot;   ‘ &amp;apos;">
+<meta property="og:site_name" content="zhidao8's Blogs">
+<meta property="og:description" content="转义字符   字符 转义序列    &amp; &amp;amp;   < &amp;lt;   > &amp;gt;   “ &amp;quot;   ‘ &amp;apos;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-06-09T04:31:19.000Z">
 <meta property="article:modified_time" content="2018-06-09T04:31:19.000Z">
@@ -53,13 +51,34 @@
   <noscript>
     <link rel="stylesheet" href="/blogs/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start --><style>
+body text-autospace:after {
+    content: ' ';
+    display: inline;
+    font-family: inherit;
+    font-size: 0.45em;
+}
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+html code text-autospace,
+html pre text-autospace,
+html kbd text-autospace,
+html samp text-autospace,
+html ruby text-autospace,
+html .tag-list-item text-autospace {
+    display: none;
+}
+
+html ol > text-autospace,
+html ul > text-autospace {
+    display: none;
+}
+</style><!-- hexo injector head_end end --></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
@@ -76,7 +95,7 @@
       <h1 class="site-title">zhidao8's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">只争朝夕，不负韶华</p>
+      <p class="site-subtitle" itemprop="description"><text-autospace></text-autospace>只争朝夕，不负韶华</p>
   </div>
 
   <div class="site-nav-right">
@@ -109,9 +128,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
@@ -150,12 +167,12 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">转义字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-CDATA-gt"><span class="nav-number">2.</span> <span class="nav-text">&lt;![CDATA[]]&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E5%92%8C-lt-CDATA-gt-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">转义字符和 &lt;![CDATA[]]&gt; 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">转义字符<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-CDATA-gt"><span class="nav-number">2.</span> <span class="nav-text">&lt;![CDATA[]]&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E5%92%8C-lt-CDATA-gt-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">转义字符和 &lt;![CDATA[]]&gt; 的区别<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">参考链接<text-autospace></text-autospace></span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">zhidao8</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -163,22 +180,25 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blogs/archives/">
-          <span class="site-state-item-count">40</span>
-          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name"><text-autospace></text-autospace>日志<text-autospace></text-autospace></span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blogs/categories/">
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>分类<text-autospace></text-autospace></span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blogs/tags/">
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -196,6 +216,7 @@
     </header>
 
     
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -212,16 +233,16 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b555f3d-978e-11ec-8ee3-5d314a3065a5/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
       <meta itemprop="name" content="zhidao8">
       <meta itemprop="description" content="">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="zhidao8's Blogs">
     </span>
       <header class="post-header">
@@ -235,7 +256,7 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">发表于</span>
+      <span class="post-meta-item-text">发表于<text-autospace></text-autospace></span>
 
       <time title="创建时间：2018-06-09 12:31:19" itemprop="dateCreated datePublished" datetime="2018-06-09T12:31:19+08:00">2018-06-09</time>
     </span>
@@ -243,17 +264,32 @@
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+      <span class="post-meta-item-text"><text-autospace></text-autospace>分类于<text-autospace></text-autospace></span>
+        <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
           <a href="/blogs/categories/android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
         </span>
           ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
           <a href="/blogs/categories/xml/" itemprop="url" rel="index"><span itemprop="name">XML</span></a>
         </span>
     </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>本文字数：</span>
+      <span>550</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>阅读时长 ≈</span>
+      <span>1 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -301,19 +337,19 @@
 <li>区分大小写</li>
 </ul>
 <p>但是严格来说，在 XML 中只有 <code>&lt;</code> 和 <code>&amp;</code> 是非法的，其它三个都是可以合法存在的，但是，把它们都进行转义是一个好的习惯。</p>
-<h2 id="lt-CDATA-gt"><a href="#lt-CDATA-gt" class="headerlink" title="&lt;![CDATA[]]&gt;"></a>&lt;![CDATA[]]&gt;</h2><p>被 <code>&lt;![CDATA[]]&gt;</code> 这个标记所包含的内容将表示为纯文本，比如 <code>&lt;![CDATA[&lt;]]&gt;</code> 表示文本内容 <code>&lt;</code>。</p>
+<h2 id="lt-CDATA-gt"><a href="#lt-CDATA-gt" class="headerlink" title="<![CDATA[]]>"></a>&lt;![CDATA[]]&gt;</h2><p><text-autospace></text-autospace>被 <code>&lt;![CDATA[]]&gt;</code> 这个标记所包含的内容将表示为纯文本，比如 <code>&lt;![CDATA[&lt;]]&gt;</code> 表示文本内容 <code>&lt;</code>。</p>
 <p>注意</p>
 <ul>
 <li>此部分不能再包含 <code>]]&gt;</code></li>
 <li>不允许嵌套使用</li>
 <li><code>]]&gt;</code> 这部分不能包含空格或者换行</li>
 </ul>
-<h2 id="转义字符和-lt-CDATA-gt-的区别"><a href="#转义字符和-lt-CDATA-gt-的区别" class="headerlink" title="转义字符和 &lt;![CDATA[]]&gt; 的区别"></a>转义字符和 &lt;![CDATA[]]&gt; 的区别</h2><ul>
+<h2 id="转义字符和-lt-CDATA-gt-的区别"><a href="#转义字符和-lt-CDATA-gt-的区别" class="headerlink" title="转义字符和 <![CDATA[]]> 的区别"></a>转义字符和 &lt;![CDATA[]]&gt; 的区别</h2><ul>
 <li><code>&lt;![CDATA[]]&gt;</code> 不能适用所有情况，转义字符可以</li>
 <li>对于短字符串使用 <code>&lt;![CDATA[]]&gt;</code> 写起来啰嗦，对于长字符串使用转义字符写起来可读性差</li>
 <li><code>&lt;![CDATA[]]&gt;</code> 表示 XML 解析器忽略解析，所以更快</li>
 </ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>[&lt;![CDATA[]]&gt;和转义字符 - catgatp - 博客园](<a target="_blank" rel="noopener" href="https://www.cnblogs.com/catgatp/p/6403382.html">https://www.cnblogs.com/catgatp/p/6403382.html</a>)</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接<text-autospace></text-autospace></h2><p>[<!--[CDATA[]]--><text-autospace></text-autospace>和转义字符 - catgatp - 博客园](<a target="_blank" rel="noopener" href="https://www.cnblogs.com/catgatp/p/6403382.html">https://www.cnblogs.com/catgatp/p/6403382.html</a>)</p>
 
     </div>
 
@@ -323,7 +359,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blogs/tags/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" rel="tag"># 转义字符</a>
+              <a href="/blogs/tags/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" rel="tag"><i class="fa fa-tag"></i> 转义字符</a>
           </div>
 
         
@@ -357,7 +393,7 @@
 
 
 <div class="copyright">
-  &copy; 2018 – 
+  © 2018 – 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
@@ -372,7 +408,7 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script><script src="/blogs/js/bookmark.js"></script>
 
   
 <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
@@ -390,5 +426,6 @@
 
 
 
-</body>
-</html>
+
+
+</body></html>

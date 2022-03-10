@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<!DOCTYPE html><html lang="zh-CN"><head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
@@ -22,12 +20,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
 <meta name="description" content="属性类型ECMAScript 中有两种属性：数据属性和访问器属性。 数据属性数据属性包含一个数据值的位置。在这个位置可以读取和写入值。数据属性有 4 个描述其行为的特性。  [[Configurable]]   表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。默认值为 true。  [[Enumerable]]   表示能否通过 for-i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 对象及高级技巧">
 <meta property="og:url" content="http://zhidao8.github.io/posts/6b555f3a-978e-11ec-8ee3-5d314a3065a5/index.html">
-<meta property="og:site_name" content="zhidao8&#39;s Blogs">
+<meta property="og:site_name" content="zhidao8's Blogs">
 <meta property="og:description" content="属性类型ECMAScript 中有两种属性：数据属性和访问器属性。 数据属性数据属性包含一个数据值的位置。在这个位置可以读取和写入值。数据属性有 4 个描述其行为的特性。  [[Configurable]]   表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。默认值为 true。  [[Enumerable]]   表示能否通过 for-i">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-09-05T04:31:19.000Z">
@@ -53,13 +51,34 @@
   <noscript>
     <link rel="stylesheet" href="/blogs/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start --><style>
+body text-autospace:after {
+    content: ' ';
+    display: inline;
+    font-family: inherit;
+    font-size: 0.45em;
+}
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+html code text-autospace,
+html pre text-autospace,
+html kbd text-autospace,
+html samp text-autospace,
+html ruby text-autospace,
+html .tag-list-item text-autospace {
+    display: none;
+}
+
+html ol > text-autospace,
+html ul > text-autospace {
+    display: none;
+}
+</style><!-- hexo injector head_end end --></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
@@ -76,7 +95,7 @@
       <h1 class="site-title">zhidao8's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">只争朝夕，不负韶华</p>
+      <p class="site-subtitle" itemprop="description"><text-autospace></text-autospace>只争朝夕，不负韶华</p>
   </div>
 
   <div class="site-nav-right">
@@ -109,9 +128,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
+    <input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
   </div>
   <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
@@ -150,12 +167,12 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">属性类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">数据属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">访问器属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">定义多个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%B1%9E%E6%80%A7%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">读取属性的特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%AF%A1%E6%94%B9%E5%AF%B9%E8%B1%A1%EF%BC%88ECMAScript-5%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">防篡改对象（ECMAScript 5）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E6%8B%93%E5%B1%95%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">不可拓展对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E5%B0%81%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">密封的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">冻结的对象</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">属性类型<text-autospace></text-autospace></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">数据属性<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">访问器属性<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">定义多个属性<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%B1%9E%E6%80%A7%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">读取属性的特性<text-autospace></text-autospace></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%AF%A1%E6%94%B9%E5%AF%B9%E8%B1%A1%EF%BC%88ECMAScript-5%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">防篡改对象（ECMAScript 5）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E6%8B%93%E5%B1%95%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text">不可拓展对象<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E5%B0%81%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">密封的对象<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">冻结的对象<text-autospace></text-autospace></span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">zhidao8</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -163,22 +180,25 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blogs/archives/">
-          <span class="site-state-item-count">40</span>
-          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name"><text-autospace></text-autospace>日志<text-autospace></text-autospace></span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blogs/categories/">
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>分类<text-autospace></text-autospace></span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blogs/tags/">
-        <span class="site-state-item-count">40</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name"><text-autospace></text-autospace>标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -196,6 +216,7 @@
     </header>
 
     
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -212,16 +233,16 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhidao8.github.io/posts/6b555f3a-978e-11ec-8ee3-5d314a3065a5/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
       <meta itemprop="name" content="zhidao8">
       <meta itemprop="description" content="">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="zhidao8's Blogs">
     </span>
       <header class="post-header">
@@ -235,7 +256,7 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">发表于</span>
+      <span class="post-meta-item-text">发表于<text-autospace></text-autospace></span>
 
       <time title="创建时间：2018-09-05 12:31:19" itemprop="dateCreated datePublished" datetime="2018-09-05T12:31:19+08:00">2018-09-05</time>
     </span>
@@ -243,13 +264,28 @@
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+      <span class="post-meta-item-text"><text-autospace></text-autospace>分类于<text-autospace></text-autospace></span>
+        <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
           <a href="/blogs/categories/html-css-javascript/" itemprop="url" rel="index"><span itemprop="name">HTML/CSS/JavaScript</span></a>
         </span>
     </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text"><text-autospace></text-autospace>阅读时长 ≈</span>
+      <span>8 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -259,7 +295,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h2><p>ECMAScript 中有两种属性：数据属性和访问器属性。</p>
+        <h2 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型<text-autospace></text-autospace></h2><p>ECMAScript 中有两种属性：数据属性和访问器属性。</p>
 <h3 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h3><p>数据属性包含一个数据值的位置。在这个位置可以读取和写入值。数据属性有 4 个描述其行为的特性。</p>
 <ul>
 <li><p>[[Configurable]]</p>
@@ -277,9 +313,9 @@
 </ul>
 <p>要修改属性的默认特性，需要使用 ECMAScript 5 的 <code>Object.defineProperty()</code> 方法。</p>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">&quot;name&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&quot;Carter&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Carter</span></span><br><span class="line">person.name = <span class="string">&quot;Greg&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Carter</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = {};</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, {</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">"Carter"</span></span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Carter</span></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Carter</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p><strong>注意</strong>：</p>
+<p><strong><text-autospace></text-autospace>注意</strong>：</p>
 <ul>
 <li><p>把 configurable 设置为 false 后，就不能再设置为 true 了。即一旦把属性定义为不可配置的，就不能再把它变回可配置的了。此时再调用 <code>Object.defineProperty()</code> 方法修改除 writable 之外的特性，都会导致错误。</p>
 </li>
@@ -287,7 +323,7 @@
 </li>
 </ul>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">&quot;name&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&quot;Carter&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出错误</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">&quot;name&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = {};</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, {</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">"Carter"</span></span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抛出错误<text-autospace></text-autospace></span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, {</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span></span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h3><p>访问器属性不包含数据值，它们包含一堆 getter 函数和 setter 函数。</p>
 <ul>
@@ -306,15 +342,15 @@
 </ul>
 <p>访问器属性依然不能直接定义，必须使用 <code>Object.defineProperty()</code> 来定义。</p>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">    <span class="attr">_year</span>: <span class="number">2004</span>,</span><br><span class="line">    <span class="attr">edition</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">&quot;year&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>._year = newValue;</span><br><span class="line">            <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line"><span class="built_in">console</span>.log(book.edition); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = {</span><br><span class="line">    <span class="attr">_year</span>: <span class="number">2004</span>,</span><br><span class="line">    <span class="attr">edition</span>: <span class="number">1</span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, {</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>{</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) {</span><br><span class="line">            <span class="built_in">this</span>._year = newValue;</span><br><span class="line">            <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line"><span class="built_in">console</span>.log(book.edition); <span class="comment">// 2</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h3><p>ECMAScript 5 又定义了一个 <code>Object.defineProperties()</code> 方法。利用这个方法可以通过描述符一次定义多个属性。</p>
+<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a><text-autospace></text-autospace>定义多个属性<text-autospace></text-autospace></h3><p>ECMAScript 5 又定义了一个 <code>Object.defineProperties()</code> 方法。利用这个方法可以通过描述符一次定义多个属性。</p>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperties(book, &#123;</span><br><span class="line">    <span class="attr">_year</span>: &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2004</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">edition</span>: &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">year</span>: &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line">                <span class="built_in">this</span>._year = newValue;</span><br><span class="line">                <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = {};</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperties(book, {</span><br><span class="line">    <span class="attr">_year</span>: {</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2004</span></span><br><span class="line">    },</span><br><span class="line">    <span class="attr">edition</span>: {</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    },</span><br><span class="line">    <span class="attr">year</span>: {</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">        },</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>{</span><br><span class="line">            <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) {</span><br><span class="line">                <span class="built_in">this</span>._year = newValue;</span><br><span class="line">                <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h3><p>使用 ECMAScript 5 提供的 <code>Object.getOwnPropertyDescriptor()</code> 方法，可以取得给定属性的描述符。</p>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperties(book, &#123;</span><br><span class="line">    <span class="attr">_year</span>: &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2004</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">edition</span>: &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">year</span>: &#123;</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line">                <span class="built_in">this</span>._year = newValue;</span><br><span class="line">                <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">&quot;_year&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.enumerable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.writable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value); <span class="comment">// 2004</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get); <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.set); <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">&quot;year&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.enumerable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.writable); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get); <span class="comment">// &quot;function&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.set); <span class="comment">// &quot;function&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = {};</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperties(book, {</span><br><span class="line">    <span class="attr">_year</span>: {</span><br><span class="line">        <span class="attr">value</span>: <span class="number">2004</span></span><br><span class="line">    },</span><br><span class="line">    <span class="attr">edition</span>: {</span><br><span class="line">        <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">    },</span><br><span class="line">    <span class="attr">year</span>: {</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">        },</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>) </span>{</span><br><span class="line">            <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) {</span><br><span class="line">                <span class="built_in">this</span>._year = newValue;</span><br><span class="line">                <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">"_year"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.enumerable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.writable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value); <span class="comment">// 2004</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get); <span class="comment">// "undefined"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.set); <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">"year"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.enumerable); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.writable); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get); <span class="comment">// "function"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.set); <span class="comment">// "function"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="防篡改对象（ECMAScript-5）"><a href="#防篡改对象（ECMAScript-5）" class="headerlink" title="防篡改对象（ECMAScript 5）"></a>防篡改对象（ECMAScript 5）</h2><h3 id="不可拓展对象"><a href="#不可拓展对象" class="headerlink" title="不可拓展对象"></a>不可拓展对象</h3><ul>
 <li><p>Object.preventExtensions(obj)</p>
@@ -325,9 +361,9 @@
 </li>
 </ul>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">&quot;Nicholas&quot;</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = { <span class="attr">name</span>: <span class="string">"Nicholas"</span> };</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="密封的对象"><a href="#密封的对象" class="headerlink" title="密封的对象"></a>密封的对象</h3><ul>
+<h3 id="密封的对象"><a href="#密封的对象" class="headerlink" title="密封的对象"></a><text-autospace></text-autospace>密封的对象</h3><ul>
 <li><p>Object.seal(obj)</p>
 <p>  使对象不可拓展，且不能删除对象中的属性和方法</p>
 </li>
@@ -336,18 +372,18 @@
 </li>
 </ul>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">&quot;Nicholas&quot;</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.seal(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// &quot;Nicholas&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = { <span class="attr">name</span>: <span class="string">"Nicholas"</span> };</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.seal(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="冻结的对象"><a href="#冻结的对象" class="headerlink" title="冻结的对象"></a>冻结的对象</h3><ul>
 <li><p>Object.freeze(obj)</p>
-<p>  使对象不可拓展，又是密封的，且如果没有定义[[Set]]函数，对象中属性是不可写的</p>
+<p>  使对象不可拓展，又是密封的，且如果没有定义<text-autospace></text-autospace>[[Set]]<text-autospace></text-autospace>函数，对象中属性是不可写的</p>
 </li>
 <li><p>Object.isFrozen(obj)</p>
 <p>  判断对象是否被冻结</p>
 </li>
 </ul>
 <p>示例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">&quot;Nicholas&quot;</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.freeze(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// &quot;Nicholas&quot;</span></span><br><span class="line"></span><br><span class="line">person.name = <span class="string">&quot;Greg&quot;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// &quot;Nicholas&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = { <span class="attr">name</span>: <span class="string">"Nicholas"</span> };</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(person); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.freeze(person);</span><br><span class="line"><span class="built_in">Object</span>.isExtensible(person); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(person); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(person); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// "Nicholas"</span></span><br><span class="line"></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></tbody></table></figure>
 
     </div>
 
@@ -357,7 +393,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blogs/tags/javascript/" rel="tag"># JavaScript</a>
+              <a href="/blogs/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           </div>
 
         
@@ -391,7 +427,7 @@
 
 
 <div class="copyright">
-  &copy; 2018 – 
+  © 2018 – 
   <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
@@ -406,7 +442,7 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script>
+<script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script><script src="/blogs/js/bookmark.js"></script>
 
   
 <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
@@ -424,5 +460,6 @@
 
 
 
-</body>
-</html>
+
+
+</body></html>

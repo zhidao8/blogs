@@ -106,6 +106,162 @@
       </tags>
   </entry>
   <entry>
+    <title>Android 属性动画</title>
+    <url>/blogs/posts/6b553823-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="Property-Animation-Overview"><a href="#Property-Animation-Overview" class="headerlink" title="Property Animation Overview"></a>Property Animation Overview</h2><p>The property animation system lets you define the following characteristics of an animation:</p>
+<ul>
+<li>Duration: You can specify the duration of an animation. The default length is 300 ms.</li>
+<li>Time interpolation: You can specify how the values for the property are calculated as a function of the animation’s current elapsed time.</li>
+<li>Repeat count and behavior: You can specify whether or not to have an animation repeat when it reaches the end of a duration and how many times to repeat the animation. You can also specify whether you want the animation to play back in reverse. Setting it to reverse plays the animation forwards then backwards repeatedly, until the number of repeats is reached.</li>
+<li>Animator sets: You can group animations into logical sets that play together or sequentially or after specified delays.</li>
+<li>Frame refresh delay: You can specify how often to refresh frames of your animation. The default is set to refresh every 10 ms, but the speed in which your application can refresh frames is ultimately dependent on how busy the system is overall and how fast the system can service the underlying timer.</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="API-Overview"><a href="#API-Overview" class="headerlink" title="API Overview"></a>API Overview</h2><p><strong>Table 1.</strong> Animators</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ValueAnimator</td>
+<td>The main timing engine for property animation that also computes the values for the property to be animated. It has all of the core functionality that calculates animation values and contains the timing details of each animation, information about whether an animation repeats, listeners that receive update events, and the ability to set custom types to evaluate. There are two pieces to animating properties: calculating the animated values and setting those values on the object and property that is being animated. ValueAnimator does not carry out the second piece, so you must listen for updates to values calculated by the ValueAnimator and modify the objects that you want to animate with your own logic. See the section about Animating with ValueAnimator for more information.</td>
+</tr>
+<tr>
+<td>ObjectAnimator</td>
+<td>A subclass of ValueAnimator that allows you to set a target object and object property to animate. This class updates the property accordingly when it computes a new value for the animation. You want to use ObjectAnimator most of the time, because it makes the process of animating values on target objects much easier. However, you sometimes want to use ValueAnimator directly because ObjectAnimator has a few more restrictions, such as requiring specific acessor methods to be present on the target object.</td>
+</tr>
+<tr>
+<td>AnimatorSet</td>
+<td>Provides a mechanism to group animations together so that they run in relation to one another. You can set animations to play together, sequentially, or after a specified delay. See the section about Choreographing multiple animations with Animator Sets for more information.</td>
+</tr>
+</tbody></table>
+<p><strong>Table 2.</strong> Evaluators</p>
+<table>
+<thead>
+<tr>
+<th>Class&#x2F;Interface</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IntEvaluator</td>
+<td>The default evaluator to calculate values for int properties.</td>
+</tr>
+<tr>
+<td>FloatEvaluator</td>
+<td>The default evaluator to calculate values for float properties.</td>
+</tr>
+<tr>
+<td>ArgbEvaluator</td>
+<td>The default evaluator to calculate values for color properties that are represented as hexidecimal values.</td>
+</tr>
+<tr>
+<td>TypeEvaluator</td>
+<td>An interface that allows you to create your own evaluator. If you are animating an object property that is not an int, float, or color, you must implement the TypeEvaluator interface to specify how to compute the object property’s animated values. You can also specify a custom TypeEvaluator for int, float, and color values as well, if you want to process those types differently than the default behavior. See the section about Using a TypeEvaluator for more information on how to write a custom evaluator.</td>
+</tr>
+</tbody></table>
+<p><strong>Table 3.</strong> Interpolators</p>
+<table>
+<thead>
+<tr>
+<th>Class&#x2F;Interface</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AccelerateDecelerateInterpolator</td>
+<td>An interpolator whose rate of change starts and ends slowly but accelerates through the middle.</td>
+</tr>
+<tr>
+<td>AccelerateInterpolator</td>
+<td>An interpolator whose rate of change starts out slowly and then accelerates.</td>
+</tr>
+<tr>
+<td>AnticipateInterpolator</td>
+<td>An interpolator whose change starts backward then flings forward.</td>
+</tr>
+<tr>
+<td>AnticipateOvershootInterpolator</td>
+<td>An interpolator whose change starts backward, flings forward and overshoots the target value, then finally goes back to the final value.</td>
+</tr>
+<tr>
+<td>BounceInterpolator</td>
+<td>An interpolator whose change bounces at the end.</td>
+</tr>
+<tr>
+<td>CycleInterpolator</td>
+<td>An interpolator whose animation repeats for a specified number of cycles.</td>
+</tr>
+<tr>
+<td>DecelerateInterpolator</td>
+<td>An interpolator whose rate of change starts out quickly and then decelerates.</td>
+</tr>
+<tr>
+<td>LinearInterpolator</td>
+<td>An interpolator whose rate of change is constant.</td>
+</tr>
+<tr>
+<td>OvershootInterpolator</td>
+<td>An interpolator whose change flings forward and overshoots the last value then comes back.</td>
+</tr>
+<tr>
+<td>TimeInterpolator</td>
+<td>An interface that allows you to implement your own interpolator.</td>
+</tr>
+</tbody></table>
+<h2 id="Animating-with-ValueAnimator"><a href="#Animating-with-ValueAnimator" class="headerlink" title="Animating with ValueAnimator"></a>Animating with ValueAnimator</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofFloat(<span class="number">0f</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofObject(<span class="keyword">new</span> MyTypeEvaluator(), startPropertyValue, endPropertyValue);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">animation.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// You can use the animated value in a property that uses the</span></span><br><span class="line">        <span class="comment">// same type as the animation. In this case, you can use the</span></span><br><span class="line">        <span class="comment">// float value in the translationX property.</span></span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Animating-with-ObjectAnimator"><a href="#Animating-with-ObjectAnimator" class="headerlink" title="Animating with ObjectAnimator"></a>Animating with ObjectAnimator</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ObjectAnimator animation = ObjectAnimator.ofFloat(textView, <span class="string">&quot;translationX&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Choreographing-Multiple-Animations-with-AnimatorSet"><a href="#Choreographing-Multiple-Animations-with-AnimatorSet" class="headerlink" title="Choreographing Multiple Animations with AnimatorSet"></a>Choreographing Multiple Animations with AnimatorSet</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AnimatorSet bouncer = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">bouncer.play(bounceAnim).before(squashAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(squashAnim2);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim2);</span><br><span class="line">bouncer.play(bounceBackAnim).after(stretchAnim2);</span><br><span class="line">ValueAnimator fadeAnim = ObjectAnimator.ofFloat(newBall, <span class="string">&quot;alpha&quot;</span>, <span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">fadeAnim.setDuration(<span class="number">250</span>);</span><br><span class="line">AnimatorSet animatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animatorSet.play(bouncer).before(fadeAnim);</span><br><span class="line">animatorSet.start();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Animating-Layout-Changes-to-ViewGroups"><a href="#Animating-Layout-Changes-to-ViewGroups" class="headerlink" title="Animating Layout Changes to ViewGroups"></a>Animating Layout Changes to ViewGroups</h2><p>You can animate layout changes within a ViewGroup with the <code>LayoutTransition</code> class. Views inside a ViewGroup can go through an appearing and disappearing animation when you add them to or remove them from a ViewGroup or when you call a View’s <code>setVisibility()</code> method with <code>VISIBLE</code>, <code>INVISIBLE</code>, or <code>GONE</code>. The remaining Views in the ViewGroup can also animate into their new positions when you add or remove Views. You can define the following animations in a LayoutTransition object by calling <code>setAnimator()</code> and passing in an <code>Animator</code> object with one of the following LayoutTransition constants:</p>
+<ul>
+<li>APPEARING - A flag indicating the animation that runs on items that are appearing in the container.</li>
+<li>CHANGE_APPEARING - A flag indicating the animation that runs on items that are changing due to a new item appearing in the container.</li>
+<li>DISAPPEARING - A flag indicating the animation that runs on items that are disappearing from the container.</li>
+<li>CHANGE_DISAPPEARING - A flag indicating the animation that runs on items that are changing due to an item disappearing from the container.</li>
+</ul>
+<h2 id="Using-StateListAnimator-to-animate-view-state-changes"><a href="#Using-StateListAnimator-to-animate-view-state-changes" class="headerlink" title="Using StateListAnimator to animate view state changes"></a>Using StateListAnimator to animate view state changes</h2><p>res&#x2F;xml&#x2F;animate_scale.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the pressed state; increase x and y size to 150% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleX&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1.5&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleY&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1.5&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the default, non-pressed state; set x and y size to 100% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleX&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleY&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">android:stateListAnimator</span>=<span class="string">&quot;@xml/animate_scale&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Specifying-Keyframes"><a href="#Specifying-Keyframes" class="headerlink" title="Specifying Keyframes"></a>Specifying Keyframes</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Keyframe kf0 = Keyframe.ofFloat(<span class="number">0f</span>, <span class="number">0f</span>);</span><br><span class="line">Keyframe kf1 = Keyframe.ofFloat(<span class="number">.5f</span>, <span class="number">360f</span>);</span><br><span class="line">Keyframe kf2 = Keyframe.ofFloat(<span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">PropertyValuesHolder pvhRotation = PropertyValuesHolder.ofKeyframe(<span class="string">&quot;rotation&quot;</span>, kf0, kf1, kf2);</span><br><span class="line">ObjectAnimator rotationAnim = ObjectAnimator.ofPropertyValuesHolder(target, pvhRotation)</span><br><span class="line">rotationAnim.setDuration(5000ms);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Animating-with-ViewPropertyAnimator"><a href="#Animating-with-ViewPropertyAnimator" class="headerlink" title="Animating with ViewPropertyAnimator"></a>Animating with ViewPropertyAnimator</h2><h3 id="Multiple-ObjectAnimator-objects"><a href="#Multiple-ObjectAnimator-objects" class="headerlink" title="Multiple ObjectAnimator objects"></a>Multiple ObjectAnimator objects</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ObjectAnimator animX = ObjectAnimator.ofFloat(myView, <span class="string">&quot;x&quot;</span>, <span class="number">50f</span>);</span><br><span class="line">ObjectAnimator animY = ObjectAnimator.ofFloat(myView, <span class="string">&quot;y&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">AnimatorSet animSetXY = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animSetXY.playTogether(animX, animY);</span><br><span class="line">animSetXY.start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="One-ObjectAnimator"><a href="#One-ObjectAnimator" class="headerlink" title="One ObjectAnimator"></a>One ObjectAnimator</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(<span class="string">&quot;x&quot;</span>, <span class="number">50f</span>);</span><br><span class="line">PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(<span class="string">&quot;y&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">ObjectAnimator.ofPropertyValuesHolder(myView, pvhX, pvyY).start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="ViewPropertyAnimator"><a href="#ViewPropertyAnimator" class="headerlink" title="ViewPropertyAnimator"></a>ViewPropertyAnimator</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">myView.animate().x(<span class="number">50f</span>).y(<span class="number">100f</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Declaring-Animations-in-XML"><a href="#Declaring-Animations-in-XML" class="headerlink" title="Declaring Animations in XML"></a>Declaring Animations in XML</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">android:ordering</span>=<span class="string">&quot;sequentially&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">&quot;x&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">&quot;400&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">&quot;intType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">&quot;y&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">&quot;300&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">&quot;intType&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:propertyName</span>=<span class="string">&quot;alpha&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueTo</span>=<span class="string">&quot;1f&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(myContext,</span><br><span class="line">    R.anim.property_animator);</span><br><span class="line">set.setTarget(myObject);</span><br><span class="line">set.start();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animator</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;1000&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueFrom</span>=<span class="string">&quot;0f&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueTo</span>=<span class="string">&quot;-100f&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator xmlAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(<span class="keyword">this</span>,</span><br><span class="line">        R.animator.animator);</span><br><span class="line">xmlAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">xmlAnimator.start();</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/guide/topics/graphics/prop-animation.html">Property Animation Overview | Android Developers</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>属性动画</tag>
+        <tag>ObjectAnimator</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android 摄像头</title>
     <url>/blogs/posts/6b553825-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="简单调用"><a href="#简单调用" class="headerlink" title="简单调用"></a>简单调用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 启动安装在手机上的摄像头应用</span></span><br><span class="line">startActivityForResult(Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE), <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
@@ -347,203 +503,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS 居中大全</title>
-    <url>/blogs/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<p>假设 HTML 代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span>Child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>基础的 CSS 样式如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">/* 将 margin 设置为负的宽高的一半 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin: auto"></a>absolute + margin: auto</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="text-align-center-vertical-align-middle-line-height"><a href="#text-align-center-vertical-align-middle-line-height" class="headerlink" title="text-align: center + vertical-align: middle + line-height"></a>text-align: center + vertical-align: middle + line-height</h2><p><strong>缺点</strong>：需要知道父元素的高。父元素需要设置跟自身高度相等的 line-height。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="comment">/* 跟父元素高度一样的 line-height */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="comment">/* 水平居中 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/* 垂直居中 */</span></span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="comment">/* vertical-align 和父元素的 text-align 属性都只应用于行内元素 */</span></span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">line-height</span>: initial;</span><br><span class="line">  <span class="comment">/* 修正文字对齐 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-transform-translate-50-50"><a href="#absolute-transform-translate-50-50" class="headerlink" title="absolute + transform: translate(-50%, -50%)"></a>absolute + transform: translate(-50%, -50%)</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="display-table-cell-text-align-center-vertical-align-middle"><a href="#display-table-cell-text-align-center-vertical-align-middle" class="headerlink" title="display: table-cell + text-align: center + vertical-align: middle"></a>display: table-cell + text-align: center + vertical-align: middle</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="flex-justify-content-center-align-items-center"><a href="#flex-justify-content-center-align-items-center" class="headerlink" title="flex + justify-content: center + align-items: center"></a>flex + justify-content: center + align-items: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="flex-margin-auto"><a href="#flex-margin-auto" class="headerlink" title="flex + margin: auto"></a>flex + margin: auto</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="display-grid-align-self-center-justify-self-center"><a href="#display-grid-align-self-center-justify-self-center" class="headerlink" title="display: grid + align-self: center + justify-self: center"></a>display: grid + align-self: center + justify-self: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">  justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-        <tag>居中</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Android 属性动画</title>
-    <url>/blogs/posts/6b553823-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="Property-Animation-Overview"><a href="#Property-Animation-Overview" class="headerlink" title="Property Animation Overview"></a>Property Animation Overview</h2><p>The property animation system lets you define the following characteristics of an animation:</p>
-<ul>
-<li>Duration: You can specify the duration of an animation. The default length is 300 ms.</li>
-<li>Time interpolation: You can specify how the values for the property are calculated as a function of the animation’s current elapsed time.</li>
-<li>Repeat count and behavior: You can specify whether or not to have an animation repeat when it reaches the end of a duration and how many times to repeat the animation. You can also specify whether you want the animation to play back in reverse. Setting it to reverse plays the animation forwards then backwards repeatedly, until the number of repeats is reached.</li>
-<li>Animator sets: You can group animations into logical sets that play together or sequentially or after specified delays.</li>
-<li>Frame refresh delay: You can specify how often to refresh frames of your animation. The default is set to refresh every 10 ms, but the speed in which your application can refresh frames is ultimately dependent on how busy the system is overall and how fast the system can service the underlying timer.</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="API-Overview"><a href="#API-Overview" class="headerlink" title="API Overview"></a>API Overview</h2><p><strong>Table 1.</strong> Animators</p>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ValueAnimator</td>
-<td>The main timing engine for property animation that also computes the values for the property to be animated. It has all of the core functionality that calculates animation values and contains the timing details of each animation, information about whether an animation repeats, listeners that receive update events, and the ability to set custom types to evaluate. There are two pieces to animating properties: calculating the animated values and setting those values on the object and property that is being animated. ValueAnimator does not carry out the second piece, so you must listen for updates to values calculated by the ValueAnimator and modify the objects that you want to animate with your own logic. See the section about Animating with ValueAnimator for more information.</td>
-</tr>
-<tr>
-<td>ObjectAnimator</td>
-<td>A subclass of ValueAnimator that allows you to set a target object and object property to animate. This class updates the property accordingly when it computes a new value for the animation. You want to use ObjectAnimator most of the time, because it makes the process of animating values on target objects much easier. However, you sometimes want to use ValueAnimator directly because ObjectAnimator has a few more restrictions, such as requiring specific acessor methods to be present on the target object.</td>
-</tr>
-<tr>
-<td>AnimatorSet</td>
-<td>Provides a mechanism to group animations together so that they run in relation to one another. You can set animations to play together, sequentially, or after a specified delay. See the section about Choreographing multiple animations with Animator Sets for more information.</td>
-</tr>
-</tbody></table>
-<p><strong>Table 2.</strong> Evaluators</p>
-<table>
-<thead>
-<tr>
-<th>Class&#x2F;Interface</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>IntEvaluator</td>
-<td>The default evaluator to calculate values for int properties.</td>
-</tr>
-<tr>
-<td>FloatEvaluator</td>
-<td>The default evaluator to calculate values for float properties.</td>
-</tr>
-<tr>
-<td>ArgbEvaluator</td>
-<td>The default evaluator to calculate values for color properties that are represented as hexidecimal values.</td>
-</tr>
-<tr>
-<td>TypeEvaluator</td>
-<td>An interface that allows you to create your own evaluator. If you are animating an object property that is not an int, float, or color, you must implement the TypeEvaluator interface to specify how to compute the object property’s animated values. You can also specify a custom TypeEvaluator for int, float, and color values as well, if you want to process those types differently than the default behavior. See the section about Using a TypeEvaluator for more information on how to write a custom evaluator.</td>
-</tr>
-</tbody></table>
-<p><strong>Table 3.</strong> Interpolators</p>
-<table>
-<thead>
-<tr>
-<th>Class&#x2F;Interface</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AccelerateDecelerateInterpolator</td>
-<td>An interpolator whose rate of change starts and ends slowly but accelerates through the middle.</td>
-</tr>
-<tr>
-<td>AccelerateInterpolator</td>
-<td>An interpolator whose rate of change starts out slowly and then accelerates.</td>
-</tr>
-<tr>
-<td>AnticipateInterpolator</td>
-<td>An interpolator whose change starts backward then flings forward.</td>
-</tr>
-<tr>
-<td>AnticipateOvershootInterpolator</td>
-<td>An interpolator whose change starts backward, flings forward and overshoots the target value, then finally goes back to the final value.</td>
-</tr>
-<tr>
-<td>BounceInterpolator</td>
-<td>An interpolator whose change bounces at the end.</td>
-</tr>
-<tr>
-<td>CycleInterpolator</td>
-<td>An interpolator whose animation repeats for a specified number of cycles.</td>
-</tr>
-<tr>
-<td>DecelerateInterpolator</td>
-<td>An interpolator whose rate of change starts out quickly and then decelerates.</td>
-</tr>
-<tr>
-<td>LinearInterpolator</td>
-<td>An interpolator whose rate of change is constant.</td>
-</tr>
-<tr>
-<td>OvershootInterpolator</td>
-<td>An interpolator whose change flings forward and overshoots the last value then comes back.</td>
-</tr>
-<tr>
-<td>TimeInterpolator</td>
-<td>An interface that allows you to implement your own interpolator.</td>
-</tr>
-</tbody></table>
-<h2 id="Animating-with-ValueAnimator"><a href="#Animating-with-ValueAnimator" class="headerlink" title="Animating with ValueAnimator"></a>Animating with ValueAnimator</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofFloat(<span class="number">0f</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofObject(<span class="keyword">new</span> MyTypeEvaluator(), startPropertyValue, endPropertyValue);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">animation.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// You can use the animated value in a property that uses the</span></span><br><span class="line">        <span class="comment">// same type as the animation. In this case, you can use the</span></span><br><span class="line">        <span class="comment">// float value in the translationX property.</span></span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Animating-with-ObjectAnimator"><a href="#Animating-with-ObjectAnimator" class="headerlink" title="Animating with ObjectAnimator"></a>Animating with ObjectAnimator</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ObjectAnimator animation = ObjectAnimator.ofFloat(textView, <span class="string">&quot;translationX&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
-
-<h2 id="Choreographing-Multiple-Animations-with-AnimatorSet"><a href="#Choreographing-Multiple-Animations-with-AnimatorSet" class="headerlink" title="Choreographing Multiple Animations with AnimatorSet"></a>Choreographing Multiple Animations with AnimatorSet</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AnimatorSet bouncer = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">bouncer.play(bounceAnim).before(squashAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(squashAnim2);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim2);</span><br><span class="line">bouncer.play(bounceBackAnim).after(stretchAnim2);</span><br><span class="line">ValueAnimator fadeAnim = ObjectAnimator.ofFloat(newBall, <span class="string">&quot;alpha&quot;</span>, <span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">fadeAnim.setDuration(<span class="number">250</span>);</span><br><span class="line">AnimatorSet animatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animatorSet.play(bouncer).before(fadeAnim);</span><br><span class="line">animatorSet.start();</span><br></pre></td></tr></table></figure>
-
-<h2 id="Animating-Layout-Changes-to-ViewGroups"><a href="#Animating-Layout-Changes-to-ViewGroups" class="headerlink" title="Animating Layout Changes to ViewGroups"></a>Animating Layout Changes to ViewGroups</h2><p>You can animate layout changes within a ViewGroup with the <code>LayoutTransition</code> class. Views inside a ViewGroup can go through an appearing and disappearing animation when you add them to or remove them from a ViewGroup or when you call a View’s <code>setVisibility()</code> method with <code>VISIBLE</code>, <code>INVISIBLE</code>, or <code>GONE</code>. The remaining Views in the ViewGroup can also animate into their new positions when you add or remove Views. You can define the following animations in a LayoutTransition object by calling <code>setAnimator()</code> and passing in an <code>Animator</code> object with one of the following LayoutTransition constants:</p>
-<ul>
-<li>APPEARING - A flag indicating the animation that runs on items that are appearing in the container.</li>
-<li>CHANGE_APPEARING - A flag indicating the animation that runs on items that are changing due to a new item appearing in the container.</li>
-<li>DISAPPEARING - A flag indicating the animation that runs on items that are disappearing from the container.</li>
-<li>CHANGE_DISAPPEARING - A flag indicating the animation that runs on items that are changing due to an item disappearing from the container.</li>
-</ul>
-<h2 id="Using-StateListAnimator-to-animate-view-state-changes"><a href="#Using-StateListAnimator-to-animate-view-state-changes" class="headerlink" title="Using StateListAnimator to animate view state changes"></a>Using StateListAnimator to animate view state changes</h2><p>res&#x2F;xml&#x2F;animate_scale.xml</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the pressed state; increase x and y size to 150% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleX&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1.5&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleY&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1.5&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the default, non-pressed state; set x and y size to 100% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleX&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">&quot;scaleY&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">&quot;@android:integer/config_shortAnimTime&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">android:stateListAnimator</span>=<span class="string">&quot;@xml/animate_scale&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Specifying-Keyframes"><a href="#Specifying-Keyframes" class="headerlink" title="Specifying Keyframes"></a>Specifying Keyframes</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Keyframe kf0 = Keyframe.ofFloat(<span class="number">0f</span>, <span class="number">0f</span>);</span><br><span class="line">Keyframe kf1 = Keyframe.ofFloat(<span class="number">.5f</span>, <span class="number">360f</span>);</span><br><span class="line">Keyframe kf2 = Keyframe.ofFloat(<span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">PropertyValuesHolder pvhRotation = PropertyValuesHolder.ofKeyframe(<span class="string">&quot;rotation&quot;</span>, kf0, kf1, kf2);</span><br><span class="line">ObjectAnimator rotationAnim = ObjectAnimator.ofPropertyValuesHolder(target, pvhRotation)</span><br><span class="line">rotationAnim.setDuration(5000ms);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Animating-with-ViewPropertyAnimator"><a href="#Animating-with-ViewPropertyAnimator" class="headerlink" title="Animating with ViewPropertyAnimator"></a>Animating with ViewPropertyAnimator</h2><h3 id="Multiple-ObjectAnimator-objects"><a href="#Multiple-ObjectAnimator-objects" class="headerlink" title="Multiple ObjectAnimator objects"></a>Multiple ObjectAnimator objects</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ObjectAnimator animX = ObjectAnimator.ofFloat(myView, <span class="string">&quot;x&quot;</span>, <span class="number">50f</span>);</span><br><span class="line">ObjectAnimator animY = ObjectAnimator.ofFloat(myView, <span class="string">&quot;y&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">AnimatorSet animSetXY = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animSetXY.playTogether(animX, animY);</span><br><span class="line">animSetXY.start();</span><br></pre></td></tr></table></figure>
-
-<h3 id="One-ObjectAnimator"><a href="#One-ObjectAnimator" class="headerlink" title="One ObjectAnimator"></a>One ObjectAnimator</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(<span class="string">&quot;x&quot;</span>, <span class="number">50f</span>);</span><br><span class="line">PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(<span class="string">&quot;y&quot;</span>, <span class="number">100f</span>);</span><br><span class="line">ObjectAnimator.ofPropertyValuesHolder(myView, pvhX, pvyY).start();</span><br></pre></td></tr></table></figure>
-
-<h3 id="ViewPropertyAnimator"><a href="#ViewPropertyAnimator" class="headerlink" title="ViewPropertyAnimator"></a>ViewPropertyAnimator</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">myView.animate().x(<span class="number">50f</span>).y(<span class="number">100f</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Declaring-Animations-in-XML"><a href="#Declaring-Animations-in-XML" class="headerlink" title="Declaring Animations in XML"></a>Declaring Animations in XML</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">android:ordering</span>=<span class="string">&quot;sequentially&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">&quot;x&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">&quot;400&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">&quot;intType&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">&quot;y&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">&quot;300&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">&quot;intType&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:propertyName</span>=<span class="string">&quot;alpha&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueTo</span>=<span class="string">&quot;1f&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(myContext,</span><br><span class="line">    R.anim.property_animator);</span><br><span class="line">set.setTarget(myObject);</span><br><span class="line">set.start();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animator</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">&quot;1000&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueType</span>=<span class="string">&quot;floatType&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueFrom</span>=<span class="string">&quot;0f&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueTo</span>=<span class="string">&quot;-100f&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ValueAnimator xmlAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(<span class="keyword">this</span>,</span><br><span class="line">        R.animator.animator);</span><br><span class="line">xmlAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">xmlAnimator.start();</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/guide/topics/graphics/prop-animation.html">Property Animation Overview | Android Developers</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-      <tags>
-        <tag>属性动画</tag>
-        <tag>ObjectAnimator</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS 常用属性</title>
     <url>/blogs/posts/6b555f32-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><table>
@@ -757,6 +716,47 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS 居中大全</title>
+    <url>/blogs/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<p>假设 HTML 代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span>Child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>基础的 CSS 样式如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">/* 将 margin 设置为负的宽高的一半 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin: auto"></a>absolute + margin: auto</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="text-align-center-vertical-align-middle-line-height"><a href="#text-align-center-vertical-align-middle-line-height" class="headerlink" title="text-align: center + vertical-align: middle + line-height"></a>text-align: center + vertical-align: middle + line-height</h2><p><strong>缺点</strong>：需要知道父元素的高。父元素需要设置跟自身高度相等的 line-height。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="comment">/* 跟父元素高度一样的 line-height */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="comment">/* 水平居中 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/* 垂直居中 */</span></span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="comment">/* vertical-align 和父元素的 text-align 属性都只应用于行内元素 */</span></span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">line-height</span>: initial;</span><br><span class="line">  <span class="comment">/* 修正文字对齐 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="absolute-transform-translate-50-50"><a href="#absolute-transform-translate-50-50" class="headerlink" title="absolute + transform: translate(-50%, -50%)"></a>absolute + transform: translate(-50%, -50%)</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="display-table-cell-text-align-center-vertical-align-middle"><a href="#display-table-cell-text-align-center-vertical-align-middle" class="headerlink" title="display: table-cell + text-align: center + vertical-align: middle"></a>display: table-cell + text-align: center + vertical-align: middle</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flex-justify-content-center-align-items-center"><a href="#flex-justify-content-center-align-items-center" class="headerlink" title="flex + justify-content: center + align-items: center"></a>flex + justify-content: center + align-items: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flex-margin-auto"><a href="#flex-margin-auto" class="headerlink" title="flex + margin: auto"></a>flex + margin: auto</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="display-grid-align-self-center-justify-self-center"><a href="#display-grid-align-self-center-justify-self-center" class="headerlink" title="display: grid + align-self: center + justify-self: center"></a>display: grid + align-self: center + justify-self: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">  justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>HTML/CSS/JavaScript</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>居中</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS 滤镜 - filter 属性</title>
     <url>/blogs/posts/6b555f33-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<p>强大的 CSS filter</p>
@@ -791,7 +791,7 @@
 </tr>
 <tr>
 <td>drop-shadow()</td>
-<td>给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受 &lt;shadow&gt; （在 CSS3 背景中定义）类型的值，除了“inset”关键字是不允许的。该函数与已有的 box-shadow box-shadow 属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速</td>
+<td>给图像设置一个阴影效果。阴影是合成在图像下面，可以有模糊度的，可以以特定颜色画出的遮罩图的偏移版本。 函数接受 &lt;shadow&gt; （在 CSS3 背景中定义）类型的值，除了「inset」关键字是不允许的。该函数与已有的 box-shadow box-shadow 属性很相似；不同之处在于，通过滤镜，一些浏览器为了更好的性能会提供硬件加速</td>
 </tr>
 <tr>
 <td>hue-rotate()</td>
@@ -828,7 +828,7 @@
 
 <span id="more"></span>
 
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称“容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称“项目”。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称「容器」。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称「项目」。</p>
 <p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
 <p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做 main start，结束位置叫做 main end；交叉轴的开始位置叫做 cross start，结束位置叫做 cross end。</p>
 <p>项目默认沿主轴排列。单个项目占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。</p>
@@ -1650,6 +1650,41 @@
       </tags>
   </entry>
   <entry>
+    <title>background-attachment</title>
+    <url>/blogs/posts/6b555f3e-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<p>CSS 属性 <code>background-attachment</code> 设置背景图片的位置是固定在视口（viewport）内，还是随包含它的块（block）滚动。</p>
+<p>语法如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">background-attachment</span>: fixed | scroll | local;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fixed</td>
+<td>背景相对于视口固定（viewport），背景不会随着页面的其他内容滚动而滚动</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>背景随着包含它的元素的祖先元素滚动而滚动。但是当包含它的元素滚动时（<code>overflow: scroll</code>），背景不滚动</td>
+</tr>
+<tr>
+<td>local</td>
+<td>背景与包含它的元素绑定，随着元素滚动而滚动</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>HTML/CSS/JavaScript</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>XML 中的转义字符</title>
     <url>/blogs/posts/6b555f3d-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><table>
@@ -1710,41 +1745,6 @@
       </categories>
       <tags>
         <tag>转义字符</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>background-attachment</title>
-    <url>/blogs/posts/6b555f3e-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<p>CSS 属性 <code>background-attachment</code> 设置背景图片的位置是固定在视口（viewport）内，还是随包含它的块（block）滚动。</p>
-<p>语法如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">background-attachment</span>: fixed | scroll | local;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>fixed</td>
-<td>背景相对于视口固定（viewport），背景不会随着页面的其他内容滚动而滚动</td>
-</tr>
-<tr>
-<td>scroll</td>
-<td>背景随着包含它的元素的祖先元素滚动而滚动。但是当包含它的元素滚动时（<code>overflow: scroll</code>），背景不滚动</td>
-</tr>
-<tr>
-<td>local</td>
-<td>背景与包含它的元素绑定，随着元素滚动而滚动</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -1833,17 +1833,6 @@
       </tags>
   </entry>
   <entry>
-    <title>怎么学习前端开发</title>
-    <url>/blogs/posts/6b558643-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="怎么学习前端开发？求推荐学习路线？-知乎"><a href="#怎么学习前端开发？求推荐学习路线？-知乎" class="headerlink" title="怎么学习前端开发？求推荐学习路线？ - 知乎"></a><a href="https://www.zhihu.com/question/30180100/answer/156399333">怎么学习前端开发？求推荐学习路线？ - 知乎</a></h2><h2 id="如何学习编程？-知乎"><a href="#如何学习编程？-知乎" class="headerlink" title="如何学习编程？ - 知乎"></a><a href="https://www.zhihu.com/question/19578287/answer/157148072">如何学习编程？ - 知乎</a></h2><h2 id="零基础开始学-Web-前端开发，有什么建议吗？-知乎"><a href="#零基础开始学-Web-前端开发，有什么建议吗？-知乎" class="headerlink" title="零基础开始学 Web 前端开发，有什么建议吗？ - 知乎"></a><a href="https://www.zhihu.com/question/19637373/answer/162940674">零基础开始学 Web 前端开发，有什么建议吗？ - 知乎</a></h2><h2 id="程序员学哪种语言最好？-知乎"><a href="#程序员学哪种语言最好？-知乎" class="headerlink" title="程序员学哪种语言最好？ - 知乎"></a><a href="https://www.zhihu.com/question/23016465/answer/169041683">程序员学哪种语言最好？ - 知乎</a></h2><h2 id="学习的终极目标是什么？-知乎"><a href="#学习的终极目标是什么？-知乎" class="headerlink" title="学习的终极目标是什么？ - 知乎"></a><a href="https://zhuanlan.zhihu.com/p/26894535">学习的终极目标是什么？ - 知乎</a></h2><span id="more"></span>]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>图</title>
     <url>/blogs/posts/6b558641-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p><strong>图（graph）</strong>是一种数学结构，它表示真实世界中实体之间的关系。</p>
@@ -1869,6 +1858,17 @@
       </categories>
       <tags>
         <tag>图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎么学习前端开发</title>
+    <url>/blogs/posts/6b558643-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="怎么学习前端开发？求推荐学习路线？-知乎"><a href="#怎么学习前端开发？求推荐学习路线？-知乎" class="headerlink" title="怎么学习前端开发？求推荐学习路线？ - 知乎"></a><a href="https://www.zhihu.com/question/30180100/answer/156399333">怎么学习前端开发？求推荐学习路线？ - 知乎</a></h2><h2 id="如何学习编程？-知乎"><a href="#如何学习编程？-知乎" class="headerlink" title="如何学习编程？ - 知乎"></a><a href="https://www.zhihu.com/question/19578287/answer/157148072">如何学习编程？ - 知乎</a></h2><h2 id="零基础开始学-Web-前端开发，有什么建议吗？-知乎"><a href="#零基础开始学-Web-前端开发，有什么建议吗？-知乎" class="headerlink" title="零基础开始学 Web 前端开发，有什么建议吗？ - 知乎"></a><a href="https://www.zhihu.com/question/19637373/answer/162940674">零基础开始学 Web 前端开发，有什么建议吗？ - 知乎</a></h2><h2 id="程序员学哪种语言最好？-知乎"><a href="#程序员学哪种语言最好？-知乎" class="headerlink" title="程序员学哪种语言最好？ - 知乎"></a><a href="https://www.zhihu.com/question/23016465/answer/169041683">程序员学哪种语言最好？ - 知乎</a></h2><h2 id="学习的终极目标是什么？-知乎"><a href="#学习的终极目标是什么？-知乎" class="headerlink" title="学习的终极目标是什么？ - 知乎"></a><a href="https://zhuanlan.zhihu.com/p/26894535">学习的终极目标是什么？ - 知乎</a></h2><span id="more"></span>]]></content>
+      <categories>
+        <category>HTML/CSS/JavaScript</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -2145,19 +2145,19 @@
   <entry>
     <title>范式（NF）</title>
     <url>/blogs/posts/6b558646-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<p>按照教材中的定义，范式是“符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度”。很晦涩吧？实际上你可以把它粗略地理解为<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。就像家里装修买建材，最环保的是 E0 级，其次是 E1 级，还有 E2 级等等。数据库范式也分为 1NF、2NF、3NF、BCNF、4NF、5NF。一般在我们设计关系型数据库的时候，最多考虑到 BCNF 就够。符合高一级范式的设计，必定符合低一级范式，例如符合 2NF 的关系模式，必定符合 1NF。</p>
+    <content><![CDATA[<p>按照教材中的定义，范式是「符合某一种级别的关系模式的集合，表示一个关系内部各属性之间的联系的合理化程度」。很晦涩吧？实际上你可以把它粗略地理解为<strong>一张数据表的表结构所符合的某种设计标准的级别</strong>。就像家里装修买建材，最环保的是 E0 级，其次是 E1 级，还有 E2 级等等。数据库范式也分为 1NF、2NF、3NF、BCNF、4NF、5NF。一般在我们设计关系型数据库的时候，最多考虑到 BCNF 就够。符合高一级范式的设计，必定符合低一级范式，例如符合 2NF 的关系模式，必定符合 1NF。</p>
 <span id="more"></span>
 
 <h2 id="第一范式（1NF）"><a href="#第一范式（1NF）" class="headerlink" title="第一范式（1NF）"></a>第一范式（1NF）</h2><p><strong>定义：符合1NF的关系中的每个属性都不可再分。</strong>实际上，<strong>1NF是所有关系型数据库的最基本要求</strong></p>
-<h2 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h2><p>2NF 对 1NF 的改进是，<strong>2NF 在 1NF 的基础之上，消除了非主属性对于码的部分函数依赖</strong>。接下来对这句话中涉及到的四个概念——<strong>“函数依赖”</strong>、<strong>“码”</strong>、<strong>“非主属性”</strong>、与<strong>“部分函数依赖”</strong>进行一下解释。</p>
-<h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p>我们可以这么理解（但并不是特别严格的定义）：<strong>若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y</strong>。也就是说，在数据表中，不存在任意两条记录，它们在X属性（或属性组）上的值相同，而在Y属性上的值不同。这也就是“函数依赖”名字的由来，类似于函数关系 y &#x3D; f(x)，在x的值确定的情况下，y的值一定是确定的。</p>
+<h2 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h2><p>2NF 对 1NF 的改进是，<strong>2NF 在 1NF 的基础之上，消除了非主属性对于码的部分函数依赖</strong>。接下来对这句话中涉及到的四个概念——<strong>「函数依赖」</strong>、<strong>「码」</strong>、<strong>「非主属性」</strong>、与<strong>「部分函数依赖」</strong>进行一下解释。</p>
+<h3 id="函数依赖"><a href="#函数依赖" class="headerlink" title="函数依赖"></a>函数依赖</h3><p>我们可以这么理解（但并不是特别严格的定义）：<strong>若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y</strong>。也就是说，在数据表中，不存在任意两条记录，它们在X属性（或属性组）上的值相同，而在Y属性上的值不同。这也就是「函数依赖」名字的由来，类似于函数关系 y &#x3D; f(x)，在x的值确定的情况下，y的值一定是确定的。</p>
 <h3 id="完全函数依赖"><a href="#完全函数依赖" class="headerlink" title="完全函数依赖"></a>完全函数依赖</h3><p>在一张表中，若 X → Y，且对于 X 的任何一个真子集（假如属性组 X 包含超过一个属性的话），X ‘ → Y 不成立，那么我们称 Y 对于 X <strong>完全函数依赖</strong>，记作 X F→ Y。（那个F应该写在箭头的正上方，没办法打出来……，正确的写法如<strong>下图</strong>）</p>
-<p><img src="https://pic4.zhimg.com/50/12513de20079d12b99d946072df7311a_hd.jpg" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/50/12513de20079d12b99d946072df7311a_hd.jpg" alt="完全函数依赖"></p>
 <h3 id="部分函数依赖"><a href="#部分函数依赖" class="headerlink" title="部分函数依赖"></a>部分函数依赖</h3><p>假如 Y 函数依赖于 X，但同时 Y 并不完全函数依赖于 X，那么我们就称 Y 部分函数依赖于 X，记作 X  P→ Y，如<strong>下图</strong>。</p>
-<p><img src="https://pic2.zhimg.com/50/10b52b39b18b8ea9fb17b46babf4d20f_hd.jpg" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/50/10b52b39b18b8ea9fb17b46babf4d20f_hd.jpg" alt="部分函数依赖"></p>
 <h3 id="传递函数依赖"><a href="#传递函数依赖" class="headerlink" title="传递函数依赖"></a>传递函数依赖</h3><p>假如 Z 函数依赖于 Y，且 Y 函数依赖于 X （前提是：Y 不包含于 X，且 X 不函数依赖于 Y），那么我们就称 Z 传递函数依赖于 X ，记作 X T→ Z，如<strong>下图</strong>。</p>
-<p><img src="https://pic4.zhimg.com/50/51f8105fbbe92adaa3e343ea2db3bf49_hd.jpg" alt="img"></p>
-<h3 id="码"><a href="#码" class="headerlink" title="码"></a>码</h3><p>设 K 为某表中的一个属性或属性组，若除 K 之外的所有属性都完全函数依赖于 K（这个“完全”不要漏了），那么我们称 K 为<strong>候选码</strong>，简称为<strong>码</strong>。在实际中我们通常可以理解为：<strong>假如当 K 确定的情况下，该表除 K 之外的所有属性的值也就随之确定，那么 K 就是码</strong>。一张表中可以有超过一个码。（实际应用中为了方便，通常选择其中的一个码作为<strong>主码</strong>）</p>
+<p><img src="https://pic4.zhimg.com/50/51f8105fbbe92adaa3e343ea2db3bf49_hd.jpg" alt="传递函数依赖"></p>
+<h3 id="码"><a href="#码" class="headerlink" title="码"></a>码</h3><p>设 K 为某表中的一个属性或属性组，若除 K 之外的所有属性都完全函数依赖于 K（这个「完全」不要漏了），那么我们称 K 为<strong>候选码</strong>，简称为<strong>码</strong>。在实际中我们通常可以理解为：<strong>假如当 K 确定的情况下，该表除 K 之外的所有属性的值也就随之确定，那么 K 就是码</strong>。一张表中可以有超过一个码。（实际应用中为了方便，通常选择其中的一个码作为<strong>主码</strong>）</p>
 <h3 id="非主属性"><a href="#非主属性" class="headerlink" title="非主属性"></a>非主属性</h3><p>不包含在任何一个码中的属性为非主属性。</p>
 <h2 id="第三范式（3NF）"><a href="#第三范式（3NF）" class="headerlink" title="第三范式（3NF）"></a>第三范式（3NF）</h2><p><strong>3NF 在 2NF 的基础之上，消除了非主属性对于码的传递函数依赖</strong>。也就是说， 如果存在非主属性对于码的传递函数依赖，则不符合 3NF 的要求。</p>
 <h2 id="BC范式（BCNF）"><a href="#BC范式（BCNF）" class="headerlink" title="BC范式（BCNF）"></a>BC范式（BCNF）</h2><p>BCNF 在 3NF 的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p>
@@ -2296,6 +2296,24 @@
       </tags>
   </entry>
   <entry>
+    <title>实现 JavaScript 的 bind，apply，call 方法</title>
+    <url>/blogs/posts/6b55864a-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="实现-Function-prototype-bind-方法"><a href="#实现-Function-prototype-bind-方法" class="headerlink" title="实现 Function.prototype.bind 方法"></a>实现 Function.prototype.bind 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span> (<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">      args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// apply 方法的实现在下文</span></span><br><span class="line">    <span class="keyword">return</span> apply(fn, obj, args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="实现-Function-prototype-apply-方法"><a href="#实现-Function-prototype-apply-方法" class="headerlink" title="实现 Function.prototype.apply 方法"></a>实现 Function.prototype.apply 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">apply</span> (<span class="params">fn, obj, args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> tmpFn = <span class="built_in">String</span>(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime())</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, tmpFn, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: fn</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">var</span> statement = <span class="string">&#x27;obj[tmpFn](&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">    statement += <span class="string">&#x27;args[&#x27;</span> + i + <span class="string">&#x27;], &#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    statement = statement.slice(<span class="number">0</span>, -<span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  statement += <span class="string">&#x27;)&#x27;</span></span><br><span class="line">  <span class="keyword">var</span> result = <span class="built_in">eval</span>(statement)</span><br><span class="line">  <span class="keyword">delete</span> obj[tmpFn]</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现-Function-prototype-call-方法"><a href="#实现-Function-prototype-call-方法" class="headerlink" title="实现 Function.prototype.call 方法"></a>实现 Function.prototype.call 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">call</span> (<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 直接调用上面实现的 apply 方法</span></span><br><span class="line">  <span class="keyword">return</span> apply(fn, obj, args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>HTML/CSS/JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序列化</title>
     <url>/blogs/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>Java 的 <code>Serializable</code> 接口是一个标记接口，它是一个空接口。实现它只是标记这个类是可序列化的。</p>
@@ -2356,24 +2374,6 @@
       </tags>
   </entry>
   <entry>
-    <title>实现 JavaScript 的 bind，apply，call 方法</title>
-    <url>/blogs/posts/6b55864a-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="实现-Function-prototype-bind-方法"><a href="#实现-Function-prototype-bind-方法" class="headerlink" title="实现 Function.prototype.bind 方法"></a>实现 Function.prototype.bind 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span> (<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">      args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// apply 方法的实现在下文</span></span><br><span class="line">    <span class="keyword">return</span> apply(fn, obj, args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="实现-Function-prototype-apply-方法"><a href="#实现-Function-prototype-apply-方法" class="headerlink" title="实现 Function.prototype.apply 方法"></a>实现 Function.prototype.apply 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">apply</span> (<span class="params">fn, obj, args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> tmpFn = <span class="built_in">String</span>(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime())</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, tmpFn, &#123;</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">value</span>: fn</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">var</span> statement = <span class="string">&#x27;obj[tmpFn](&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">    statement += <span class="string">&#x27;args[&#x27;</span> + i + <span class="string">&#x27;], &#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    statement = statement.slice(<span class="number">0</span>, -<span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  statement += <span class="string">&#x27;)&#x27;</span></span><br><span class="line">  <span class="keyword">var</span> result = <span class="built_in">eval</span>(statement)</span><br><span class="line">  <span class="keyword">delete</span> obj[tmpFn]</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="实现-Function-prototype-call-方法"><a href="#实现-Function-prototype-call-方法" class="headerlink" title="实现 Function.prototype.call 方法"></a>实现 Function.prototype.call 方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">call</span> (<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">    args.push(<span class="built_in">arguments</span>[i])</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 直接调用上面实现的 apply 方法</span></span><br><span class="line">  <span class="keyword">return</span> apply(fn, obj, args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>时间标准</title>
     <url>/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="世界时（Universal-Time）"><a href="#世界时（Universal-Time）" class="headerlink" title="世界时（Universal Time）"></a>世界时（Universal Time）</h2><p>世界时（Universal Time，简称 UT）是一种以格林尼治子夜起算的<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%B6">平太阳时</a>。世界时是以地球自转为基准得到的时间尺度，其精度受到地球自转不均匀变化和极移的影响，为了解决这种影响，1955年国际天文联合会定义了 UT0、UT1 和 UT2 三个系统：</p>
@@ -2393,17 +2393,17 @@
 <span id="more"></span>
 
 <h2 id="平太阳时"><a href="#平太阳时" class="headerlink" title="平太阳时"></a>平太阳时</h2><p>太阳日（solar day）是依据太阳运动，所定义的时间，可以分为<a href="#%E8%A7%86%E5%A4%AA%E9%98%B3%E6%97%A5">视太阳日</a>和<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%A5">平太阳日</a>。</p>
-<p>一太阳日传统称为一“日”、一“天”或一“昼夜”。</p>
+<p>一太阳日传统称为一「日」、一「天」或一「昼夜」。</p>
 <h3 id="视太阳日"><a href="#视太阳日" class="headerlink" title="视太阳日"></a>视太阳日</h3><p>视太阳日（apparent solar day）是依据<a href="#%E7%9C%9F%E5%A4%AA%E9%98%B3">真太阳</a>定义的，也就是真实的太阳连续两次经过某地相同之中天，即是上至上中天或下至下中天的时间间隔，可以使用日晷来测量（上中天）。</p>
 <p>由于以下两个原因，视太阳日在一年当中的长度会每天不停地改变。</p>
 <p>首先，地球的轨道是一个椭圆而不是正圆，所以当地球接近太阳时速度会加快，到达近日点时的运动速度最快；远离时又会减慢，到达远日点时的速度最慢（参考开普勒行星运动定律）。<br>其次，因为地球自转轴的倾斜角度，使得太阳在黄道上运行的大圆对地球的天球赤道是倾斜的，当太阳在两个分点时，穿越赤道时会有一个角度的，所以投影在赤道上的运行速度小于平均速度；当太阳在至点时，他的运动方向是平行于赤道的，所以投影的运行速度高于平均的速度（参考回归年）。因此，视太阳日在3月（26-27日）和9月（12-13日）是比在6月（18-19日）或12月（20-21日）短的。这些日期的长短变化是在分点、至点、远日点、和近日点之间逐渐变化的。</p>
-<h3 id="平太阳日"><a href="#平太阳日" class="headerlink" title="平太阳日"></a>平太阳日</h3><p>平太阳日（mean solar day）是以平太阳为参考点，以平太阳连续两次经过某地之下中天的时间间隔，需花24小时来转360°59’。更明确的说，平太阳日是经由观察太阳相对于恒星的周日运动，所获得的平均太阳时，经由人为的调整而显示在时钟上的时间。</p>
+<h3 id="平太阳日"><a href="#平太阳日" class="headerlink" title="平太阳日"></a>平太阳日</h3><p>平太阳日（mean solar day）是以平太阳为参考点，以平太阳连续两次经过某地之下中天的时间间隔，需花24小时来转360°59′。更明确的说，平太阳日是经由观察太阳相对于恒星的周日运动，所获得的平均太阳时，经由人为的调整而显示在时钟上的时间。</p>
 <p>平太阳日的长度是固定的24小时，在一年之中不会因为昼夜长短的变化而改变。视太阳日的长度会与平太阳日（86,400秒）不同，相邻的每一天最多可以短22秒或长29秒。因为这种延长或缩短会持续进行一段时间，所以最多会比平太阳日提早17分钟或延迟14分钟。因为这些期间是周期性的，平太阳时和视太阳时的差值就是均时差。</p>
 <p>在历史上有许多方法被用来模拟（显示）平太阳时，最早是使用漏壶或水钟，差不多从前4000年到前2000年中期。在纪元前一千年中叶之前，水钟只能依据视太阳日来调整，因此除了能在夜晚继续使用外，它的准确度并不会比依靠太阳投影的日晷好。</p>
 <p>不过，太阳相对于恒星始终是在黄道上向东移动，因此从纪元前一千年中期，相对于恒星的周日运动可以用来测量平太阳日，来比较以确定时钟的误差率。巴比伦的天文学家已经知道均时差和如何利用相对于恒星的自转速率，恒星时，来改正，以获得比水钟更为准确的时间。这种理想的恒星时日后也应用在行星、月球和太阳运动的描述。</p>
 <p>在20世纪初期，机械时钟的准确度还没有比地球自转所显示的恒星时钟来得准确，即使到了今天，原子钟的精度已经比地球的自转更为稳定，恒星时钟仍然被用来校准平太阳日。在20世纪末期，地球自转的速率被改以外星系的无线电源来定义，并且平太阳时也被转换成外来的无线电源的比率。平太阳时与协调世界时之间的差异，就成为是否需要做闰秒调整的依据。</p>
 <h3 id="太阳日的其他含意"><a href="#太阳日的其他含意" class="headerlink" title="太阳日的其他含意"></a>太阳日的其他含意</h3><p>太阳日是星期日的前身。自古罗马开始定为休息日，人民不需工作而从事崇拜活动。</p>
-<h2 id="真太阳"><a href="#真太阳" class="headerlink" title="真太阳"></a>真太阳</h2><p>真太阳或视太阳是地球上的观察者（或任一行星的观察者）所看见的太阳。术语“真太阳”是用来对比“平太阳”（它指太阳的平均位置），以对应术语“真太阳时”和“平太阳时”。</p>
+<h2 id="真太阳"><a href="#真太阳" class="headerlink" title="真太阳"></a>真太阳</h2><p>真太阳或视太阳是地球上的观察者（或任一行星的观察者）所看见的太阳。术语「真太阳」是用来对比「平太阳」（它指太阳的平均位置），以对应术语「真太阳时」和「平太阳时」。</p>
 <p>真太阳日是以太阳为参照的地球的自转周期。由于地球公转的原因，真太阳日并不等于地球自转的恒星周期（恒星日），而是比恒星日约长3分56秒。又由于地球公转轨道是椭圆形的，根据开普勒定律，在近日点的公转速度快于在远日点的公转速度，因此一年之内不同时间的运动并不匀速，所以每个真太阳日的长短也不相等。</p>
 <h2 id="协调世界时"><a href="#协调世界时" class="headerlink" title="协调世界时"></a>协调世界时</h2><p>协调世界时（英语：Coordinated Universal Time，法语：Temps Universel Coordonné，简称UTC）是最主要的世界时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林尼治标准时间。中华民国采用CNS 7648的《资料元及交换格式–资讯交换–日期及时间的表示法》（与ISO 8601类似）称之为世界协调时间。中华人民共和国采用ISO 8601:2000的国家标准GB&#x2F;T 7408-2005《数据元和交换格式 信息交换 日期和时间表示法》中亦称之为协调世界时。</p>
 <p>协调世界时是世界上调节时钟和时间的主要时间标准，它与0度经线的平太阳时相差不超过1秒，并不遵守夏令时。协调世界时是最接近格林威治标准时间（GMT）的几个替代时间系统之一。对于大多数用途来说，UTC时间被认为能与GMT时间互换，但GMT时间已不再被科学界所确定。</p>
@@ -2474,7 +2474,9 @@
   <entry>
     <title>Java 并行程序设计</title>
     <url>/blogs/posts/6b55864e-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h2><h3 id="join-方法"><a href="#join-方法" class="headerlink" title="join 方法"></a>join 方法</h3><p>等待线程结束之后再继续执行当前线程。</p>
+    <content><![CDATA[<p>[真太阳](/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/#真太阳)</p>
+<h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理</h2><h3 id="join-方法"><a href="#join-方法" class="headerlink" title="join 方法"></a>join 方法</h3><p>等待线程结束之后再继续执行当前线程。</p>
+<p>等待 with space 线程结束”this’s a test”行当前abasds线程。</p>
 <p><code>Thread</code> 的实例 <code>join</code> 方法的定义如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span></span><br></pre></td></tr></table></figure>
 
@@ -2610,6 +2612,113 @@
       </categories>
       <tags>
         <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ECMAScript 6 (ES6) 入门 - async 函数</title>
+    <url>/blogs/posts/1940b640-9d3d-11ec-a9bf-4b3a3c7de5a4/</url>
+    <content><![CDATA[<p>async函数是使用<code>async</code>关键字声明的函数。其中允许使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字让我们可以用一种更简洁的方式写出基于<code>Promise</code>的异步行为，而无需刻意地链式调用promise。</p>
+<span id="more"></span>
+
+<p><strong>备注</strong>：<code>await</code>关键字只在async函数内有效。如果你在async函数体之外使用它，就会抛出语法错误SyntaxError。</p>
+<p>async函数一定会返回一个promise对象。如果一个async函数的返回值不是promise，那么它将会被隐式地包装在一个promise中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(a + b); <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">        .then(<span class="function"><span class="params">a</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>)</span><br><span class="line">                .then(<span class="function"><span class="params">b</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> a + b;</span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.info(value); <span class="comment">// 3</span></span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">undefined</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以在async方法内部使用try…catch捕获<code>await</code>语句的promise的<code>rejected</code>状态返回的错误信息。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>await</code>语句的promise的<code>rejected</code>状态没有被try…catch捕获，当前async函数将会返回一个<code>rejected</code>状态的promise对象，并且错误信息是<code>await</code>语句的promise的<code>rejected</code>的错误信息。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 并不会执行到这里</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>一、打印出来的顺序是什么？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">sleep(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>二、打印出来的顺序是什么？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> fun();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">    sleep(<span class="number">10</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.bookstack.cn/read/es6-3rd/docs-async.md">20. async 函数 - 《阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版》 - 书栈网 · BookStack</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function">async函数 - JavaScript | MDN</a></li>
+</ul>
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/78113300">js中的宏任务与微任务 - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/172471249">什么是协程？ - 知乎</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ECMAScript 6</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ECMAScript 6 (ES6) 入门 - Promise 对象</title>
+    <url>/blogs/posts/6943d0f0-9cf7-11ec-9675-0f9deae176b3/</url>
+    <content><![CDATA[<p>ES6语言标准的<code>Promise</code>对象，是异步编程的一种解决方案，同时也是了ES6之前的回调地狱问题的一种解决方案。</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><figcaption><span>回调地狱</span></figcaption><table><tr><td class="code"><pre><span class="line">checkPermissionFromServer(userId, <span class="function">(<span class="params">hasPermission</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (hasPermission) &#123;</span><br><span class="line">        loadDataFromServer(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            checkQualifierFromServer(data, <span class="function">(<span class="params">canAccess</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (canAccess) &#123;</span><br><span class="line">                    <span class="comment">// your logic</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    exit();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        exit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><img src="https://pic4.zhimg.com/v2-bf8218ff747e325a8603247691e0c592_r.jpg" alt="回调地狱"></p>
+<p><em><strong>天猪</strong></em> — <a href="https://www.zhihu.com/question/49718514">为什么NodeJS的回调会被称为地狱?</a></p>
+</blockquote>
+<p><code>Promise</code>有三种状态：<code>pending</code>（进行中）、<code>fulfilled</code>（已成功）和<code>rejected</code>（已失败）。<code>fulfilled</code>状态和<code>rejected</code>状态称为<code>settled</code>（已定型）。对象的状态一旦变为<code>settled</code>，就不能再变成另两种状态，即<code>fulfilled</code>不能再变成<code>pending</code>和<code>rejected</code>，<code>rejected</code>也不能再变成<code>pending</code>和<code>fulfilled</code>。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>可以用以下方法创建一个<code>Promise</code>实例。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ... some code</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>) &#123;</span><br><span class="line">        resolve(value);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>Promise</code>构造函数接受一个函数作为参数，该函数的两个参数分别是<code>resolve</code>和<code>reject</code>。这两个参数都是函数。</p>
+<ul>
+<li><code>resolve</code>参数函数的作用是，将<code>Promise</code>对象的状态从<code>pending</code>变为<code>fulfilled</code>，在异步操作成功时调用，并将异步操作的结果，作为参数传递出去。</li>
+<li><code>reject</code>参数函数的作用是，将<code>Promise</code>对象的状态从<code>pending</code>变为<code>rejected</code>，在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。</li>
+</ul>
+<p>通过<code>Promise</code>的<code>then</code>实例方法获取<code>resolve</code>传递的结果，通过<code>catch</code>实例方法捕获<code>reject</code>方法传递的错误。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = promise</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">// value 是从 resolve 方法传递过来的</span></span><br><span class="line">        <span class="comment">// your logic</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123; <span class="comment">// error 是从 reject 方法传递过来的</span></span><br><span class="line">        <span class="comment">// process error logic</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>then</code>和<code>catch</code>方法后返回的是一个新的<code>Promise</code>对象，并且<code>then</code>和<code>catch</code>的参数方法所返回的值，将会成为新的<code>Promise</code>对象的<code>fulfilled</code>结果。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promiseA = promise</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// your logic</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;promiseA value&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promiseB = promise</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// your logic</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;promiseB error&#x27;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.info(promiseA === promise); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.info(promiseB === promise); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.info(promiseA === promiseB); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">promiseA.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// &#x27;promiseA value&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promiseC = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;rejected&#x27;</span>);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(error); <span class="comment">// &#x27;rejected&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;catched error&#x27;</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promiseC.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// &#x27;catched error&#x27;</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 程序不会执行到这里，因为上一个 catch 已经将 error 吃掉了</span></span><br><span class="line">    <span class="built_in">console</span>.error(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，<code>then</code>和<code>catch</code>的参数方法所返回的值，可以是一个<code>Promise</code>对象。这种情况下，这个promise会被JavaScript引擎动态地插入链式调用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(<span class="number">1</span>))</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>; <span class="comment">// 直接返回 2</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">// 这个 then 得到的结果自然是 2</span></span><br><span class="line">        <span class="built_in">console</span>.info(value); <span class="comment">// 2</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(<span class="number">1</span>))</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(<span class="number">2</span>)); <span class="comment">// 创建 Promise 实例，返回结果 2</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">// 在这个 then 的参数方法的 value 的值依然是 2，而不是 Promise 对象</span></span><br><span class="line">        <span class="built_in">console</span>.info(value); <span class="comment">// 2</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>此外，<code>Promise</code>的还有一个<code>finally</code>的实例方法，其传入的参数回调方法无论是<code>fulfilled</code>还是<code>rejected</code>都会被调用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无论 promise 对象的状态是 fulfilled 还是 rejected，都会执行后面的所有 finally 的参数回调方法</span></span><br><span class="line">promise.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;).finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;finally&#x27;</span>); <span class="comment">// &#x27;finally&#x27;</span></span><br><span class="line">&#125;).finally(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;finally2&#x27;</span>); <span class="comment">// &#x27;finally2&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h2><p>假如将上面回调地狱的代码用<code>Promise</code>重写：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    checkPermissionFromServer(userId, <span class="function"><span class="params">hasPermission</span> =&gt;</span> resolve(hasPermission));</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">hasPermission</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!hasPermission) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        loadDataFromServer(<span class="function"><span class="params">data</span> =&gt;</span> resolve(data));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        checkQualifierFromServer(data, <span class="function"><span class="params">canAccess</span> =&gt;</span> resolve(canAccess));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">canAccess</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!canAccess) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    exit();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><h3 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h3><p>该方法返回一个状态为fulfilled的promise对象，fulfilled的值为value。等价于<code>new Promise((resolve, reject) =&gt; resolve(value))</code>。</p>
+<h3 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h3><p>该方法返回一个状态为rejected的promise对象，rejected的错误信息为reason。等价于<code>new Promise((resolve, reject) =&gt; reject(reason))</code>。</p>
+<h3 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h3><p>该方法将iterable中的多个promise对象包装成一个新的promise对象。<br>该promise对象由iterable参数对象里面的所有promise对象决定。</p>
+<ul>
+<li>在iterable参数对象里<strong>所有的promise对象都fulfilled</strong>的时候，该promise对象才会<strong>变成fulfilled</strong>。并且fulfilled的值会是一个数组，数组包含了iterable里所有promise对象的fulfilled值，数组值的顺序跟iterable的顺序保持一致。</li>
+<li>在iterable参数对象里<strong>只要有一个promise对象变成rejected</strong>状态，该promise对象就会<strong>变成rejected</strong>。并且rejected的错误信息会是第一个变成rejected状态的promise对象的错误信息。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promises = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(n));</span><br><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.all(promises);</span><br><span class="line">p.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promises2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].map(<span class="function"><span class="params">n</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">2</span> === <span class="number">0</span> ? <span class="built_in">Promise</span>.reject(n) : <span class="built_in">Promise</span>.resolve(n); <span class="comment">// 如果是偶数，则 reject</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> p2 = <span class="built_in">Promise</span>.all(promises2);</span><br><span class="line">p2.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 并不会执行到这里</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h3><p>略</p>
+<h3 id="Promise-allSettled-iterable"><a href="#Promise-allSettled-iterable" class="headerlink" title="Promise.allSettled(iterable)"></a>Promise.allSettled(iterable)</h3><p>略</p>
+<h3 id="Promise-any-iterable"><a href="#Promise-any-iterable" class="headerlink" title="Promise.any(iterable)"></a>Promise.any(iterable)</h3><p>略</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.bookstack.cn/read/es6-3rd/docs-promise.md">16. Promise 对象 - 《阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版》 - 书栈网 · BookStack</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises">使用 Promise - JavaScript | MDN</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise - JavaScript | MDN</a></li>
+<li><a href="https://www.zhihu.com/question/49718514">为什么NodeJS的回调会被称为地狱? - 知乎</a></li>
+</ul>
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/78113300">js中的宏任务与微任务 - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/172471249">什么是协程？ - 知乎</a></li>
+<li><a href="https://rxjs.dev/guide/overview">RxJS - Introduction</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ECMAScript 6</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
       </tags>
   </entry>
 </search>
