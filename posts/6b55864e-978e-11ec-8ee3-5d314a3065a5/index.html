@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
-<meta name="description" content="[真太阳](/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/#真太阳) 线程管理join 方法等待线程结束之后再继续执行当前线程。 等待 with space 线程结束”this’s a test”行当前abasds线程。 Thread 的实例 join 方法的定义如下： 123public final void join() throws In">
+<meta name="description" content="线程管理join 方法等待线程结束之后再继续执行当前线程。 Thread 的实例 join 方法的定义如下： 123public final void join() throws InterruptedExceptionpublic final synchronized void join(long millis) throws InterruptedExceptionpublic final s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 并行程序设计">
 <meta property="og:url" content="http://zhidao8.github.io/posts/6b55864e-978e-11ec-8ee3-5d314a3065a5/index.html">
 <meta property="og:site_name" content="zhidao8's Blogs">
-<meta property="og:description" content="[真太阳](/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/#真太阳) 线程管理join 方法等待线程结束之后再继续执行当前线程。 等待 with space 线程结束”this’s a test”行当前abasds线程。 Thread 的实例 join 方法的定义如下： 123public final void join() throws In">
+<meta property="og:description" content="线程管理join 方法等待线程结束之后再继续执行当前线程。 Thread 的实例 join 方法的定义如下： 123public final void join() throws InterruptedExceptionpublic final synchronized void join(long millis) throws InterruptedExceptionpublic final s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-10T13:47:33.000Z">
 <meta property="article:modified_time" content="2021-12-10T13:47:33.000Z">
@@ -277,7 +277,7 @@ html ul > text-autospace {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text"><text-autospace></text-autospace>本文字数：</span>
-      <span>996</span>
+      <span>895</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -295,9 +295,7 @@ html ul > text-autospace {
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>[真太阳](/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/#真太阳)</p>
-<h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理<text-autospace></text-autospace></h2><h3 id="join-方法"><a href="#join-方法" class="headerlink" title="join 方法"></a>join 方法</h3><p>等待线程结束之后再继续执行当前线程。</p>
-<p>等待 with space 线程结束”this’s a test”<text-autospace></text-autospace>行当前<text-autospace></text-autospace>abasds<text-autospace></text-autospace>线程。</p>
+        <h2 id="线程管理"><a href="#线程管理" class="headerlink" title="线程管理"></a>线程管理<text-autospace></text-autospace></h2><h3 id="join-方法"><a href="#join-方法" class="headerlink" title="join 方法"></a>join 方法</h3><p>等待线程结束之后再继续执行当前线程。</p>
 <p><code>Thread</code> 的实例 <code>join</code> 方法的定义如下：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis)</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">long</span> millis, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span></span><br></pre></td></tr></tbody></table></figure>
 
