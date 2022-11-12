@@ -106,6 +106,247 @@
       </tags>
   </entry>
   <entry>
+    <title>Android 摄像头</title>
+    <url>/blogs/posts/6b553825-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="简单调用"><a href="#简单调用" class="headerlink" title="简单调用"></a>简单调用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 启动安装在手机上的摄像头应用</span></span><br><span class="line">startActivityForResult(Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE), <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">0</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (Activity.RESULT_OK == resultCode &amp;&amp; <span class="keyword">data</span> != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 获取摄像头应用返回的 Bitmap</span></span><br><span class="line">                <span class="keyword">val</span> bitmap = <span class="keyword">data</span>.getParcelableExtra&lt;Bitmap&gt;(<span class="string">&quot;data&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="获取原图"><a href="#获取原图" class="headerlink" title="获取原图"></a>获取原图</h2><p>使用以上方法获取得到的 <code>Bitmap</code> 是缩略图，需要获取原图则使用以下方法</p>
+<p>在 <code>manifest.xml</code> 文件中添加 <code>READ_EXTERNAL_STORAGE</code> 权限</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)</span><br><span class="line"><span class="keyword">val</span> imageFile = File(dir, <span class="string">&quot;img.jpg&quot;</span>)</span><br><span class="line"><span class="comment">// Intent 启动安装在手机上的摄像头应用</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line"><span class="comment">// 指定照片或视频的保存文件名</span></span><br><span class="line">intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile))</span><br><span class="line">startActivityForResult(intent, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">0</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (Activity.RESULT_OK == resultCode) &#123;</span><br><span class="line">                <span class="comment">// 从文件系统中读取照片文件</span></span><br><span class="line">                <span class="keyword">val</span> bitmap = BitmapFactory.decodeFile(imageFile.absolutePath)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用以下方法根据 <code>ImageView</code> 的宽高对图片进行缩放</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setPicture</span><span class="params">(imageView: <span class="type">ImageView</span>, photo: <span class="type">File</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 获取 ImageView 的宽高</span></span><br><span class="line">    <span class="keyword">val</span> targetW = imageView.width</span><br><span class="line">    <span class="keyword">val</span> targetH = imageView.height</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取 Bitmap 的大小</span></span><br><span class="line">    <span class="keyword">val</span> bmOptions = BitmapFactory.Options()</span><br><span class="line">    bmOptions.inJustDecodeBounds = <span class="literal">true</span></span><br><span class="line">    BitmapFactory.decodeFile(photo.absolutePath, bmOptions)</span><br><span class="line">    <span class="keyword">val</span> photoW = bmOptions.outWidth</span><br><span class="line">    <span class="keyword">val</span> photoH = bmOptions.outHeight</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 确定缩小图片的程度</span></span><br><span class="line">    <span class="keyword">val</span> scaleFactor = Math.min(photoW / targetW, photoH / targetH)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将图片解码为适合 ImageView 宽高的 Bitmap</span></span><br><span class="line">    bmOptions.inJustDecodeBounds = <span class="literal">false</span></span><br><span class="line">    bmOptions.inSampleSize = scaleFactor</span><br><span class="line">    bmOptions.inPurgeable = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> bitmap = BitmapFactory.decodeFile(photo.absolutePath, bmOptions)</span><br><span class="line">    imageView.setImageBitmap(bitmap)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="FileUriExposedException-异常"><a href="#FileUriExposedException-异常" class="headerlink" title="FileUriExposedException 异常"></a>FileUriExposedException 异常</h2><p>[Android FileProvider](..&#x2F;Android FileProvider)</p>
+<h2 id="拍摄视频"><a href="#拍摄视频" class="headerlink" title="拍摄视频"></a>拍摄视频</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> takeVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)</span><br><span class="line"><span class="keyword">if</span> (takeVideoIntent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">    startActivityForResult(takeVideoIntent, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">1</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">data</span> != <span class="literal">null</span> &amp;&amp; resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">                <span class="keyword">val</span> videoUri = <span class="keyword">data</span>.<span class="keyword">data</span></span><br><span class="line">                videoView.setVideoURI(videoUri)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/training/camera/photobasics">Take photos &amp;nbsp;|&amp;nbsp; Android Developers</a></p>
+<p><a href="https://www.yiibai.com/android/android_camera.html">Android Camera(摄像头) - Android教程&amp;trade;</a></p>
+<p><a href="https://blog.csdn.net/qq_30380777/article/details/52850332?locationNum=9&fps=1">Android 调用系统拍照后返回的图片变小了（变模糊了） - CSDN博客</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>摄像头</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android 无障碍功能</title>
+    <url>/blogs/posts/6b553824-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="继承-AccessibilityService-类"><a href="#继承-AccessibilityService-类" class="headerlink" title="继承 AccessibilityService 类"></a>继承 AccessibilityService 类</h2><p>编写自己的 <code>Service</code> 类，继承 <code>android.accessibilityservice.AccessibilityService</code> ，并实现 <code>onAccessibilityEvent(AccessibilityEvent event)</code> 和 <code>onInterruput()</code> 父类的两个抽象方法:</p>
+<p>MyAccessibilityService.kt</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> android.accessibilityservice.AccessibilityService</span><br><span class="line"><span class="keyword">import</span> android.view.accessibility.AccessibilityEvent</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAccessibilityService</span> : <span class="type">AccessibilityService</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onInterrupt</span><span class="params">()</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAccessibilityEvent</span><span class="params">(event: <span class="type">AccessibilityEvent</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="在-AndroidManifest-xml-中的配置"><a href="#在-AndroidManifest-xml-中的配置" class="headerlink" title="在 AndroidManifest.xml 中的配置"></a>在 AndroidManifest.xml 中的配置</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">&quot;.MyAccessibilityService&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:permission</span>=<span class="string">&quot;android.permission.BIND_ACCESSIBILITY_SERVICE&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.accessibilityservice.AccessibilityService&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">&quot;android.accessibilityservice&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:resource</span>=<span class="string">&quot;@xml/accessibility_config&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写无障碍服务配置"><a href="#编写无障碍服务配置" class="headerlink" title="编写无障碍服务配置"></a>编写无障碍服务配置</h2><p>accessibility_config.xml</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">accessibility-service</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityEventTypes</span>=<span class="string">&quot;typeAllMask&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityFeedbackType</span>=<span class="string">&quot;feedbackAllMask&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityFlags</span>=<span class="string">&quot;flagDefault&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:canRetrieveWindowContent</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:description</span>=<span class="string">&quot;@string/accessibility_description&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:notificationTimeout</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:packageNames</span>=<span class="string">&quot;com.tencent.mm&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>android:description</td>
+<td>相关数据的描述性文本</td>
+</tr>
+<tr>
+<td>android:summary</td>
+<td>该项目的摘要</td>
+</tr>
+<tr>
+<td>android:settingsActivity</td>
+<td>允许用户修改服务设置的活动的组件名称</td>
+</tr>
+<tr>
+<td>android:accessibilityEventTypes</td>
+<td>指定服务能够接收处理的事件类型</td>
+</tr>
+<tr>
+<td>android:packageNames</td>
+<td>服务处理的目标应用包名称（多个包用逗号分隔；如果没有该属性将包含所有的包）</td>
+</tr>
+<tr>
+<td>android:accessibilityFeedbackType</td>
+<td>服务提供的反馈类型</td>
+</tr>
+<tr>
+<td>android:notificationTimeout</td>
+<td>发送到无障碍服务的两个相同类型的可访问事件之间的最小时间间隔（以毫秒为单位）</td>
+</tr>
+<tr>
+<td>android:accessibilityFlags</td>
+<td>其他标志</td>
+</tr>
+<tr>
+<td>android:canRetrieveWindowContent</td>
+<td>是否允许无障碍服务能够检索活动窗口内容</td>
+</tr>
+<tr>
+<td>android:canRequestTouchExplorationMode</td>
+<td>是否允许无障碍服务能够请求触摸探察模式，在这种模式下，可以大声朗读所触摸的项目，并且可以通过手势探察 UI</td>
+</tr>
+<tr>
+<td>android:canRequestEnhancedWebAccessibility</td>
+<td>是否允许服务能够请求增强的 Web 可访问性增强的属性</td>
+</tr>
+<tr>
+<td>android:canRequestFilterKeyEvents</td>
+<td>是否允许无障碍服务能够请求过滤关键事件的属性</td>
+</tr>
+<tr>
+<td>android:canControlMagnification</td>
+<td>是否允许无障碍服务能够控制显示的放大倍数</td>
+</tr>
+<tr>
+<td>android:canPerformGestures</td>
+<td>是否允许无障碍服务能够执行手势</td>
+</tr>
+<tr>
+<td>android:canRequestFingerprintGestures</td>
+<td>是否允许无障碍服务能够从指纹传感器捕捉手势</td>
+</tr>
+</tbody></table>
+<p>也可以在服务运行期间随时调用 <code>setServiceInfo(AccessibilityServiceInfo)</code> 方法来动态更改服务配置。</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>无障碍服务的生命周期仅由系统管理，并遵循既定的服务生命周期。 启动无障碍服务是由用户明确地在设备设置中启动服务来触发的。 系统绑定到服务后，它调用 <code>onServiceConnected()</code> 方法。可以覆盖此方法执行服务绑定后的初始化操作。</p>
+<p>当用户在设备设置中关闭辅助功能或者调用 <code>disableSelf()</code> （API 24）停止辅助功能。</p>
+<h2 id="判断服务是否启用"><a href="#判断服务是否启用" class="headerlink" title="判断服务是否启用"></a>判断服务是否启用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 调用示例：</span></span><br><span class="line"><span class="comment"> * accessibilityServiceEnabled(context, MyAccessibilityService::class.java.name, AccessibilityServiceInfo.FEEDBACK_AUDIBLE)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">accessibilityServiceEnabled</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    context: <span class="type">Context</span>, serviceName: <span class="type">String</span>, feedbackTypeFlags: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) <span class="keyword">as</span> AccessibilityManager</span><br><span class="line">    <span class="keyword">val</span> list = am.getEnabledAccessibilityServiceList(feedbackTypeFlags)</span><br><span class="line">    list.forEach &#123;</span><br><span class="line">        <span class="keyword">val</span> serviceInfo = it.resolveInfo.serviceInfo</span><br><span class="line">        <span class="keyword">if</span> (context.packageName == serviceInfo.packageName &amp;&amp; serviceName == serviceInfo.name)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开设置"><a href="#打开设置" class="headerlink" title="打开设置"></a>打开设置</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)</span><br><span class="line"><span class="keyword">if</span> (intent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="检索窗口内容"><a href="#检索窗口内容" class="headerlink" title="检索窗口内容"></a>检索窗口内容</h3><p>服务可以在其声明中指定它可以检索窗口内容，该窗口内容表示为 <code>AccessibilityWindowInfo</code> 和 <code>AccessibilityNodeInfo</code> 对象的树。声明此功能要求服务通过 <code>AndroidManifest.xml</code> 的 <code>meta-data</code> 引用的 xml 资源进行声明配置（即声明 <code>android:canRetrieveWindowContent=&quot;true&quot;</code>）。</p>
+<p>可以使用 <code>AccessibilityEvent.getSource()</code>、<code>findFocus(int)</code>、<code>getWindows()</code>、<code>getRootInActiveWindow()</code> 等方法对窗口内容进行检索。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/reference/android/accessibilityservice/AccessibilityService.html">AccessibilityService | Android Developers</a></p>
+<p><a href="https://developer.android.google.cn/reference/android/accessibilityservice/AccessibilityServiceInfo.html">AccessibilityServiceInfo | Android Developers</a></p>
+<p><a href="https://developer.android.google.cn/reference/android/view/accessibility/AccessibilityEvent.html">AccessibilityEvent | Android Developers</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>无障碍</tag>
+        <tag>AccessibilityService</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android 通知栏使用权</title>
+    <url>/blogs/posts/6b555f30-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Android API 18 开始，应用可以通过 NotificationListenerService 接收通知的发布、删除、或通知排序变更的回调消息。</p>
+<h2 id="继承-NotificationListenerService-类"><a href="#继承-NotificationListenerService-类" class="headerlink" title="继承 NotificationListenerService 类"></a>继承 NotificationListenerService 类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> android.<span class="keyword">annotation</span>.TargetApi</span><br><span class="line"><span class="keyword">import</span> android.os.Build</span><br><span class="line"><span class="keyword">import</span> android.service.notification.NotificationListenerService</span><br><span class="line"><span class="keyword">import</span> android.service.notification.StatusBarNotification</span><br><span class="line"></span><br><span class="line"><span class="comment">// NotificationListenerService 是 API 18 开始出现的</span></span><br><span class="line"><span class="meta">@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyNotificationListenerService</span> : <span class="type">NotificationListenerService</span></span>() &#123;</span><br><span class="line">    <span class="comment">// API 21 之前，父类的这个方法是 abstract 的</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNotificationPosted</span><span class="params">(sbn: <span class="type">StatusBarNotification</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// API 21 之前，父类的这个方法是 abstract 的</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNotificationRemoved</span><span class="params">(sbn: <span class="type">StatusBarNotification</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="在-AndroidManifest-xml-中的配置"><a href="#在-AndroidManifest-xml-中的配置" class="headerlink" title="在 AndroidManifest.xml 中的配置"></a>在 AndroidManifest.xml 中的配置</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">&quot;.MyNotificationListenerService&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:permission</span>=<span class="string">&quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.service.notification.NotificationListenerService&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在执行任何操作之前，服务应先等待 <code>onListenerConnected()</code> 方法的回调。 <code>requestRebind(ComponentName)</code> （API 24）方法是唯一可以在 <code>onListenerConnected()</code> 之前或 <code>onListenerDisconnected()</code> 之后调用的方法。</p>
+<h2 id="常用-API"><a href="#常用-API" class="headerlink" title="常用 API"></a>常用 API</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cancelAllNotifications ()</td>
+<td>清除所有通知</td>
+</tr>
+<tr>
+<td>cancelNotification(String pkg, String tag, int id)</td>
+<td>清除指定的一条通知（API 21 开始弃用）</td>
+</tr>
+<tr>
+<td>cancelNotification(String key)</td>
+<td>清除指定的一条通知（API 21）</td>
+</tr>
+<tr>
+<td>getActiveNotifications()</td>
+<td>获取所有通知</td>
+</tr>
+<tr>
+<td>onNotificationPosted(StatusBarNotification sbn)</td>
+<td>实现这个方法接收通知发布的回调消息</td>
+</tr>
+<tr>
+<td>onNotificationRemoved(StatusBarNotification sbn)</td>
+<td>实现这个方法接收通知删除的回调消息</td>
+</tr>
+<tr>
+<td>onNotificationRankingUpdate(NotificationListenerService.RankingMap rankingMap)</td>
+<td>实现这个方法接收通知顺序更变的回调消息</td>
+</tr>
+</tbody></table>
+<h2 id="StatusBarNotification-常用-API"><a href="#StatusBarNotification-常用-API" class="headerlink" title="StatusBarNotification 常用 API"></a>StatusBarNotification 常用 API</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getKey()</td>
+<td>此通知记录的唯一标识</td>
+</tr>
+<tr>
+<td>getPackageName()</td>
+<td>发布通知的应用包名</td>
+</tr>
+<tr>
+<td>getId()</td>
+<td><code>NotificationManager.notify(int id, Notification notification)</code> 的 id</td>
+</tr>
+<tr>
+<td>getNotification()</td>
+<td><code>NotificationManager.notify(int id, Notification notification)</code> 的 notification</td>
+</tr>
+<tr>
+<td>getPostTime()</td>
+<td>通知的发布时间（<code>System.currentTimeMillis()</code>），可能跟 <code>Notification.when</code> 不相同</td>
+</tr>
+<tr>
+<td>getTag()</td>
+<td><code>NotificationManager.notify(String tag, int id, Notification notification)</code> 的 tag，如果没有指定 tag 将会是 null</td>
+</tr>
+<tr>
+<td>isOngoing()</td>
+<td>通知的 flag 是否有 <code>Notification.FLAG_ONGOING_EVENT</code></td>
+</tr>
+<tr>
+<td>isClearable()</td>
+<td>检查通知是否有 <code>Notification.FLAG_ONGOING_EVENT</code> 或 <code>Notification.FLAG_NO_CLEAR</code> 标志</td>
+</tr>
+</tbody></table>
+<h2 id="判断服务是否启用"><a href="#判断服务是否启用" class="headerlink" title="判断服务是否启用"></a>判断服务是否启用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">notificationListenerEnabled</span><span class="params">(context: <span class="type">Context</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> NotificationManagerCompat.getEnabledListenerPackages(context).contains(context.packageName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打开设置"><a href="#打开设置" class="headerlink" title="打开设置"></a>打开设置</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP_MR1) &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)</span><br><span class="line">    <span class="keyword">if</span> (intent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/reference/android/service/notification/NotificationListenerService.html">NotificationListenerService | Android Developers</a></p>
+<p><a href="https://developer.android.google.cn/reference/android/service/notification/StatusBarNotification.html">StatusBarNotification | Android Developers</a></p>
+<p><a href="https://developer.android.google.cn/reference/android/app/Notification.html">Notification | Android Developers</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>通知栏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android 属性动画</title>
     <url>/blogs/posts/6b553823-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="Property-Animation-Overview"><a href="#Property-Animation-Overview" class="headerlink" title="Property Animation Overview"></a>Property Animation Overview</h2><p>The property animation system lets you define the following characteristics of an animation:</p>
@@ -262,142 +503,44 @@
       </tags>
   </entry>
   <entry>
-    <title>Android 摄像头</title>
-    <url>/blogs/posts/6b553825-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="简单调用"><a href="#简单调用" class="headerlink" title="简单调用"></a>简单调用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 启动安装在手机上的摄像头应用</span></span><br><span class="line">startActivityForResult(Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE), <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+    <title>CSS 居中大全</title>
+    <url>/blogs/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<p>假设 HTML 代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span>Child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">0</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (Activity.RESULT_OK == resultCode &amp;&amp; <span class="keyword">data</span> != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 获取摄像头应用返回的 Bitmap</span></span><br><span class="line">                <span class="keyword">val</span> bitmap = <span class="keyword">data</span>.getParcelableExtra&lt;Bitmap&gt;(<span class="string">&quot;data&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="获取原图"><a href="#获取原图" class="headerlink" title="获取原图"></a>获取原图</h2><p>使用以上方法获取得到的 <code>Bitmap</code> 是缩略图，需要获取原图则使用以下方法</p>
-<p>在 <code>manifest.xml</code> 文件中添加 <code>READ_EXTERNAL_STORAGE</code> 权限</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)</span><br><span class="line"><span class="keyword">val</span> imageFile = File(dir, <span class="string">&quot;img.jpg&quot;</span>)</span><br><span class="line"><span class="comment">// Intent 启动安装在手机上的摄像头应用</span></span><br><span class="line"><span class="keyword">val</span> intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)</span><br><span class="line"><span class="comment">// 指定照片或视频的保存文件名</span></span><br><span class="line">intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile))</span><br><span class="line">startActivityForResult(intent, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">0</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (Activity.RESULT_OK == resultCode) &#123;</span><br><span class="line">                <span class="comment">// 从文件系统中读取照片文件</span></span><br><span class="line">                <span class="keyword">val</span> bitmap = BitmapFactory.decodeFile(imageFile.absolutePath)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用以下方法根据 <code>ImageView</code> 的宽高对图片进行缩放</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">setPicture</span><span class="params">(imageView: <span class="type">ImageView</span>, photo: <span class="type">File</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 获取 ImageView 的宽高</span></span><br><span class="line">    <span class="keyword">val</span> targetW = imageView.width</span><br><span class="line">    <span class="keyword">val</span> targetH = imageView.height</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取 Bitmap 的大小</span></span><br><span class="line">    <span class="keyword">val</span> bmOptions = BitmapFactory.Options()</span><br><span class="line">    bmOptions.inJustDecodeBounds = <span class="literal">true</span></span><br><span class="line">    BitmapFactory.decodeFile(photo.absolutePath, bmOptions)</span><br><span class="line">    <span class="keyword">val</span> photoW = bmOptions.outWidth</span><br><span class="line">    <span class="keyword">val</span> photoH = bmOptions.outHeight</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 确定缩小图片的程度</span></span><br><span class="line">    <span class="keyword">val</span> scaleFactor = Math.min(photoW / targetW, photoH / targetH)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将图片解码为适合 ImageView 宽高的 Bitmap</span></span><br><span class="line">    bmOptions.inJustDecodeBounds = <span class="literal">false</span></span><br><span class="line">    bmOptions.inSampleSize = scaleFactor</span><br><span class="line">    bmOptions.inPurgeable = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> bitmap = BitmapFactory.decodeFile(photo.absolutePath, bmOptions)</span><br><span class="line">    imageView.setImageBitmap(bitmap)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="FileUriExposedException-异常"><a href="#FileUriExposedException-异常" class="headerlink" title="FileUriExposedException 异常"></a>FileUriExposedException 异常</h2><p>[Android FileProvider](..&#x2F;Android FileProvider)</p>
-<h2 id="拍摄视频"><a href="#拍摄视频" class="headerlink" title="拍摄视频"></a>拍摄视频</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> takeVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)</span><br><span class="line"><span class="keyword">if</span> (takeVideoIntent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">    startActivityForResult(takeVideoIntent, <span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, <span class="keyword">data</span>: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> (requestCode) &#123;</span><br><span class="line">        <span class="number">1</span> -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">data</span> != <span class="literal">null</span> &amp;&amp; resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">                <span class="keyword">val</span> videoUri = <span class="keyword">data</span>.<span class="keyword">data</span></span><br><span class="line">                videoView.setVideoURI(videoUri)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/training/camera/photobasics">Take photos &amp;nbsp;|&amp;nbsp; Android Developers</a></p>
-<p><a href="https://www.yiibai.com/android/android_camera.html">Android Camera(摄像头) - Android教程&amp;trade;</a></p>
-<p><a href="https://blog.csdn.net/qq_30380777/article/details/52850332?locationNum=9&fps=1">Android 调用系统拍照后返回的图片变小了（变模糊了） - CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-      <tags>
-        <tag>摄像头</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Android 无障碍功能</title>
-    <url>/blogs/posts/6b553824-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="继承-AccessibilityService-类"><a href="#继承-AccessibilityService-类" class="headerlink" title="继承 AccessibilityService 类"></a>继承 AccessibilityService 类</h2><p>编写自己的 <code>Service</code> 类，继承 <code>android.accessibilityservice.AccessibilityService</code> ，并实现 <code>onAccessibilityEvent(AccessibilityEvent event)</code> 和 <code>onInterruput()</code> 父类的两个抽象方法:</p>
-<p>MyAccessibilityService.kt</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> android.accessibilityservice.AccessibilityService</span><br><span class="line"><span class="keyword">import</span> android.view.accessibility.AccessibilityEvent</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAccessibilityService</span> : <span class="type">AccessibilityService</span></span>() &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onInterrupt</span><span class="params">()</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onAccessibilityEvent</span><span class="params">(event: <span class="type">AccessibilityEvent</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基础的 CSS 样式如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<h2 id="在-AndroidManifest-xml-中的配置"><a href="#在-AndroidManifest-xml-中的配置" class="headerlink" title="在 AndroidManifest.xml 中的配置"></a>在 AndroidManifest.xml 中的配置</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">&quot;.MyAccessibilityService&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:permission</span>=<span class="string">&quot;android.permission.BIND_ACCESSIBILITY_SERVICE&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.accessibilityservice.AccessibilityService&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">&quot;android.accessibilityservice&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:resource</span>=<span class="string">&quot;@xml/accessibility_config&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">/* 将 margin 设置为负的宽高的一半 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="编写无障碍服务配置"><a href="#编写无障碍服务配置" class="headerlink" title="编写无障碍服务配置"></a>编写无障碍服务配置</h2><p>accessibility_config.xml</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">accessibility-service</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityEventTypes</span>=<span class="string">&quot;typeAllMask&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityFeedbackType</span>=<span class="string">&quot;feedbackAllMask&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:accessibilityFlags</span>=<span class="string">&quot;flagDefault&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:canRetrieveWindowContent</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:description</span>=<span class="string">&quot;@string/accessibility_description&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:notificationTimeout</span>=<span class="string">&quot;500&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:packageNames</span>=<span class="string">&quot;com.tencent.mm&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin: auto"></a>absolute + margin: auto</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>android:description</td>
-<td>相关数据的描述性文本</td>
-</tr>
-<tr>
-<td>android:summary</td>
-<td>该项目的摘要</td>
-</tr>
-<tr>
-<td>android:settingsActivity</td>
-<td>允许用户修改服务设置的活动的组件名称</td>
-</tr>
-<tr>
-<td>android:accessibilityEventTypes</td>
-<td>指定服务能够接收处理的事件类型</td>
-</tr>
-<tr>
-<td>android:packageNames</td>
-<td>服务处理的目标应用包名称（多个包用逗号分隔；如果没有该属性将包含所有的包）</td>
-</tr>
-<tr>
-<td>android:accessibilityFeedbackType</td>
-<td>服务提供的反馈类型</td>
-</tr>
-<tr>
-<td>android:notificationTimeout</td>
-<td>发送到无障碍服务的两个相同类型的可访问事件之间的最小时间间隔（以毫秒为单位）</td>
-</tr>
-<tr>
-<td>android:accessibilityFlags</td>
-<td>其他标志</td>
-</tr>
-<tr>
-<td>android:canRetrieveWindowContent</td>
-<td>是否允许无障碍服务能够检索活动窗口内容</td>
-</tr>
-<tr>
-<td>android:canRequestTouchExplorationMode</td>
-<td>是否允许无障碍服务能够请求触摸探察模式，在这种模式下，可以大声朗读所触摸的项目，并且可以通过手势探察 UI</td>
-</tr>
-<tr>
-<td>android:canRequestEnhancedWebAccessibility</td>
-<td>是否允许服务能够请求增强的 Web 可访问性增强的属性</td>
-</tr>
-<tr>
-<td>android:canRequestFilterKeyEvents</td>
-<td>是否允许无障碍服务能够请求过滤关键事件的属性</td>
-</tr>
-<tr>
-<td>android:canControlMagnification</td>
-<td>是否允许无障碍服务能够控制显示的放大倍数</td>
-</tr>
-<tr>
-<td>android:canPerformGestures</td>
-<td>是否允许无障碍服务能够执行手势</td>
-</tr>
-<tr>
-<td>android:canRequestFingerprintGestures</td>
-<td>是否允许无障碍服务能够从指纹传感器捕捉手势</td>
-</tr>
-</tbody></table>
-<p>也可以在服务运行期间随时调用 <code>setServiceInfo(AccessibilityServiceInfo)</code> 方法来动态更改服务配置。</p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>无障碍服务的生命周期仅由系统管理，并遵循既定的服务生命周期。 启动无障碍服务是由用户明确地在设备设置中启动服务来触发的。 系统绑定到服务后，它调用 <code>onServiceConnected()</code> 方法。可以覆盖此方法执行服务绑定后的初始化操作。</p>
-<p>当用户在设备设置中关闭辅助功能或者调用 <code>disableSelf()</code> （API 24）停止辅助功能。</p>
-<h2 id="判断服务是否启用"><a href="#判断服务是否启用" class="headerlink" title="判断服务是否启用"></a>判断服务是否启用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 调用示例：</span></span><br><span class="line"><span class="comment"> * accessibilityServiceEnabled(context, MyAccessibilityService::class.java.name, AccessibilityServiceInfo.FEEDBACK_AUDIBLE)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">accessibilityServiceEnabled</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    context: <span class="type">Context</span>, serviceName: <span class="type">String</span>, feedbackTypeFlags: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> am = context.getSystemService(Context.ACCESSIBILITY_SERVICE) <span class="keyword">as</span> AccessibilityManager</span><br><span class="line">    <span class="keyword">val</span> list = am.getEnabledAccessibilityServiceList(feedbackTypeFlags)</span><br><span class="line">    list.forEach &#123;</span><br><span class="line">        <span class="keyword">val</span> serviceInfo = it.resolveInfo.serviceInfo</span><br><span class="line">        <span class="keyword">if</span> (context.packageName == serviceInfo.packageName &amp;&amp; serviceName == serviceInfo.name)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="打开设置"><a href="#打开设置" class="headerlink" title="打开设置"></a>打开设置</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)</span><br><span class="line"><span class="keyword">if</span> (intent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="text-align-center-vertical-align-middle-line-height"><a href="#text-align-center-vertical-align-middle-line-height" class="headerlink" title="text-align: center + vertical-align: middle + line-height"></a>text-align: center + vertical-align: middle + line-height</h2><p><strong>缺点</strong>：需要知道父元素的高。父元素需要设置跟自身高度相等的 line-height。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="comment">/* 跟父元素高度一样的 line-height */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="comment">/* 水平居中 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/* 垂直居中 */</span></span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="comment">/* vertical-align 和父元素的 text-align 属性都只应用于行内元素 */</span></span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">line-height</span>: initial;</span><br><span class="line">  <span class="comment">/* 修正文字对齐 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="检索窗口内容"><a href="#检索窗口内容" class="headerlink" title="检索窗口内容"></a>检索窗口内容</h3><p>服务可以在其声明中指定它可以检索窗口内容，该窗口内容表示为 <code>AccessibilityWindowInfo</code> 和 <code>AccessibilityNodeInfo</code> 对象的树。声明此功能要求服务通过 <code>AndroidManifest.xml</code> 的 <code>meta-data</code> 引用的 xml 资源进行声明配置（即声明 <code>android:canRetrieveWindowContent=&quot;true&quot;</code>）。</p>
-<p>可以使用 <code>AccessibilityEvent.getSource()</code>、<code>findFocus(int)</code>、<code>getWindows()</code>、<code>getRootInActiveWindow()</code> 等方法对窗口内容进行检索。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/reference/android/accessibilityservice/AccessibilityService.html">AccessibilityService | Android Developers</a></p>
-<p><a href="https://developer.android.google.cn/reference/android/accessibilityservice/AccessibilityServiceInfo.html">AccessibilityServiceInfo | Android Developers</a></p>
-<p><a href="https://developer.android.google.cn/reference/android/view/accessibility/AccessibilityEvent.html">AccessibilityEvent | Android Developers</a></p>
+<h2 id="absolute-transform-translate-50-50"><a href="#absolute-transform-translate-50-50" class="headerlink" title="absolute + transform: translate(-50%, -50%)"></a>absolute + transform: translate(-50%, -50%)</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="display-table-cell-text-align-center-vertical-align-middle"><a href="#display-table-cell-text-align-center-vertical-align-middle" class="headerlink" title="display: table-cell + text-align: center + vertical-align: middle"></a>display: table-cell + text-align: center + vertical-align: middle</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flex-justify-content-center-align-items-center"><a href="#flex-justify-content-center-align-items-center" class="headerlink" title="flex + justify-content: center + align-items: center"></a>flex + justify-content: center + align-items: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flex-margin-auto"><a href="#flex-margin-auto" class="headerlink" title="flex + margin: auto"></a>flex + margin: auto</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="display-grid-align-self-center-justify-self-center"><a href="#display-grid-align-self-center-justify-self-center" class="headerlink" title="display: grid + align-self: center + justify-self: center"></a>display: grid + align-self: center + justify-self: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">  justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Android</category>
+        <category>HTML/CSS/JavaScript</category>
       </categories>
       <tags>
-        <tag>无障碍</tag>
-        <tag>AccessibilityService</tag>
+        <tag>CSS</tag>
+        <tag>居中</tag>
       </tags>
   </entry>
   <entry>
@@ -614,47 +757,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS 居中大全</title>
-    <url>/blogs/posts/6b555f31-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<p>假设 HTML 代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span>Child<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>基础的 CSS 样式如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">/* 将 margin 设置为负的宽高的一半 */</span></span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin: auto"></a>absolute + margin: auto</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><p><strong>缺点</strong>：需要知道子元素的宽高。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">calc</span>(<span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">  <span class="comment">/* 指定宽高 */</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="text-align-center-vertical-align-middle-line-height"><a href="#text-align-center-vertical-align-middle-line-height" class="headerlink" title="text-align: center + vertical-align: middle + line-height"></a>text-align: center + vertical-align: middle + line-height</h2><p><strong>缺点</strong>：需要知道父元素的高。父元素需要设置跟自身高度相等的 line-height。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="comment">/* 跟父元素高度一样的 line-height */</span></span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="comment">/* 水平居中 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/* 垂直居中 */</span></span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="comment">/* vertical-align 和父元素的 text-align 属性都只应用于行内元素 */</span></span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">line-height</span>: initial;</span><br><span class="line">  <span class="comment">/* 修正文字对齐 */</span></span><br><span class="line">  <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="absolute-transform-translate-50-50"><a href="#absolute-transform-translate-50-50" class="headerlink" title="absolute + transform: translate(-50%, -50%)"></a>absolute + transform: translate(-50%, -50%)</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="display-table-cell-text-align-center-vertical-align-middle"><a href="#display-table-cell-text-align-center-vertical-align-middle" class="headerlink" title="display: table-cell + text-align: center + vertical-align: middle"></a>display: table-cell + text-align: center + vertical-align: middle</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="flex-justify-content-center-align-items-center"><a href="#flex-justify-content-center-align-items-center" class="headerlink" title="flex + justify-content: center + align-items: center"></a>flex + justify-content: center + align-items: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="flex-margin-auto"><a href="#flex-margin-auto" class="headerlink" title="flex + margin: auto"></a>flex + margin: auto</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="display-grid-align-self-center-justify-self-center"><a href="#display-grid-align-self-center-justify-self-center" class="headerlink" title="display: grid + align-self: center + justify-self: center"></a>display: grid + align-self: center + justify-self: center</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: center;</span><br><span class="line">  justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-        <tag>居中</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS 滤镜 - filter 属性</title>
     <url>/blogs/posts/6b555f33-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<p>强大的 CSS filter</p>
@@ -718,108 +820,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Android 通知栏使用权</title>
-    <url>/blogs/posts/6b555f30-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Android API 18 开始，应用可以通过 NotificationListenerService 接收通知的发布、删除、或通知排序变更的回调消息。</p>
-<h2 id="继承-NotificationListenerService-类"><a href="#继承-NotificationListenerService-类" class="headerlink" title="继承 NotificationListenerService 类"></a>继承 NotificationListenerService 类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> android.<span class="keyword">annotation</span>.TargetApi</span><br><span class="line"><span class="keyword">import</span> android.os.Build</span><br><span class="line"><span class="keyword">import</span> android.service.notification.NotificationListenerService</span><br><span class="line"><span class="keyword">import</span> android.service.notification.StatusBarNotification</span><br><span class="line"></span><br><span class="line"><span class="comment">// NotificationListenerService 是 API 18 开始出现的</span></span><br><span class="line"><span class="meta">@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyNotificationListenerService</span> : <span class="type">NotificationListenerService</span></span>() &#123;</span><br><span class="line">    <span class="comment">// API 21 之前，父类的这个方法是 abstract 的</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNotificationPosted</span><span class="params">(sbn: <span class="type">StatusBarNotification</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// API 21 之前，父类的这个方法是 abstract 的</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onNotificationRemoved</span><span class="params">(sbn: <span class="type">StatusBarNotification</span>?)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="在-AndroidManifest-xml-中的配置"><a href="#在-AndroidManifest-xml-中的配置" class="headerlink" title="在 AndroidManifest.xml 中的配置"></a>在 AndroidManifest.xml 中的配置</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">&quot;.MyNotificationListenerService&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:permission</span>=<span class="string">&quot;android.permission.BIND_NOTIFICATION_LISTENER_SERVICE&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.service.notification.NotificationListenerService&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在执行任何操作之前，服务应先等待 <code>onListenerConnected()</code> 方法的回调。 <code>requestRebind(ComponentName)</code> （API 24）方法是唯一可以在 <code>onListenerConnected()</code> 之前或 <code>onListenerDisconnected()</code> 之后调用的方法。</p>
-<h2 id="常用-API"><a href="#常用-API" class="headerlink" title="常用 API"></a>常用 API</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>cancelAllNotifications ()</td>
-<td>清除所有通知</td>
-</tr>
-<tr>
-<td>cancelNotification(String pkg, String tag, int id)</td>
-<td>清除指定的一条通知（API 21 开始弃用）</td>
-</tr>
-<tr>
-<td>cancelNotification(String key)</td>
-<td>清除指定的一条通知（API 21）</td>
-</tr>
-<tr>
-<td>getActiveNotifications()</td>
-<td>获取所有通知</td>
-</tr>
-<tr>
-<td>onNotificationPosted(StatusBarNotification sbn)</td>
-<td>实现这个方法接收通知发布的回调消息</td>
-</tr>
-<tr>
-<td>onNotificationRemoved(StatusBarNotification sbn)</td>
-<td>实现这个方法接收通知删除的回调消息</td>
-</tr>
-<tr>
-<td>onNotificationRankingUpdate(NotificationListenerService.RankingMap rankingMap)</td>
-<td>实现这个方法接收通知顺序更变的回调消息</td>
-</tr>
-</tbody></table>
-<h2 id="StatusBarNotification-常用-API"><a href="#StatusBarNotification-常用-API" class="headerlink" title="StatusBarNotification 常用 API"></a>StatusBarNotification 常用 API</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>getKey()</td>
-<td>此通知记录的唯一标识</td>
-</tr>
-<tr>
-<td>getPackageName()</td>
-<td>发布通知的应用包名</td>
-</tr>
-<tr>
-<td>getId()</td>
-<td><code>NotificationManager.notify(int id, Notification notification)</code> 的 id</td>
-</tr>
-<tr>
-<td>getNotification()</td>
-<td><code>NotificationManager.notify(int id, Notification notification)</code> 的 notification</td>
-</tr>
-<tr>
-<td>getPostTime()</td>
-<td>通知的发布时间（<code>System.currentTimeMillis()</code>），可能跟 <code>Notification.when</code> 不相同</td>
-</tr>
-<tr>
-<td>getTag()</td>
-<td><code>NotificationManager.notify(String tag, int id, Notification notification)</code> 的 tag，如果没有指定 tag 将会是 null</td>
-</tr>
-<tr>
-<td>isOngoing()</td>
-<td>通知的 flag 是否有 <code>Notification.FLAG_ONGOING_EVENT</code></td>
-</tr>
-<tr>
-<td>isClearable()</td>
-<td>检查通知是否有 <code>Notification.FLAG_ONGOING_EVENT</code> 或 <code>Notification.FLAG_NO_CLEAR</code> 标志</td>
-</tr>
-</tbody></table>
-<h2 id="判断服务是否启用"><a href="#判断服务是否启用" class="headerlink" title="判断服务是否启用"></a>判断服务是否启用</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">notificationListenerEnabled</span><span class="params">(context: <span class="type">Context</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> NotificationManagerCompat.getEnabledListenerPackages(context).contains(context.packageName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="打开设置"><a href="#打开设置" class="headerlink" title="打开设置"></a>打开设置</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP_MR1) &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)</span><br><span class="line">    <span class="keyword">if</span> (intent.resolveActivity(packageManager) != <span class="literal">null</span>) &#123;</span><br><span class="line">        startActivity(intent)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.android.google.cn/reference/android/service/notification/NotificationListenerService.html">NotificationListenerService | Android Developers</a></p>
-<p><a href="https://developer.android.google.cn/reference/android/service/notification/StatusBarNotification.html">StatusBarNotification | Android Developers</a></p>
-<p><a href="https://developer.android.google.cn/reference/android/app/Notification.html">Notification | Android Developers</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-      <tags>
-        <tag>通知栏</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flex 布局</title>
     <url>/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -830,6 +830,12 @@
 
 <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称「容器」。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称「项目」。</p>
 <p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
+<p><img src="/blogs/posts/6b555f34-978e-11ec-8ee3-5d314a3065a5/asdfsadf/asdasdf/Flex%20%E5%B8%83%E5%B1%80/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.png" alt="基本概念"></p>
 <p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做 main start，结束位置叫做 main end；交叉轴的开始位置叫做 cross start，结束位置叫做 cross end。</p>
 <p>项目默认沿主轴排列。单个项目占据的主轴空间叫做 main size，占据的交叉轴空间叫做 cross size。</p>
 <h2 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="comment">/* 决定主轴的方向（即项目的排列方向） */</span></span><br><span class="line">    <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">    <span class="comment">/* 项目如果在轴线上排不下，该属性定义了项目如何换行 */</span></span><br><span class="line">    <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">    <span class="comment">/* flex-direction 属性和 flex-wrap 属性的简写形式，默认值为 row nowrap */</span></span><br><span class="line">    <span class="attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;  <span class="comment">/* default row nowrap */</span></span><br><span class="line">    <span class="comment">/* 定义了项目在主轴上的排列方式 */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">    <span class="comment">/* 定义了项目在交叉轴上对齐方式 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">    <span class="comment">/* 定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用 */</span></span><br><span class="line">    <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1543,86 +1549,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL 5.7.20 zip 安装与简单配置</title>
-    <url>/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="MySQL-5-7-20-下载和安装"><a href="#MySQL-5-7-20-下载和安装" class="headerlink" title="MySQL 5.7.20 下载和安装"></a>MySQL 5.7.20 下载和安装</h2><ol>
-<li><p>首先上 MySQL 的官网下载  <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
-<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/MySQL%E4%B8%8B%E8%BD%BD%E7%95%8C%E9%9D%A2.png" alt="MySQL 下载界面"></p>
- <span id="more"></span>
-</li>
-<li><p>下载完解压到你想要存放的位置（我这里是解压到 <code>D:\MySQL</code>）</p>
-</li>
-<li><p>设置环境变量（我使用的是 Win10 系统）</p>
-<p> 创建 <code>MYSQL_HOME</code> 变量，变量值为之前数据库 zip 解压的位置</p>
-<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8FMYSQL_HOME.png" alt="环境变量 MYSQL_HOME"></p>
-<p> 在 <code>Path</code> 变量中添加 <code>%MYSQL_HOME%\bin</code></p>
-<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/Path%E6%B7%BB%E5%8A%A0MYSQL_HOME.png" alt="Path 添加 MYSQL_HOME"></p>
-<p> 最后保存就完成了 MySQL 的环境变量配置了</p>
-</li>
-<li><p>补充 data 目录和 my.ini 文件</p>
-<p> 用管理员打开 PowerShell （右键系统左下角 Windows 徽标）</p>
-<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%98%E6%89%93%E5%BC%80PowerShell.png" alt="用管理员打开 PowerShell"></p>
- <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">PS C:\WINDOWS\system32&gt; <span class="built_in">cd</span> D:/MySQL/bin</span><br><span class="line">PS D:\MySQL\bin&gt; mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
-
-<p> 然后返回 MySQL 目录就会发现有 data 目录了</p>
-<p> 直接创建 my.ini 文件，内容如下（这里内容不一定要按照下文，可以自行百度，但是其实都差不多）</p>
- <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment">#设置3306端口</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=D:\MySQL</span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=D:\MySQL\data</span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为8比特编码的latin1字符集</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装、启动和停止服务</p>
-<p> 在 <code>D:\MySQL\bin</code> 下用管理员运行 PowerShell 输入命令 <code>mysqld -install</code> 如果出现 <em>Service successfully installed</em> 说明注册成功了</p>
-<p> 接下来运行 <code>net start mysql</code> 命令启动 MySQL 服务</p>
-<p> <code>net stop mysql</code> 命令停止 MySQL 服务</p>
-</li>
-</ol>
-<h2 id="创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作"><a href="#创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作" class="headerlink" title="创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作"></a>创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作</h2><ol>
-<li><p>创建数据库</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database testDB;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除数据库</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database testDB;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建用户</p>
-<p> 创建 <code>test</code> 用户，密码是 <code>test</code></p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span>  test@<span class="string">&#x27;localhost&#x27;</span> identified  <span class="keyword">by</span> <span class="string">&#x27;test&#x27;</span> ; #本地登录</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span>  test@<span class="string">&#x27;%&#x27;</span>  identified  <span class="keyword">by</span> <span class="string">&#x27;test&#x27;</span> ; #远程登录</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
-
-<p> 使用 <code>exit</code> 命令退出当前用户的登陆后用 <code>mysql -u test -p</code> 测试是否创建成功</p>
-</li>
-<li><p>为用户授权</p>
-<p> a. 授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by ‘密码’</p>
-<p> b. 以 root 身份登录 MySQL</p>
-<p> c. 为用户创建一个数据库（testDB）：</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database testDB;</span><br><span class="line"><span class="keyword">create</span> database testDB <span class="keyword">default</span> charset utf8 <span class="keyword">collate</span> utf8_general_ci;</span><br></pre></td></tr></table></figure>
-
-<p> d. 授权 test 用户拥有 testDB 数据库的所有权限：</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> testDB.<span class="operator">*</span> <span class="keyword">to</span> test@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span>  <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line">flush privileges; #刷新系统权限表</span><br></pre></td></tr></table></figure>
-
-<p> e. 指定部分权限给用户:</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,update <span class="keyword">on</span> testDB.<span class="operator">*</span> <span class="keyword">to</span>  test@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span>  <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line">flush privileges; #刷新系统权限表</span><br></pre></td></tr></table></figure>
-
-<p> f.授权 test 用户拥有所有数据库的某些权限：</p>
-<p> grant select,delete,update,create,drop on . to test@’%’  identified by ‘1234’;  #”%” 表示对所有非本地主机授权，不包括 localhost</p>
-</li>
-<li><p>删除用户</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="keyword">delete</span>  <span class="keyword">from</span>  mysql.user <span class="keyword">where</span>  <span class="string">&#x27;test&#x27;</span> <span class="keyword">and</span>  host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">flush privileges;</span><br><span class="line"><span class="keyword">drop</span> database testDB;</span><br></pre></td></tr></table></figure>
-
-<p> 删除账户及权限：</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> 用户名@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> 用户名@<span class="string">&#x27;localhost&#x27;</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改指定用户密码</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line">update mysql.user <span class="keyword">set</span> authentication_string<span class="operator">=</span>password(<span class="string">&#x27;新密码&#x27;</span>) <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;test&#x27;</span> <span class="keyword">and</span>  host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><p><code>show databases;</code> # 显示所有数据库</p>
-<p><code>show tables;</code> # 显示当前数据库所有的表</p>
-<p><code>select database();</code> # 显示当前所使用的数据库</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Visual Studio Code 常用插件</title>
     <url>/blogs/posts/6b555f3c-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="IntelliJ-IDEA-Keybindings"><a href="#IntelliJ-IDEA-Keybindings" class="headerlink" title="IntelliJ IDEA Keybindings"></a>IntelliJ IDEA Keybindings</h2><p>安装插件 <a href="https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings">IntelliJ IDEA Keybindings</a></p>
@@ -1745,6 +1671,86 @@
       </categories>
       <tags>
         <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 5.7.20 zip 安装与简单配置</title>
+    <url>/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="MySQL-5-7-20-下载和安装"><a href="#MySQL-5-7-20-下载和安装" class="headerlink" title="MySQL 5.7.20 下载和安装"></a>MySQL 5.7.20 下载和安装</h2><ol>
+<li><p>首先上 MySQL 的官网下载  <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
+<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/MySQL%E4%B8%8B%E8%BD%BD%E7%95%8C%E9%9D%A2.png" alt="MySQL 下载界面"></p>
+ <span id="more"></span>
+</li>
+<li><p>下载完解压到你想要存放的位置（我这里是解压到 <code>D:\MySQL</code>）</p>
+</li>
+<li><p>设置环境变量（我使用的是 Win10 系统）</p>
+<p> 创建 <code>MYSQL_HOME</code> 变量，变量值为之前数据库 zip 解压的位置</p>
+<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8FMYSQL_HOME.png" alt="环境变量 MYSQL_HOME"></p>
+<p> 在 <code>Path</code> 变量中添加 <code>%MYSQL_HOME%\bin</code></p>
+<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/Path%E6%B7%BB%E5%8A%A0MYSQL_HOME.png" alt="Path 添加 MYSQL_HOME"></p>
+<p> 最后保存就完成了 MySQL 的环境变量配置了</p>
+</li>
+<li><p>补充 data 目录和 my.ini 文件</p>
+<p> 用管理员打开 PowerShell （右键系统左下角 Windows 徽标）</p>
+<p> <img src="/blogs/posts/6b555f3b-978e-11ec-8ee3-5d314a3065a5/%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%98%E6%89%93%E5%BC%80PowerShell.png" alt="用管理员打开 PowerShell"></p>
+ <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">PS C:\WINDOWS\system32&gt; <span class="built_in">cd</span> D:/MySQL/bin</span><br><span class="line">PS D:\MySQL\bin&gt; mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
+
+<p> 然后返回 MySQL 目录就会发现有 data 目录了</p>
+<p> 直接创建 my.ini 文件，内容如下（这里内容不一定要按照下文，可以自行百度，但是其实都差不多）</p>
+ <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment">#设置3306端口</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=D:\MySQL</span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=D:\MySQL\data</span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为8比特编码的latin1字符集</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装、启动和停止服务</p>
+<p> 在 <code>D:\MySQL\bin</code> 下用管理员运行 PowerShell 输入命令 <code>mysqld -install</code> 如果出现 <em>Service successfully installed</em> 说明注册成功了</p>
+<p> 接下来运行 <code>net start mysql</code> 命令启动 MySQL 服务</p>
+<p> <code>net stop mysql</code> 命令停止 MySQL 服务</p>
+</li>
+</ol>
+<h2 id="创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作"><a href="#创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作" class="headerlink" title="创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作"></a>创建数据库、删除数据库、添加用户、用户授权、删除用户、修改密码等操作</h2><ol>
+<li><p>创建数据库</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database testDB;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据库</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database testDB;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建用户</p>
+<p> 创建 <code>test</code> 用户，密码是 <code>test</code></p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span>  test@<span class="string">&#x27;localhost&#x27;</span> identified  <span class="keyword">by</span> <span class="string">&#x27;test&#x27;</span> ; #本地登录</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span>  test@<span class="string">&#x27;%&#x27;</span>  identified  <span class="keyword">by</span> <span class="string">&#x27;test&#x27;</span> ; #远程登录</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p> 使用 <code>exit</code> 命令退出当前用户的登陆后用 <code>mysql -u test -p</code> 测试是否创建成功</p>
+</li>
+<li><p>为用户授权</p>
+<p> a. 授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by ‘密码’</p>
+<p> b. 以 root 身份登录 MySQL</p>
+<p> c. 为用户创建一个数据库（testDB）：</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database testDB;</span><br><span class="line"><span class="keyword">create</span> database testDB <span class="keyword">default</span> charset utf8 <span class="keyword">collate</span> utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<p> d. 授权 test 用户拥有 testDB 数据库的所有权限：</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> testDB.<span class="operator">*</span> <span class="keyword">to</span> test@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span>  <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line">flush privileges; #刷新系统权限表</span><br></pre></td></tr></table></figure>
+
+<p> e. 指定部分权限给用户:</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>,update <span class="keyword">on</span> testDB.<span class="operator">*</span> <span class="keyword">to</span>  test@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span>  <span class="string">&#x27;1234&#x27;</span>;</span><br><span class="line">flush privileges; #刷新系统权限表</span><br></pre></td></tr></table></figure>
+
+<p> f.授权 test 用户拥有所有数据库的某些权限：</p>
+<p> grant select,delete,update,create,drop on . to test@’%’  identified by ‘1234’;  #”%” 表示对所有非本地主机授权，不包括 localhost</p>
+</li>
+<li><p>删除用户</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="keyword">delete</span>  <span class="keyword">from</span>  mysql.user <span class="keyword">where</span>  <span class="string">&#x27;test&#x27;</span> <span class="keyword">and</span>  host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">flush privileges;</span><br><span class="line"><span class="keyword">drop</span> database testDB;</span><br></pre></td></tr></table></figure>
+
+<p> 删除账户及权限：</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> 用户名@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> 用户名@<span class="string">&#x27;localhost&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改指定用户密码</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">mysql <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line">update mysql.user <span class="keyword">set</span> authentication_string<span class="operator">=</span>password(<span class="string">&#x27;新密码&#x27;</span>) <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;test&#x27;</span> <span class="keyword">and</span>  host<span class="operator">=</span><span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><p><code>show databases;</code> # 显示所有数据库</p>
+<p><code>show tables;</code> # 显示当前数据库所有的表</p>
+<p><code>select database();</code> # 显示当前所使用的数据库</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -2270,18 +2276,28 @@
 <h3 id="Redis-Strings"><a href="#Redis-Strings" class="headerlink" title="Redis Strings"></a>Redis Strings</h3><p>值可以是任何种类的字符串（包括二进制数据），例如你可以在一个键下保存一副 jpeg 图片。值的长度不能超过 512MB。</p>
 <p>常用命令：</p>
 <ul>
-<li>SET</li>
-<li>GET</li>
-<li>GETSET</li>
-<li>INCR</li>
-<li>INCRBY</li>
-<li>DECR</li>
-<li>DECRBY</li>
-<li>TYPE</li>
-<li>EXISTS</li>
-<li>DEL</li>
-<li>MSET</li>
-<li>MGET</li>
+<li><p>SET<br>  设置一个字符串值。</p>
+</li>
+<li><p>GET<br>  检索一个字符串值。</p>
+</li>
+<li><p>INCR<br>  将数字字符串加1。</p>
+</li>
+<li><p>INCRBY<br>  将数字字符串加上给定数字，如<code>INCRBY count 10</code>：将<code>count</code>这个数字字符串加10。</p>
+</li>
+<li><p>DECR<br>  将数字字符串减1。</p>
+</li>
+<li><p>DECRBY<br>  将数字字符串减去给定数字（类比<code>INCRBY</code>）。</p>
+</li>
+<li><p>TYPE<br>  该命令返回存储在给定键上的类型值。</p>
+</li>
+<li><p>EXISTS<br>  判断给定的键是否存在于数据库中。</p>
+</li>
+<li><p>DEL<br>  删除给定的键和其关联的值。</p>
+</li>
+<li><p>MSET<br>  同时设置多个键-值。如：<code>MSET a 10 b 20 c 30</code>。</p>
+</li>
+<li><p>MGET<br>  同时检索多个键-值。如：<code>MGET a b c</code>。</p>
+</li>
 </ul>
 <h3 id="Redis-Lists"><a href="#Redis-Lists" class="headerlink" title="Redis Lists"></a>Redis Lists</h3><p>Redis lists 基于 Linked Lists 实现。因此在头部或尾部添加一个元素的操作，其时间复杂度是常数级别的，但索引访问元素的速度就没那么快了。</p>
 <p>常用命令：</p>
@@ -2506,53 +2522,6 @@
       </tags>
   </entry>
   <entry>
-    <title>时间标准</title>
-    <url>/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/</url>
-    <content><![CDATA[<h2 id="世界时（Universal-Time）"><a href="#世界时（Universal-Time）" class="headerlink" title="世界时（Universal Time）"></a>世界时（Universal Time）</h2><p>世界时（Universal Time，简称 UT）是一种以格林尼治子夜起算的<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%B6">平太阳时</a>。世界时是以地球自转为基准得到的时间尺度，其精度受到地球自转不均匀变化和极移的影响，为了解决这种影响，1955年国际天文联合会定义了 UT0、UT1 和 UT2 三个系统：</p>
-<ul>
-<li><p>UT0 系统是由一个天文台的天文观测直接测定的世界时，没有考虑极移造成的天文台地理坐标变化。该系统曾长期被认为是稳定均匀的时间计量系统，得到过广泛应用。</p>
-</li>
-<li><p>UT1 系统是在 UT0 的基础上加入了极移改正 Δλ，修正地轴摆动的影响。UT1 是目前使用的世界时标准。被作为目前世界民用时间标准 UTC 在增减闰秒时的参照标准。</p>
-</li>
-<li><p>UT2 系统是 UT1 的平滑处理版本，在 UT1 基础上加入了地球自转速率的季节性改正 ΔT。</p>
-</li>
-</ul>
-<p>它们之间的关系可以表示为：</p>
-<ul>
-<li>UT1 &#x3D; UT0 + Δλ</li>
-<li>UT2 &#x3D; UT1 + ΔT</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="平太阳时"><a href="#平太阳时" class="headerlink" title="平太阳时"></a>平太阳时</h2><p>太阳日（solar day）是依据太阳运动，所定义的时间，可以分为<a href="#%E8%A7%86%E5%A4%AA%E9%98%B3%E6%97%A5">视太阳日</a>和<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%A5">平太阳日</a>。</p>
-<p>一太阳日传统称为一「日」、一「天」或一「昼夜」。</p>
-<h3 id="视太阳日"><a href="#视太阳日" class="headerlink" title="视太阳日"></a>视太阳日</h3><p>视太阳日（apparent solar day）是依据<a href="#%E7%9C%9F%E5%A4%AA%E9%98%B3">真太阳</a>定义的，也就是真实的太阳连续两次经过某地相同之中天，即是上至上中天或下至下中天的时间间隔，可以使用日晷来测量（上中天）。</p>
-<p>由于以下两个原因，视太阳日在一年当中的长度会每天不停地改变。</p>
-<p>首先，地球的轨道是一个椭圆而不是正圆，所以当地球接近太阳时速度会加快，到达近日点时的运动速度最快；远离时又会减慢，到达远日点时的速度最慢（参考开普勒行星运动定律）。<br>其次，因为地球自转轴的倾斜角度，使得太阳在黄道上运行的大圆对地球的天球赤道是倾斜的，当太阳在两个分点时，穿越赤道时会有一个角度的，所以投影在赤道上的运行速度小于平均速度；当太阳在至点时，他的运动方向是平行于赤道的，所以投影的运行速度高于平均的速度（参考回归年）。因此，视太阳日在3月（26-27日）和9月（12-13日）是比在6月（18-19日）或12月（20-21日）短的。这些日期的长短变化是在分点、至点、远日点、和近日点之间逐渐变化的。</p>
-<h3 id="平太阳日"><a href="#平太阳日" class="headerlink" title="平太阳日"></a>平太阳日</h3><p>平太阳日（mean solar day）是以平太阳为参考点，以平太阳连续两次经过某地之下中天的时间间隔，需花24小时来转360°59′。更明确的说，平太阳日是经由观察太阳相对于恒星的周日运动，所获得的平均太阳时，经由人为的调整而显示在时钟上的时间。</p>
-<p>平太阳日的长度是固定的24小时，在一年之中不会因为昼夜长短的变化而改变。视太阳日的长度会与平太阳日（86,400秒）不同，相邻的每一天最多可以短22秒或长29秒。因为这种延长或缩短会持续进行一段时间，所以最多会比平太阳日提早17分钟或延迟14分钟。因为这些期间是周期性的，平太阳时和视太阳时的差值就是均时差。</p>
-<p>在历史上有许多方法被用来模拟（显示）平太阳时，最早是使用漏壶或水钟，差不多从前4000年到前2000年中期。在纪元前一千年中叶之前，水钟只能依据视太阳日来调整，因此除了能在夜晚继续使用外，它的准确度并不会比依靠太阳投影的日晷好。</p>
-<p>不过，太阳相对于恒星始终是在黄道上向东移动，因此从纪元前一千年中期，相对于恒星的周日运动可以用来测量平太阳日，来比较以确定时钟的误差率。巴比伦的天文学家已经知道均时差和如何利用相对于恒星的自转速率，恒星时，来改正，以获得比水钟更为准确的时间。这种理想的恒星时日后也应用在行星、月球和太阳运动的描述。</p>
-<p>在20世纪初期，机械时钟的准确度还没有比地球自转所显示的恒星时钟来得准确，即使到了今天，原子钟的精度已经比地球的自转更为稳定，恒星时钟仍然被用来校准平太阳日。在20世纪末期，地球自转的速率被改以外星系的无线电源来定义，并且平太阳时也被转换成外来的无线电源的比率。平太阳时与协调世界时之间的差异，就成为是否需要做闰秒调整的依据。</p>
-<h3 id="太阳日的其他含意"><a href="#太阳日的其他含意" class="headerlink" title="太阳日的其他含意"></a>太阳日的其他含意</h3><p>太阳日是星期日的前身。自古罗马开始定为休息日，人民不需工作而从事崇拜活动。</p>
-<h2 id="真太阳"><a href="#真太阳" class="headerlink" title="真太阳"></a>真太阳</h2><p>真太阳或视太阳是地球上的观察者（或任一行星的观察者）所看见的太阳。术语「真太阳」是用来对比「平太阳」（它指太阳的平均位置），以对应术语「真太阳时」和「平太阳时」。</p>
-<p>真太阳日是以太阳为参照的地球的自转周期。由于地球公转的原因，真太阳日并不等于地球自转的恒星周期（恒星日），而是比恒星日约长3分56秒。又由于地球公转轨道是椭圆形的，根据开普勒定律，在近日点的公转速度快于在远日点的公转速度，因此一年之内不同时间的运动并不匀速，所以每个真太阳日的长短也不相等。</p>
-<h2 id="协调世界时"><a href="#协调世界时" class="headerlink" title="协调世界时"></a>协调世界时</h2><p>协调世界时（英语：Coordinated Universal Time，法语：Temps Universel Coordonné，简称UTC）是最主要的世界时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林尼治标准时间。中华民国采用CNS 7648的《资料元及交换格式–资讯交换–日期及时间的表示法》（与ISO 8601类似）称之为世界协调时间。中华人民共和国采用ISO 8601:2000的国家标准GB&#x2F;T 7408-2005《数据元和交换格式 信息交换 日期和时间表示法》中亦称之为协调世界时。</p>
-<p>协调世界时是世界上调节时钟和时间的主要时间标准，它与0度经线的平太阳时相差不超过1秒，并不遵守夏令时。协调世界时是最接近格林威治标准时间（GMT）的几个替代时间系统之一。对于大多数用途来说，UTC时间被认为能与GMT时间互换，但GMT时间已不再被科学界所确定。</p>
-<p>协调世界时（UTC）正式形成于1960年国际无线电咨询委员会的374号建议中，该建议由多国时间实验室共同提出。人们对该时间系统进行过数次调整，直到1972年引入了闰秒机制，调整工作得以简化。也有很多人提议用一个没有闰秒的时间系统来替换掉协调世界时，但目前尚未就此达成一致。</p>
-<p>现行的协调世界时根据国际电信联盟的建议《Standard-frequency and time-signal emissions》(ITU-R TF.460-6)所确定。 UTC基于国际原子时，并通过不规则的加入闰秒来抵消地球自转变慢的影响[7]。闰秒在必要的时候会被插入到UTC中，以保证协调世界时（UTC）与世界时（UT1）相差不超过0.9秒[8]。</p>
-<h3 id="格林尼治平时"><a href="#格林尼治平时" class="headerlink" title="格林尼治平时"></a>格林尼治平时</h3><p>格林尼治平时（英语：Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台当地的平太阳时，因为本初子午线被定义为通过那里的经线。</p>
-<p>自1924年2月5日开始，格林尼治天文台负责每隔一小时向全世界发放调时信息。</p>
-<p>格林尼治平时的正午是指当平太阳横穿格林尼治子午线时（也就是在格林尼治上空最高点时）的时间。由于地球每天的自转是有些不规则的，而且正在缓慢减速，因此格林尼治平时基于天文观测本身的缺陷，已经被原子钟报时的协调世界时（UTC）所取代。</p>
-]]></content>
-      <categories>
-        <category>HTML/CSS/JavaScript</category>
-      </categories>
-      <tags>
-        <tag>时间</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>序列化</title>
     <url>/blogs/posts/6b55864b-978e-11ec-8ee3-5d314a3065a5/</url>
     <content><![CDATA[<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>Java 的 <code>Serializable</code> 接口是一个标记接口，它是一个空接口。实现它只是标记这个类是可序列化的。</p>
@@ -2613,43 +2582,50 @@
       </tags>
   </entry>
   <entry>
-    <title>ECMAScript 6 (ES6) 入门 - async 函数</title>
-    <url>/blogs/posts/1940b640-9d3d-11ec-a9bf-4b3a3c7de5a4/</url>
-    <content><![CDATA[<p>async函数是使用<code>async</code>关键字声明的函数。其中允许使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字让我们可以用一种更简洁的方式写出基于<code>Promise</code>的异步行为，而无需刻意地链式调用promise。</p>
+    <title>时间标准</title>
+    <url>/blogs/posts/6b55864c-978e-11ec-8ee3-5d314a3065a5/</url>
+    <content><![CDATA[<h2 id="世界时（Universal-Time）"><a href="#世界时（Universal-Time）" class="headerlink" title="世界时（Universal Time）"></a>世界时（Universal Time）</h2><p>世界时（Universal Time，简称 UT）是一种以格林尼治子夜起算的<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%B6">平太阳时</a>。世界时是以地球自转为基准得到的时间尺度，其精度受到地球自转不均匀变化和极移的影响，为了解决这种影响，1955年国际天文联合会定义了 UT0、UT1 和 UT2 三个系统：</p>
+<ul>
+<li><p>UT0 系统是由一个天文台的天文观测直接测定的世界时，没有考虑极移造成的天文台地理坐标变化。该系统曾长期被认为是稳定均匀的时间计量系统，得到过广泛应用。</p>
+</li>
+<li><p>UT1 系统是在 UT0 的基础上加入了极移改正 Δλ，修正地轴摆动的影响。UT1 是目前使用的世界时标准。被作为目前世界民用时间标准 UTC 在增减闰秒时的参照标准。</p>
+</li>
+<li><p>UT2 系统是 UT1 的平滑处理版本，在 UT1 基础上加入了地球自转速率的季节性改正 ΔT。</p>
+</li>
+</ul>
+<p>它们之间的关系可以表示为：</p>
+<ul>
+<li>UT1 &#x3D; UT0 + Δλ</li>
+<li>UT2 &#x3D; UT1 + ΔT</li>
+</ul>
 <span id="more"></span>
 
-<p><strong>备注</strong>：<code>await</code>关键字只在async函数内有效。如果你在async函数体之外使用它，就会抛出语法错误SyntaxError。</p>
-<p>async函数一定会返回一个promise对象。如果一个async函数的返回值不是promise，那么它将会被隐式地包装在一个promise中。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(a + b); <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">        .then(<span class="function"><span class="params">a</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>)</span><br><span class="line">                .then(<span class="function"><span class="params">b</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> a + b;</span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.info(value); <span class="comment">// 3</span></span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">undefined</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以在async方法内部使用try…catch捕获<code>await</code>语句的promise的<code>rejected</code>状态返回的错误信息。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>如果<code>await</code>语句的promise的<code>rejected</code>状态没有被try…catch捕获，当前async函数将会返回一个<code>rejected</code>状态的promise对象，并且错误信息是<code>await</code>语句的promise的<code>rejected</code>的错误信息。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 并不会执行到这里</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>一、打印出来的顺序是什么？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">sleep(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-
-<p>二、打印出来的顺序是什么？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> fun();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">    sleep(<span class="number">10</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.bookstack.cn/read/es6-3rd/docs-async.md">20. async 函数 - 《阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版》 - 书栈网 · BookStack</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function">async函数 - JavaScript | MDN</a></li>
-</ul>
-<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/78113300">js中的宏任务与微任务 - 知乎</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/172471249">什么是协程？ - 知乎</a></li>
-</ul>
+<h2 id="平太阳时"><a href="#平太阳时" class="headerlink" title="平太阳时"></a>平太阳时</h2><p>太阳日（solar day）是依据太阳运动，所定义的时间，可以分为<a href="#%E8%A7%86%E5%A4%AA%E9%98%B3%E6%97%A5">视太阳日</a>和<a href="#%E5%B9%B3%E5%A4%AA%E9%98%B3%E6%97%A5">平太阳日</a>。</p>
+<p>一太阳日传统称为一「日」、一「天」或一「昼夜」。</p>
+<h3 id="视太阳日"><a href="#视太阳日" class="headerlink" title="视太阳日"></a>视太阳日</h3><p>视太阳日（apparent solar day）是依据<a href="#%E7%9C%9F%E5%A4%AA%E9%98%B3">真太阳</a>定义的，也就是真实的太阳连续两次经过某地相同之中天，即是上至上中天或下至下中天的时间间隔，可以使用日晷来测量（上中天）。</p>
+<p>由于以下两个原因，视太阳日在一年当中的长度会每天不停地改变。</p>
+<p>首先，地球的轨道是一个椭圆而不是正圆，所以当地球接近太阳时速度会加快，到达近日点时的运动速度最快；远离时又会减慢，到达远日点时的速度最慢（参考开普勒行星运动定律）。<br>其次，因为地球自转轴的倾斜角度，使得太阳在黄道上运行的大圆对地球的天球赤道是倾斜的，当太阳在两个分点时，穿越赤道时会有一个角度的，所以投影在赤道上的运行速度小于平均速度；当太阳在至点时，他的运动方向是平行于赤道的，所以投影的运行速度高于平均的速度（参考回归年）。因此，视太阳日在3月（26-27日）和9月（12-13日）是比在6月（18-19日）或12月（20-21日）短的。这些日期的长短变化是在分点、至点、远日点、和近日点之间逐渐变化的。</p>
+<h3 id="平太阳日"><a href="#平太阳日" class="headerlink" title="平太阳日"></a>平太阳日</h3><p>平太阳日（mean solar day）是以平太阳为参考点，以平太阳连续两次经过某地之下中天的时间间隔，需花24小时来转360°59′。更明确的说，平太阳日是经由观察太阳相对于恒星的周日运动，所获得的平均太阳时，经由人为的调整而显示在时钟上的时间。</p>
+<p>平太阳日的长度是固定的24小时，在一年之中不会因为昼夜长短的变化而改变。视太阳日的长度会与平太阳日（86,400秒）不同，相邻的每一天最多可以短22秒或长29秒。因为这种延长或缩短会持续进行一段时间，所以最多会比平太阳日提早17分钟或延迟14分钟。因为这些期间是周期性的，平太阳时和视太阳时的差值就是均时差。</p>
+<p>在历史上有许多方法被用来模拟（显示）平太阳时，最早是使用漏壶或水钟，差不多从前4000年到前2000年中期。在纪元前一千年中叶之前，水钟只能依据视太阳日来调整，因此除了能在夜晚继续使用外，它的准确度并不会比依靠太阳投影的日晷好。</p>
+<p>不过，太阳相对于恒星始终是在黄道上向东移动，因此从纪元前一千年中期，相对于恒星的周日运动可以用来测量平太阳日，来比较以确定时钟的误差率。巴比伦的天文学家已经知道均时差和如何利用相对于恒星的自转速率，恒星时，来改正，以获得比水钟更为准确的时间。这种理想的恒星时日后也应用在行星、月球和太阳运动的描述。</p>
+<p>在20世纪初期，机械时钟的准确度还没有比地球自转所显示的恒星时钟来得准确，即使到了今天，原子钟的精度已经比地球的自转更为稳定，恒星时钟仍然被用来校准平太阳日。在20世纪末期，地球自转的速率被改以外星系的无线电源来定义，并且平太阳时也被转换成外来的无线电源的比率。平太阳时与协调世界时之间的差异，就成为是否需要做闰秒调整的依据。</p>
+<h3 id="太阳日的其他含意"><a href="#太阳日的其他含意" class="headerlink" title="太阳日的其他含意"></a>太阳日的其他含意</h3><p>太阳日是星期日的前身。自古罗马开始定为休息日，人民不需工作而从事崇拜活动。</p>
+<h2 id="真太阳"><a href="#真太阳" class="headerlink" title="真太阳"></a>真太阳</h2><p>真太阳或视太阳是地球上的观察者（或任一行星的观察者）所看见的太阳。术语「真太阳」是用来对比「平太阳」（它指太阳的平均位置），以对应术语「真太阳时」和「平太阳时」。</p>
+<p>真太阳日是以太阳为参照的地球的自转周期。由于地球公转的原因，真太阳日并不等于地球自转的恒星周期（恒星日），而是比恒星日约长3分56秒。又由于地球公转轨道是椭圆形的，根据开普勒定律，在近日点的公转速度快于在远日点的公转速度，因此一年之内不同时间的运动并不匀速，所以每个真太阳日的长短也不相等。</p>
+<h2 id="协调世界时"><a href="#协调世界时" class="headerlink" title="协调世界时"></a>协调世界时</h2><p>协调世界时（英语：Coordinated Universal Time，法语：Temps Universel Coordonné，简称UTC）是最主要的世界时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林尼治标准时间。中华民国采用CNS 7648的《资料元及交换格式–资讯交换–日期及时间的表示法》（与ISO 8601类似）称之为世界协调时间。中华人民共和国采用ISO 8601:2000的国家标准GB&#x2F;T 7408-2005《数据元和交换格式 信息交换 日期和时间表示法》中亦称之为协调世界时。</p>
+<p>协调世界时是世界上调节时钟和时间的主要时间标准，它与0度经线的平太阳时相差不超过1秒，并不遵守夏令时。协调世界时是最接近格林威治标准时间（GMT）的几个替代时间系统之一。对于大多数用途来说，UTC时间被认为能与GMT时间互换，但GMT时间已不再被科学界所确定。</p>
+<p>协调世界时（UTC）正式形成于1960年国际无线电咨询委员会的374号建议中，该建议由多国时间实验室共同提出。人们对该时间系统进行过数次调整，直到1972年引入了闰秒机制，调整工作得以简化。也有很多人提议用一个没有闰秒的时间系统来替换掉协调世界时，但目前尚未就此达成一致。</p>
+<p>现行的协调世界时根据国际电信联盟的建议《Standard-frequency and time-signal emissions》(ITU-R TF.460-6)所确定。 UTC基于国际原子时，并通过不规则的加入闰秒来抵消地球自转变慢的影响[7]。闰秒在必要的时候会被插入到UTC中，以保证协调世界时（UTC）与世界时（UT1）相差不超过0.9秒[8]。</p>
+<h3 id="格林尼治平时"><a href="#格林尼治平时" class="headerlink" title="格林尼治平时"></a>格林尼治平时</h3><p>格林尼治平时（英语：Greenwich Mean Time，GMT）是指位于英国伦敦郊区的皇家格林尼治天文台当地的平太阳时，因为本初子午线被定义为通过那里的经线。</p>
+<p>自1924年2月5日开始，格林尼治天文台负责每隔一小时向全世界发放调时信息。</p>
+<p>格林尼治平时的正午是指当平太阳横穿格林尼治子午线时（也就是在格林尼治上空最高点时）的时间。由于地球每天的自转是有些不规则的，而且正在缓慢减速，因此格林尼治平时基于天文观测本身的缺陷，已经被原子钟报时的协调世界时（UTC）所取代。</p>
 ]]></content>
       <categories>
-        <category>ECMAScript 6</category>
+        <category>HTML/CSS/JavaScript</category>
       </categories>
       <tags>
-        <tag>Promise</tag>
+        <tag>时间</tag>
       </tags>
   </entry>
   <entry>
@@ -2700,6 +2676,9 @@
 <h3 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h3><p>略</p>
 <h3 id="Promise-allSettled-iterable"><a href="#Promise-allSettled-iterable" class="headerlink" title="Promise.allSettled(iterable)"></a>Promise.allSettled(iterable)</h3><p>略</p>
 <h3 id="Promise-any-iterable"><a href="#Promise-any-iterable" class="headerlink" title="Promise.any(iterable)"></a>Promise.any(iterable)</h3><p>略</p>
+<h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>一、每个<code>?</code>打印的是什么？最终打印出来的顺序是怎样的？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, <span class="number">1000</span>, <span class="number">100</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;info 1&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// ?</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;info 2&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// ?</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;info 3&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(error); <span class="comment">// ?</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">7</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;info 4&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// ?</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;info 5&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// ?</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.info(<span class="number">8</span>);</span><br><span class="line"><span class="built_in">console</span>.info(<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;p value&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// ?</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;p error&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(error); <span class="comment">// ?</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="https://www.bookstack.cn/read/es6-3rd/docs-promise.md">16. Promise 对象 - 《阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版》 - 书栈网 · BookStack</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises">使用 Promise - JavaScript | MDN</a></li>
@@ -2718,5 +2697,146 @@
       <tags>
         <tag>Promise</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>ECMAScript 6 (ES6) 入门 - async 函数</title>
+    <url>/blogs/posts/1940b640-9d3d-11ec-a9bf-4b3a3c7de5a4/</url>
+    <content><![CDATA[<p>async函数是使用<code>async</code>关键字声明的函数。其中允许使用<code>await</code>关键字。<code>async</code>和<code>await</code>关键字让我们可以用一种更简洁的方式写出基于<code>Promise</code>的异步行为，而无需刻意地链式调用promise。</p>
+<span id="more"></span>
+
+<p><strong>备注</strong>：<code>await</code>关键字只在async函数内有效。如果你在async函数体之外使用它，就会抛出语法错误SyntaxError。</p>
+<p>async函数一定会返回一个promise对象。如果一个async函数的返回值不是promise，那么它将会被隐式地包装在一个promise中。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// your logic</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">console</span>.info(a + b); <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">        .then(<span class="function"><span class="params">a</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="number">2</span>)</span><br><span class="line">                .then(<span class="function"><span class="params">b</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> a + b;</span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.info(value); <span class="comment">// 3</span></span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">undefined</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以在async方法内部使用try…catch捕获<code>await</code>语句的promise的<code>rejected</code>状态返回的错误信息。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>await</code>语句的promise的<code>rejected</code>状态没有被try…catch捕获，当前async函数将会返回一个<code>rejected</code>状态的promise对象，并且错误信息是<code>await</code>语句的promise的<code>rejected</code>的错误信息。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">await</span> <span class="built_in">Promise</span>.reject(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f().then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.info(value); <span class="comment">// 并不会执行到这里</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error); <span class="comment">// 2</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>一、打印出来的顺序是怎样的？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">sleep(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>二、打印出来的顺序是怎样的？</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;f&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> resolve(), ms)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v1 = <span class="keyword">await</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v2 = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> v3 = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;d&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> fun();</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">    sleep(<span class="number">10</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.bookstack.cn/read/es6-3rd/docs-async.md">20. async 函数 - 《阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版》 - 书栈网 · BookStack</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function">async函数 - JavaScript | MDN</a></li>
+</ul>
+<h2 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/78113300">js中的宏任务与微任务 - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/172471249">什么是协程？ - 知乎</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ECMAScript 6</category>
+      </categories>
+      <tags>
+        <tag>Promise</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GraphQL 入门</title>
+    <url>/blogs/posts/29fd2b70-b81e-11ec-96fd-d17962556a5d/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>GraphQL 既是一种用于 API 的查询语言，也是一个满足你数据查询的运行时。GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+<p>GraphQL 是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。</p>
+<span id="more"></span>
+
+<p>一个 GraphQL 服务是通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数。例如，一个 GraphQL 服务告诉我们当前登录用户是 me，这个用户的名称可能像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Query &#123;</span><br><span class="line">  me: User</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type User &#123;</span><br><span class="line">  id: ID</span><br><span class="line">  name: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一并的还有每个类型上字段的解析函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Query_me</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request.auth.user;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User_name</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> user.getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一旦一个 GraphQL 服务运行起来（通常在 web 服务的一个 URL 上），它就能接收 GraphQL 查询，并验证和执行。接收到的查询首先会被检查确保它只引用了已定义的类型和字段，然后运行指定的解析函数来生成结果。</p>
+<p>例如这个查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  me &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会产生这样的JSON结果：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;me&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：GraphQL 是 Facebook 设计的一个语言标准，它有不同的编程语言实现版本。同时，即使是相同的编程语言，也可能有不同的实现版本。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="查询和变更（Queries-and-Mutations）"><a href="#查询和变更（Queries-and-Mutations）" class="headerlink" title="查询和变更（Queries and Mutations）"></a>查询和变更（Queries and Mutations）</h3><h4 id="字段（Fields）"><a href="#字段（Fields）" class="headerlink" title="字段（Fields）"></a>字段（Fields）</h4><p>简单而言，GraphQL 是关于请求对象上的特定字段。我们以一个非常简单的查询以及其结果为例：</p>
+<figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  hero &#123;</span><br><span class="line">    name</span><br><span class="line">    # 查询可以有备注！</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;hero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;R2-D2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;friends&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Han Solo&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Leia Organa&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个例子中，friends 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过 schema 所指示的内容来预测将会得到是单个项目还是一个列表。</p>
+<h4 id="参数（Arguments）"><a href="#参数（Arguments）" class="headerlink" title="参数（Arguments）"></a>参数（Arguments）</h4><figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  hero(name: &quot;R2-D2&quot;) &#123;</span><br><span class="line">    id</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;hero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;id&quot;</span>: <span class="string">&quot;1000&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;friends&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Han Solo&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Leia Organa&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="别名（Aliases）"><a href="#别名（Aliases）" class="headerlink" title="别名（Aliases）"></a>别名（Aliases）</h4><p>假如，我们想要在一个请求里面，通过不同参数来查询相同类型的不同数据</p>
+<figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  empireHero: hero(id: &quot;1000&quot;) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">  jediHero: hero(id: &quot;2000&quot;) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;empireHero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;jediHero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;R2-D2&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="片段（Fragments）"><a href="#片段（Fragments）" class="headerlink" title="片段（Fragments）"></a>片段（Fragments）</h4><p>片段使你能够组织一组字段，然后在需要它们的地方引入。</p>
+<figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  empireHero: hero(id: &quot;1000&quot;) &#123;</span><br><span class="line">    ...comparisonFields</span><br><span class="line">  &#125;</span><br><span class="line">  jediHero: hero(id: &quot;2000&quot;) &#123;</span><br><span class="line">    ...comparisonFields</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment comparisonFields on Character &#123;</span><br><span class="line">  name</span><br><span class="line">  appearsIn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;empireHero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;appearsIn&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;NEWHOPE&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EMPIRE&quot;</span>,</span><br><span class="line">        <span class="string">&quot;JEDI&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;jediHero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;R2-D2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;appearsIn&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;NEWHOPE&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EMPIRE&quot;</span>,</span><br><span class="line">        <span class="string">&quot;JEDI&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="操作名称（Operation-name）"><a href="#操作名称（Operation-name）" class="headerlink" title="操作名称（Operation name）"></a>操作名称（Operation name）</h4><p>这之前，我们都使用了简写句法，省略了 <code>query</code> 关键字和操作名称，但是生产中使用这些可以使我们代码减少歧义。</p>
+<figure class="highlight plaintext"><figcaption><span>既声明了操作类型（query），也声明了操作名称（HeroNameAndFriends）</span></figcaption><table><tr><td class="code"><pre><span class="line">query HeroNameAndFriends &#123;</span><br><span class="line">  hero &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>只声明了操作类型（query）</span></figcaption><table><tr><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  hero &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;hero&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;R2-D2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;friends&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Luke Skywalker&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Han Solo&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Leia Organa&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="变量（Variables）"><a href="#变量（Variables）" class="headerlink" title="变量（Variables）"></a>变量（Variables）</h4><p>前面的示例中，我们都是直接将参数硬编码到查询字符串内，但很多时候，这些参数并不是固定的，我们的客户端就需要动态地在运行时操作这些查询字符串。可以使用 GraphQL 中提供的「变量」的语法，这样一来，我们的客户端代码就只需要传入不同的变量，而不用构建一个全新的查询了。这事实上也是一个良好实践，意味着查询的参数将是动态的。</p>
+<figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line"># &#123; &quot;variables&quot;: &#123; &quot;id&quot;: &quot;1000&quot;, &quot;name&quot;: &quot;R2-D2&quot; &#125; &#125;</span><br><span class="line"></span><br><span class="line">query HeroNameAndFriends($id: ID, $name: String) &#123;</span><br><span class="line">  hero(id: $id, name: $name) &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 类型后面带上 ! 表示这个变量的值是必要的。否则就是可选的。</span><br><span class="line">query HeroNameAndFriends2($id: ID!) &#123;</span><br><span class="line">  hero(id: $id) &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 可以通过在查询中的类型定义后面附带默认值的方式，将默认值赋给变量。</span><br><span class="line">query HeroNameAndFriends3($id: ID = &quot;1000&quot;) &#123;</span><br><span class="line">  hero(id: $id) &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>变量前缀必须为<code>$</code>，后跟其类型，如例子中为<code>$id: ID</code>的类型为<code>ID</code>。</p>
+<h4 id="指令（Directives）"><a href="#指令（Directives）" class="headerlink" title="指令（Directives）"></a>指令（Directives）</h4><p>略</p>
+<h4 id="变更（Mutations）"><a href="#变更（Mutations）" class="headerlink" title="变更（Mutations）"></a>变更（Mutations）</h4><p>类似于 REST 中，约定上使用 GET 请求来查询数据，使用 PUT 或 POST 请求来修改数据。GraphQL 也是类似，约定使用<code>query</code>操作关键字来查询数据，约定任何导致写入的操作都通过<code>mutation</code>操作关键字来发送请求。</p>
+<figure class="highlight plaintext"><figcaption><span>Request</span></figcaption><table><tr><td class="code"><pre><span class="line">mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) &#123;</span><br><span class="line">  createReview(episode: $ep, review: $review) &#123;</span><br><span class="line">    stars</span><br><span class="line">    commentary</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Variables</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;ep&quot;</span>: <span class="string">&quot;JEDI&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;review&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;stars&quot;</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="attr">&quot;commentary&quot;</span>: <span class="string">&quot;This is a great movie!&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><figcaption><span>Result</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;createReview&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;stars&quot;</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">&quot;commentary&quot;</span>: <span class="string">&quot;This is a great movie!&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="内联片段（Inline-Fragments）"><a href="#内联片段（Inline-Fragments）" class="headerlink" title="内联片段（Inline Fragments）"></a>内联片段（Inline Fragments）</h4><p>略</p>
+<h4 id="元字段（Meta-fields）"><a href="#元字段（Meta-fields）" class="headerlink" title="元字段（Meta fields）"></a>元字段（Meta fields）</h4><p>略</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>客户端使用 HTTP 发送请求示例：</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">POST http://localhost:8080/graphql</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;operationName&quot;:&quot;HeroNameAndFriends&quot;,&quot;variables&quot;:&#123;&#125;,&quot;query&quot;:&quot;query HeroNameAndFriends &#123;\n  bookById(id: \&quot;book-1\&quot;) &#123;\n    name\n  &#125;\n&#125;\n\nquery HeroNameAndFriends2 &#123;\n  bookById(id: \&quot;book-2\&quot;) &#123;\n    name\n  &#125;\n&#125;\n&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://graphql.cn/learn/">GraphQL 入门 | GraphQL</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>GraphQL</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>契约测试和Pact</title>
+    <url>/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/</url>
+    <content><![CDATA[<h2 id="什么是契约测试"><a href="#什么是契约测试" class="headerlink" title="什么是契约测试"></a>什么是契约测试</h2><p>契约测试是一种通过隔离每个应用程序，来测试集成点的技术，以确保其发送或接收的消息，是符合多方共同商定理解的「契约」的。</p>
+<p>对于通过HTTP进行通信的应用程序，这些「消息」将是HTTP请求和响应；而对于使用队列的应用程序，则是通过队列传递的消息。</p>
+<p>在实践中，实现契约测试的一种常见方法（Pact也是这么做的），是检查对测试替身的所有调用，是否与对实际应用程序的调用返回相同的结果。</p>
+<h2 id="什么是Pact"><a href="#什么是Pact" class="headerlink" title="什么是Pact"></a>什么是Pact</h2><p>Pact是使用契约测试来测试HTTP和消息集成的代码优先工具。</p>
+<h2 id="契约测试范围"><a href="#契约测试范围" class="headerlink" title="契约测试范围"></a>契约测试范围</h2><h3 id="消费方的契约测试范围"><a href="#消费方的契约测试范围" class="headerlink" title="消费方的契约测试范围"></a>消费方的契约测试范围</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/consumer-test-coverage-71ca640527716073e40be0b525340500.png" alt="消费方的契约测试范围（黄色高亮部分）"></p>
+<p>在这里，Collaborator是一个组件，它的职责是与另一个系统通信。</p>
+<h3 id="提供方的契约测试范围"><a href="#提供方的契约测试范围" class="headerlink" title="提供方的契约测试范围"></a>提供方的契约测试范围</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/provider-test-coverage-1ea287e57109f2a187b0b5bc290b4247.png" alt="提供方的契约测试范围（黄色高亮部分）"></p>
+<p>在提供方这边，Pact需要重放针对这边服务的所有交互（通常是HTTP请求）。这里有很多选择，但通常有以下几种选择：</p>
+<ul>
+<li>只调用controller层（在MVC应用程序中；或上面示意图中的「Adapter」），并剔除（stub out）下面的层</li>
+<li>执行服务&#x2F;业务逻辑层的代码，但模拟（mock out）数据持久性层</li>
+<li>选择真实的或者模拟的数据库</li>
+<li>选择模拟外部服务</li>
+</ul>
+<h2 id="搭建Pact-Broker"><a href="#搭建Pact-Broker" class="headerlink" title="搭建Pact Broker"></a>搭建Pact Broker</h2><p>参考官方文档<a href="https://docs.pact.io/pact_broker/docker_images/dius">dius&#x2F;pact-broker | Pact Docs</a>，或使用官方提供的使用Docker Compose搭建的示例<a href="https://github.com/DiUS/pact_broker-docker/blob/master/docker-compose.yml">pact_broker-docker&#x2F;docker-compose.yml at master · DiUS&#x2F;pact_broker-docker · GitHub</a>。</p>
+<p>这里提供一个简化版的示例：</p>
+<figure class="highlight yml"><figcaption><span>docker-compose.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> <span class="string">psql</span> <span class="string">postgres</span> <span class="string">--command</span> <span class="string">&quot;select 1&quot;</span> <span class="string">-U</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">password</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">postgres</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">pact-broker:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">dius/pact-broker</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PACT_BROKER_DATABASE_USERNAME:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">PACT_BROKER_DATABASE_PASSWORD:</span> <span class="string">password</span></span><br><span class="line">      <span class="attr">PACT_BROKER_DATABASE_HOST:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">PACT_BROKER_DATABASE_NAME:</span> <span class="string">postgres</span></span><br><span class="line">      <span class="attr">PACT_BROKER_LOG_LEVEL:</span> <span class="string">INFO</span></span><br><span class="line">      <span class="attr">PACT_BROKER_DATABASE_CONNECT_MAX_RETRIES:</span> <span class="string">&quot;10&quot;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">&quot;8000:80&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>将以上内容保存成docker-compose.yml文件，然后使用Docker Compose命令运行<code>docker-compose --file docker-compose-my.yml --project-name pack-brocker up</code>。启动成功之后，用浏览器访问<a href="http://localhost:8000/">http://localhost:8000/</a>就可以打开Pact Broker主页了。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://docs.pact.io/">Introduction | Pact Docs</a></li>
+</ul>
+<p>替换关键词：<br>合同：契约</p>
+]]></content>
   </entry>
 </search>
