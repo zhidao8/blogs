@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN"><head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blogs/images/apple-touch-icon-next.png">
@@ -14,27 +13,34 @@
 
 
 
-<link rel="stylesheet" href="/blogs/lib/@fortawesome/fontawesome-free/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-  <link rel="stylesheet" href="/blogs/lib/animate.css/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="/blogs/lib/@fancyapps/fancybox/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-  <link rel="stylesheet" href="/blogs/lib/pace-js/themes/blue/pace-theme-minimal.css">
-  <script src="/blogs/lib/pace-js/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://unpkg.com/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
-<meta name="description" content="什么是契约测试契约测试是一种通过隔离每个应用程序，来测试集成点的技术，以确保其发送或接收的消息，是符合多方共同商定理解的「契约」的。 对于通过HTTP进行通信的应用程序，这些「消息」将是HTTP请求和响应；而对于使用队列的应用程序，则是通过队列传递的消息。 在实践中，实现契约测试的一种常见方法（Pact也是这么做的），是检查对测试替身的所有调用，是否与对实际应用程序的调用返回相同的结果。 什么是P">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zhidao8.github.io","root":"/blogs/","images":"/blogs/images","scheme":"Pisces","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blogs/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blogs/js/config.js"></script>
+
+    <meta name="description" content="什么是契约测试契约测试是一种通过隔离每个应用程序，来测试集成点的技术，以确保其发送或接收的消息，是符合多方共同商定理解的「契约」的。 对于通过HTTP进行通信的应用程序，这些「消息」将是HTTP请求和响应；而对于使用队列的应用程序，则是通过队列传递的消息。 在实践中，实现契约测试的一种常见方法（Pact也是这么做的），是检查对测试替身的所有调用，是否与对实际应用程序的调用返回相同的结果。 什么是P">
 <meta property="og:type" content="article">
 <meta property="og:title" content="契约测试和Pact">
 <meta property="og:url" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/index.html">
 <meta property="og:site_name" content="zhidao8's Blogs">
 <meta property="og:description" content="什么是契约测试契约测试是一种通过隔离每个应用程序，来测试集成点的技术，以确保其发送或接收的消息，是符合多方共同商定理解的「契约」的。 对于通过HTTP进行通信的应用程序，这些「消息」将是HTTP请求和响应；而对于使用队列的应用程序，则是通过队列传递的消息。 在实践中，实现契约测试的一种常见方法（Pact也是这么做的），是检查对测试替身的所有调用，是否与对实际应用程序的调用返回相同的结果。 什么是P">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-base-b1595e5f159ec3ff719fa551bd030c42.png">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-overview-b3088a94483efb5688c79f98ceaa3c0d.png">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-file-61aa524a752a053e2a5e564a7b4d1ffa.png">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-verification-f1b93dfd857a7db3e02980b5ff4e1259.png">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-verification-states-c5c318ae14905e0a90bcc9eeaa005998.png">
+<meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-test-and-verify-7ae6e70a9a42ffa4ac8373ba294b19d9.png">
 <meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/consumer-test-coverage-71ca640527716073e40be0b525340500.png">
 <meta property="og:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/provider-test-coverage-1ea287e57109f2a187b0b5bc290b4247.png">
 <meta property="article:published_time" content="2022-05-05T13:54:07.000Z">
 <meta property="article:modified_time" content="2022-05-05T13:54:07.000Z">
 <meta property="article:author" content="zhidao8">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/consumer-test-coverage-71ca640527716073e40be0b525340500.png">
+<meta name="twitter:image" content="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-base-b1595e5f159ec3ff719fa551bd030c42.png">
 
 
 <link rel="canonical" href="http://zhidao8.github.io/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/">
@@ -46,6 +52,7 @@
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>契约测试和Pact | zhidao8's Blogs</title>
   
+
 
 
 
@@ -94,7 +101,7 @@ html ul > text-autospace {
 
     <a href="/blogs/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">zhidao8's Blogs</h1>
+      <p class="site-title">zhidao8's Blogs</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description"><text-autospace></text-autospace>只争朝夕，不负韶华</p>
@@ -110,11 +117,7 @@ html ul > text-autospace {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
-        <li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blogs/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/blogs/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/blogs/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/blogs/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -169,7 +172,7 @@ html ul > text-autospace {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">什么是契约测试<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPact"><span class="nav-number">2.</span> <span class="nav-text">什么是<text-autospace></text-autospace>Pact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">3.</span> <span class="nav-text">契约测试范围<text-autospace></text-autospace></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%96%B9%E7%9A%84%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">3.1.</span> <span class="nav-text">消费方的契约测试范围<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E6%96%B9%E7%9A%84%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">3.2.</span> <span class="nav-text">提供方的契约测试范围<text-autospace></text-autospace></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAPact-Broker"><span class="nav-number">4.</span> <span class="nav-text">搭建<text-autospace></text-autospace>Pact Broker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料<text-autospace></text-autospace></span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">什么是契约测试<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFPact"><span class="nav-number">2.</span> <span class="nav-text">什么是<text-autospace></text-autospace>Pact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">概念<text-autospace></text-autospace></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%96%B9%EF%BC%88Consumer%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">消费方（Consumer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E6%96%B9%EF%BC%88Provider%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">提供方（Provider）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%EF%BC%88Interaction%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">交互（Interaction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pact%E6%96%87%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">Pact<text-autospace></text-autospace>文件<text-autospace></text-autospace></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">工作原理<text-autospace></text-autospace></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%96%B9%E6%B5%8B%E8%AF%95"><span class="nav-number">4.1.</span> <span class="nav-text">消费方测试<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E6%96%B9%E9%AA%8C%E8%AF%81"><span class="nav-number">4.2.</span> <span class="nav-text">提供方验证<text-autospace></text-autospace></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">组合整个流程<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">6.</span> <span class="nav-text">契约测试范围<text-autospace></text-autospace></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%96%B9%E7%9A%84%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">6.1.</span> <span class="nav-text">消费方的契约测试范围<text-autospace></text-autospace></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E6%96%B9%E7%9A%84%E5%A5%91%E7%BA%A6%E6%B5%8B%E8%AF%95%E8%8C%83%E5%9B%B4"><span class="nav-number">6.2.</span> <span class="nav-text">提供方的契约测试范围<text-autospace></text-autospace></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAPact-Broker"><span class="nav-number">7.</span> <span class="nav-text">搭建<text-autospace></text-autospace>Pact Broker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">参考资料<text-autospace></text-autospace></span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +185,7 @@ html ul > text-autospace {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blogs/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name"><text-autospace></text-autospace>日志<text-autospace></text-autospace></span>
         </a>
       </div>
@@ -199,7 +202,7 @@ html ul > text-autospace {
   </nav>
 </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/blogs/lib/@creativecommons/vocabulary/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
+    <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://unpkg.com/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/cc_zero.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -241,11 +244,16 @@ html ul > text-autospace {
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blogs/images/avatar.gif">
       <meta itemprop="name" content="zhidao8">
-      <meta itemprop="description" content="">
     </span>
 
     <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="zhidao8's Blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden="" itemprop="post" itemscope="" itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="契约测试和Pact | zhidao8's Blogs">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -270,14 +278,14 @@ html ul > text-autospace {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text"><text-autospace></text-autospace>本文字数：</span>
-      <span>1.4k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text"><text-autospace></text-autospace>阅读时长 ≈</span>
-      <span>3 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -292,6 +300,34 @@ html ul > text-autospace {
 <p>对于通过<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>进行通信的应用程序，这些「消息」将是<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>请求和响应；而对于使用队列的应用程序，则是通过队列传递的消息。</p>
 <p>在实践中，实现契约测试的一种常见方法（Pact<text-autospace></text-autospace>也是这么做的），是检查对测试替身的所有调用，是否与对实际应用程序的调用返回相同的结果。</p>
 <h2 id="什么是Pact"><a href="#什么是Pact" class="headerlink" title="什么是Pact"></a>什么是<text-autospace></text-autospace>Pact</h2><p>Pact<text-autospace></text-autospace>是使用契约测试来测试<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>和消息集成的代码优先工具。</p>
+<span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="消费方（Consumer）"><a href="#消费方（Consumer）" class="headerlink" title="消费方（Consumer）"></a>消费方（Consumer）</h3><p>消费方：利用来自另一个应用程序的功能或数据完成其工作的应用程序。对于使用<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>的应用程序，消费方总是发起<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>请求的应用程序（例如：web<text-autospace></text-autospace>前端），无论数据流的方向如何。对于使用消息队列的应用程序，消费方是从队列读取消息的应用程序。</p>
+<h3 id="提供方（Provider）"><a href="#提供方（Provider）" class="headerlink" title="提供方（Provider）"></a>提供方（Provider）</h3><p>提供方：提供功能或数据（通常通过<text-autospace></text-autospace>API）供其他应用程序使用的应用程序（通常称为服务）。对于使用<text-autospace></text-autospace>HTTP<text-autospace></text-autospace>的应用程序，提供方是返回响应的应用程序。对于使用消息队列的应用程序，提供方（也称为生产者）是将消息写入队列的应用程序。</p>
+<h3 id="交互（Interaction）"><a href="#交互（Interaction）" class="headerlink" title="交互（Interaction）"></a>交互（Interaction）</h3><p>消费方和提供方之间的契约称为<text-autospace></text-autospace>Pact。每个契约都是交互（Interaction）的集合。每个交互描述了：</p>
+<ul>
+<li>对于<text-autospace></text-autospace>HTTP：预期的请求——描述了期望消费方向提供方发送的内容。最小预期响应——描述消费方希望提供方返回的响应部分。</li>
+<li>对于消息：期望的最小消息——描述消息的消费方想要使用的部分。</li>
+</ul>
+<p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-base-b1595e5f159ec3ff719fa551bd030c42.png" alt="交互（Interaction）"></p>
+<h3 id="Pact文件"><a href="#Pact文件" class="headerlink" title="Pact文件"></a>Pact<text-autospace></text-autospace>文件</h3><p>包含了消费方测试中定义的交互（Interaction）或消息的<text-autospace></text-autospace>JSON<text-autospace></text-autospace>文件，称为契约（Contract）。契约中定义了：消费方名称，提供方名称，交互或消息的集合，和契约规范版本。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><h3 id="消费方测试"><a href="#消费方测试" class="headerlink" title="消费方测试"></a>消费方测试</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-overview-b3088a94483efb5688c79f98ceaa3c0d.png" alt="消费方测试示意图"></p>
+<ol>
+<li>使用<text-autospace></text-autospace>Pact DSL，将预期的请求和响应注册到模拟（mock）服务中。</li>
+<li>消费方在单元测试代码中发起对模拟（mock）提供方（由<text-autospace></text-autospace>Pact<text-autospace></text-autospace>框架创建）的真实请求。</li>
+<li>模拟提供方将实际请求与预期请求进行比较，如果比较成功，则发出预期响应。</li>
+<li>消费方在单元测试代码中断言返回的响应是符合期望的。</li>
+</ol>
+<p>在<text-autospace></text-autospace>Pact<text-autospace></text-autospace>中，每个交互都被认为是独立的。这意味着每个测试只测试一个交互。如果需要描述依赖于预先存在的状态的交互，可以使用提供方状态（State）来完成。提供方状态允许您描述生成预期响应所需的提供方前置条件——例如，特定用户数据的存在。这将在下文的提供方验证（Verification）中进一步解释。</p>
+<p>一旦在消费方端测试了所有的交互，Pact<text-autospace></text-autospace>框架就会生成一个描述每个交互的契约文件：</p>
+<p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-file-61aa524a752a053e2a5e564a7b4d1ffa.png" alt="契约文件"></p>
+<p>这个契约文件可以用来验证提供方是否满足消费方的期望。</p>
+<h3 id="提供方验证"><a href="#提供方验证" class="headerlink" title="提供方验证"></a>提供方验证</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-verification-f1b93dfd857a7db3e02980b5ff4e1259.png" alt="提供方验证示意图"></p>
+<p>在提供方验证中，每个请求都被发送给提供方，它生成的实际响应将与消费方测试中描述的最小期望响应进行比较。<br>如果每个请求生成的响应至少包含最小期望响应中描述的数据，则提供方验证通过。</p>
+<p>在许多情况下，提供方将需要处于特定的状态（例如「用户<text-autospace></text-autospace>123<text-autospace></text-autospace>已登录」，或「客户<text-autospace></text-autospace>456<text-autospace></text-autospace>有 #678 的发票」）。Pact<text-autospace></text-autospace>框架支持这一点，它允许在交互重放之前设置提供方状态，提供方将根据设置的状态去配置符合状态所描述的数据。</p>
+<p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-verification-states-c5c318ae14905e0a90bcc9eeaa005998.png" alt="提供方（带状态）验证示意图"></p>
+<h2 id="组合整个流程"><a href="#组合整个流程" class="headerlink" title="组合整个流程"></a>组合整个流程</h2><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/pact-test-and-verify-7ae6e70a9a42ffa4ac8373ba294b19d9.png" alt="组合示意图"></p>
+<p>如果我们为每个交互的消费方测试和提供方验证过程进行配对，消费方和提供方之间的契约就得到了完全的测试，而不必将服务启动起来。</p>
 <h2 id="契约测试范围"><a href="#契约测试范围" class="headerlink" title="契约测试范围"></a>契约测试范围</h2><h3 id="消费方的契约测试范围"><a href="#消费方的契约测试范围" class="headerlink" title="消费方的契约测试范围"></a>消费方的契约测试范围</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/consumer-test-coverage-71ca640527716073e40be0b525340500.png" alt="消费方的契约测试范围（黄色高亮部分）"></p>
 <p>在这里，Collaborator<text-autospace></text-autospace>是一个组件，它的职责是与另一个系统通信。</p>
 <h3 id="提供方的契约测试范围"><a href="#提供方的契约测试范围" class="headerlink" title="提供方的契约测试范围"></a>提供方的契约测试范围</h3><p><img src="/blogs/posts/d4e1d890-cc7a-11ec-8881-55b96d8a7f36/provider-test-coverage-1ea287e57109f2a187b0b5bc290b4247.png" alt="提供方的契约测试范围（黄色高亮部分）"></p>
@@ -329,6 +365,9 @@ html ul > text-autospace {
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/blogs/posts/cdeced80-626c-11ed-8350-e9be548a5567/" rel="next" title="CSS 层叠、继承和优先级">
+                  CSS 层叠、继承和优先级 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -360,13 +399,13 @@ html ul > text-autospace {
   </footer>
 
   
-  <script src="/blogs/lib/animejs/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="/blogs/lib/jquery/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="/blogs/lib/@fancyapps/fancybox/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
 <script src="/blogs/js/comments.js"></script><script src="/blogs/js/utils.js"></script><script src="/blogs/js/motion.js"></script><script src="/blogs/js/next-boot.js"></script><script src="/blogs/js/bookmark.js"></script>
 
   
-<script src="/blogs/lib/hexo-generator-searchdb/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
 <script src="/blogs/js/third-party/search/local-search.js"></script>
 
 
